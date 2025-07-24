@@ -1,9 +1,16 @@
-export const formatDate = (date: Date, locale = 'en-US') => {
+type TNameStyle = 'short' | 'long' | 'narrow';
+
+export const formatDate = (
+	date: Date,
+	dayNameStyle: TNameStyle = 'short',
+	monthNameStyle: TNameStyle = 'short',
+	locale = 'en-US'
+) => {
 	const dayName = date.toLocaleString(locale, {
-		weekday: 'long',
+		weekday: dayNameStyle,
 	});
-	const month = date.toLocaleString(locale, {
-		month: 'short',
+	const monthName = date.toLocaleString(locale, {
+		month: monthNameStyle,
 	});
-	return [dayName, date.getDate(), month, date.getFullYear()];
+	return [dayName, date.getDate(), monthName, date.getFullYear()];
 };

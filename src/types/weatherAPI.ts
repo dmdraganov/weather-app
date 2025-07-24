@@ -25,7 +25,8 @@ interface ICurrent extends IWeatherBase {
 	feelslike_c: number;
 }
 
-interface IDayForecast {
+export interface IDayForecast {
+	date_epoch: number;
 	day: {
 		maxtemp_c: number;
 		mintemp_c: number;
@@ -43,7 +44,15 @@ interface IForecast {
 	forecastday: IDayForecast[];
 }
 
+interface ILocation {
+	country: string;
+	name: string;
+	lat: number;
+	lon: number;
+}
+
 export interface IWeatherData {
 	current: ICurrent;
 	forecast: IForecast;
+	location: ILocation;
 }
