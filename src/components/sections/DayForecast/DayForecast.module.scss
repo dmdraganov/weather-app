@@ -1,0 +1,35 @@
+@use '../../../styles/variables' as *;
+
+.canvasContainer {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+
+	.canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.chartPoint {
+		.temp {
+		}
+
+		.bottom {
+			margin-top: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			font-size: $sm;
+
+			.icon {
+				width: 25px;
+				height: 25px;
+			}
+			.time {
+			}
+			.windSpeed {
+			}
+		}
+	}
+}

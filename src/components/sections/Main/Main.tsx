@@ -12,7 +12,7 @@ const Main = () => {
 			>
 				<NavMenu />
 				<div
-					className={`${styles.flexGap} flex-container flex-container__flex-item flex-container--column`}
+					className={`${styles.verticalFlexContainer} ${styles.flexGap} flex-container flex-container__flex-item flex-container--column`}
 				>
 					<Activities />
 					<DayForecast />
