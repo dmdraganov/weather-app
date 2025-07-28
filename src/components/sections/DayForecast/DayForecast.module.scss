@@ -1,34 +1,48 @@
 @use '../../../styles/variables' as *;
 
-.canvasContainer {
-	position: relative;
-	width: 100%;
-	overflow: hidden;
+.container {
+	flex: 1.5;
+	max-width: 900px;
 
-	.canvas {
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
+	.chart {
+		width: 100%;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
 
-	.chartPoint {
-		.temp {
-		}
+		.canvasContainer {
+			position: relative;
+			height: 100px;
 
-		.bottom {
-			margin-top: 20px;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			font-size: $sm;
-
-			.icon {
-				width: 25px;
-				height: 25px;
+			.canvas {
+				height: 100%;
 			}
-			.time {
-			}
-			.windSpeed {
+
+			.chartPoint {
+				transform: translate(-50%, -25px);
+				text-align: center;
+
+				.temp::after {
+					content: '\00B0';
+					position: absolute;
+				}
+
+				.bottomContainer {
+					margin-top: 15px;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					font-size: $sm;
+
+					.icon {
+						width: 30px;
+						height: 30px;
+					}
+					.time {
+					}
+					.windSpeed {
+					}
+				}
 			}
 		}
 	}

@@ -5,82 +5,89 @@ import APIContext from '../../../contexts/APIContext';
 import { getWeatherIcon } from '../../../utilities/iconMapper';
 
 interface IChartData {
-	x: number;
-	y: number;
 	time: string;
 	temp: number;
 	conditionIcon: string;
 	windSpeed: number;
+	x: number;
+	y: number;
 }
 
+const POINTS_DISTANCE = 150;
+const CANVAS_HEIGHT = 100;
+const canvasWidth = 24 * POINTS_DISTANCE;
+
 const DayForecast = () => {
-	const daysForecasts = useContext(APIContext)!.forecast.forecastday;
+	const dayForecast = useContext(APIContext)!.forecast.forecastday;
 	const [chartData, setChartData] = useState<IChartData[] | null>(null);
+	const [dpr, setDpr] = useState(window.devicePixelRatio);
+	const canvasContainerRef = useRef<HTMLDivElement>(null);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
-	const currentTime = new Date().getHours();
+	const realTimeHour = new Date().getHours();
 
 	useEffect(() => {
-		const canvas = canvasRef.current!;
-
-		const hoursForecast = [...daysForecasts[0].hour, ...daysForecasts[1].hour];
-		const forecastsData = hoursForecast
-			.filter(
-				(hourForecast, index) =>
-					index <= currentTime + 23 && index >= currentTime
-			)
-			.map(hourForecast => ({
-				time: hourForecast.time.split(' ')[1],
-				temp: hourForecast.temp_c,
-				conditionIcon: getWeatherIcon(
-					hourForecast.condition.code,
-					!!hourForecast.is_day
-				),
-				windSpeed: hourForecast.wind_kph,
+		const hourlyForecast = [...dayForecast[0].hour, ...dayForecast[1].hour];
+		const chartData: IChartData[] = hourlyForecast
+			.slice(realTimeHour, realTimeHour + 24)
+			.map(({ time, temp_c, condition, wind_kph, is_day }, i) => ({
+				time: i ? time.split(' ')[1] : 'Now',
+				temp: temp_c,
+				conditionIcon: getWeatherIcon(condition.code, !!is_day),
+				windSpeed: wind_kph,
+				x: 0,
+				y: 0,
 			}));
-		forecastsData[0].time = 'Now';
 
-		const tempArr = forecastsData.map(({ temp }) => temp);
+		const tempArr = chartData.map(({ temp }) => temp);
 		const minTemp = Math.min(...tempArr);
 		const maxTemp = Math.max(...tempArr);
 		const maxDiff = maxTemp - minTemp;
 
-		const chartData = forecastsData.map((hourForecast, index, arr) => {
-			const currentDiff = maxTemp - hourForecast.temp;
-			const pointY = (canvas.height - 50) * (currentDiff / maxDiff);
-			const pointX = canvas.width * ((index + 1) / arr.length);
-
-			return { ...hourForecast, x: pointX, y: pointY };
+		chartData.forEach((hourForecast, index) => {
+			hourForecast.y =
+				(CANVAS_HEIGHT - 6) * ((maxTemp - hourForecast.temp) / maxDiff) + 3;
+			hourForecast.x = canvasWidth * ((index + 1) / chartData.length);
 		});
 
-		canvas.width = chartData.length * 85;
 		setChartData(chartData);
-	}, [daysForecasts, currentTime]);
+	}, [dayForecast, realTimeHour, POINTS_DISTANCE]);
 
 	useEffect(() => {
-		const resizeObserver = new ResizeObserver(drawChart);
-		resizeObserver.observe(canvasRef.current!);
+		const canvas = canvasRef.current!;
+		canvas.width = canvasWidth * dpr;
+		canvas.height = CANVAS_HEIGHT * dpr;
+	}, [dpr]);
 
-		return () => resizeObserver.disconnect();
+	useEffect(() => {
+		const handleDprChange = () => {
+			const currentDpr = window.devicePixelRatio;
+			if (Math.abs(currentDpr - dpr) > 0.15) setDpr(currentDpr);
+		};
+		window.addEventListener('resize', handleDprChange);
+
+		canvasRef.current!.style.width = `${canvasWidth}px`;
+
+		return () => {
+			window.removeEventListener('resize', handleDprChange);
+		};
 	}, []);
 
 	useEffect(() => {
-		drawChart();
-	}, [chartData]);
-
-	const drawChart = () => {
+		if (!chartData) return;
 		const canvas = canvasRef.current!;
 		const ctx = canvas.getContext('2d');
 
-		if (ctx && chartData) {
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
+		if (ctx) {
+			ctx.scale(dpr, dpr);
+			ctx.clearRect(0, 0, canvas.width, CANVAS_HEIGHT);
 
 			ctx.beginPath();
 			ctx.strokeStyle = '#ffc355';
 			ctx.lineWidth = 2;
 
 			ctx.moveTo(0, chartData[0].y);
-			chartData.forEach(({ x, y }, index) => ctx.lineTo(x, y));
+			chartData.forEach(({ x, y }) => ctx.lineTo(x, y));
 			ctx.stroke();
 
 			ctx.beginPath();
@@ -88,36 +95,44 @@ const DayForecast = () => {
 			ctx.fillStyle = '#ffffffff';
 			ctx.fill();
 		}
-	};
+	}, [chartData, dpr]);
 
 	return (
 		<section
-			className={`division flex-container flex-container--column flex-container__flex-item`}
+			className={`${styles.container} division flex-container flex-container--column`}
 		>
 			<SectionHeading iconID='clock' text='24-hours forecast' />
-			<div className={`${styles.canvasContainer} flex-container__flex-item`}>
-				<canvas ref={canvasRef} className={styles.canvas} />
-				{chartData &&
-					chartData.map((el, i) => (
-						<div
-							key={i}
-							className={styles.chartPoint}
-							style={{
-								position: 'absolute',
-								left: el.x - 18,
-								top: el.y - 25,
-							}}
-						>
-							<span className={styles.temp}>{el.temp}&deg;</span>
-							<div className={styles.bottom}>
-								<svg className={styles.icon}>
-									<use xlinkHref={el.conditionIcon} />
-								</svg>
-								<span className={styles.windSpeed}>{el.windSpeed}km/h</span>
-								<span className={styles.time}>{el.time}</span>
-							</div>
-						</div>
-					))}
+			<div className={`${styles.chart} flex-container__flex-item`}>
+				<div ref={canvasContainerRef} className={styles.canvasContainer}>
+					<canvas
+						ref={canvasRef}
+						className={styles.canvas}
+						height={CANVAS_HEIGHT}
+					/>
+					{chartData &&
+						chartData.map(
+							({ x, y, time, temp, conditionIcon, windSpeed }, i) => (
+								<div
+									key={i}
+									className={styles.chartPoint}
+									style={{
+										position: 'absolute',
+										left: x,
+										top: y,
+									}}
+								>
+									<span className={styles.temp}>{temp}</span>
+									<div className={styles.bottomContainer}>
+										<svg className={styles.icon}>
+											<use xlinkHref={conditionIcon} />
+										</svg>
+										<span className={styles.windSpeed}>{windSpeed}km/h</span>
+										<span className={styles.time}>{time}</span>
+									</div>
+								</div>
+							)
+						)}
+				</div>
 			</div>
 		</section>
 	);
