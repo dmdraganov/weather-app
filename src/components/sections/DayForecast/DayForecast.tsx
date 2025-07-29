@@ -1,6 +1,12 @@
 import styles from './DayForecast.module.scss';
 import SectionHeading from '../../SectionHeading/SectionHeading';
-import { useContext, useEffect, useRef, useState } from 'react';
+import {
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+	type PointerEvent,
+} from 'react';
 import APIContext from '../../../contexts/APIContext';
 import { getWeatherIcon } from '../../../utilities/iconMapper';
 
@@ -15,14 +21,19 @@ interface IChartData {
 
 const POINTS_DISTANCE = 150;
 const CANVAS_HEIGHT = 100;
-const canvasWidth = 24 * POINTS_DISTANCE;
+const canvasWidth = 25 * POINTS_DISTANCE;
 
 const DayForecast = () => {
 	const dayForecast = useContext(APIContext)!.forecast.forecastday;
 	const [chartData, setChartData] = useState<IChartData[] | null>(null);
 	const [dpr, setDpr] = useState(window.devicePixelRatio);
+	const [isDragging, setIsDragging] = useState(false);
+	const chartContainerRef = useRef<HTMLDivElement>(null);
 	const canvasContainerRef = useRef<HTMLDivElement>(null);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const dragStartXRef = useRef(0);
+	const totalOffsetRef = useRef(0);
+	const prevOffsetRef = useRef(0);
 
 	const realTimeHour = new Date().getHours();
 
@@ -47,7 +58,7 @@ const DayForecast = () => {
 		chartData.forEach((hourForecast, index) => {
 			hourForecast.y =
 				(CANVAS_HEIGHT - 6) * ((maxTemp - hourForecast.temp) / maxDiff) + 3;
-			hourForecast.x = canvasWidth * ((index + 1) / chartData.length);
+			hourForecast.x = canvasWidth * ((index + 1) / (chartData.length + 1));
 		});
 
 		setChartData(chartData);
@@ -64,6 +75,7 @@ const DayForecast = () => {
 			const currentDpr = window.devicePixelRatio;
 			if (Math.abs(currentDpr - dpr) > 0.15) setDpr(currentDpr);
 		};
+		window.addEventListener('resize', handleDprChange);
 		window.addEventListener('resize', handleDprChange);
 
 		canvasRef.current!.style.width = `${canvasWidth}px`;
@@ -88,6 +100,7 @@ const DayForecast = () => {
 
 			ctx.moveTo(0, chartData[0].y);
 			chartData.forEach(({ x, y }) => ctx.lineTo(x, y));
+			ctx.lineTo(canvasWidth, chartData[23].y);
 			ctx.stroke();
 
 			ctx.beginPath();
@@ -97,12 +110,50 @@ const DayForecast = () => {
 		}
 	}, [chartData, dpr]);
 
+	const handleStartDrag = (e: PointerEvent) => {
+		const canvasContainer = canvasContainerRef.current!;
+		canvasContainer.setPointerCapture(e.pointerId);
+		dragStartXRef.current = e.clientX;
+
+		setIsDragging(true);
+	};
+
+	const handleDrag = ({ clientX }: PointerEvent) => {
+		if (!isDragging) return;
+		const canvasContainer = canvasContainerRef.current!;
+		const dragStartX = dragStartXRef.current;
+		const prevOffset = prevOffsetRef.current;
+
+		const maxOffset = -(canvasWidth - canvasContainer.clientWidth);
+		const totalOffset = prevOffset + (clientX - dragStartX);
+
+		if (totalOffset <= 0 && totalOffset >= maxOffset) {
+			totalOffsetRef.current = totalOffset;
+			canvasContainer.style.transform = `translateX(${totalOffset}px)`;
+		}
+	};
+
+	const handleStopDrag = (e: PointerEvent) => {
+		const canvasContainer = canvasContainerRef.current!;
+		canvasContainer.releasePointerCapture(e.pointerId);
+		prevOffsetRef.current = totalOffsetRef.current;
+
+		setIsDragging(false);
+	};
+
 	return (
 		<section
 			className={`${styles.container} division flex-container flex-container--column`}
 		>
 			<SectionHeading iconID='clock' text='24-hours forecast' />
-			<div className={`${styles.chart} flex-container__flex-item`}>
+			<div
+				className={`${styles.chart} flex-container__flex-item`}
+				ref={chartContainerRef}
+				onPointerDown={handleStartDrag}
+				onPointerMove={handleDrag}
+				onPointerUp={handleStopDrag}
+				onPointerCancel={handleStopDrag}
+			>
 				<div ref={canvasContainerRef} className={styles.canvasContainer}>
 					<canvas
 						ref={canvasRef}
