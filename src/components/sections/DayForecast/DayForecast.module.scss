@@ -5,6 +5,7 @@
 	max-width: 900px;
 
 	.chart {
+		touch-action: none;
 		width: 100%;
 		overflow: hidden;
 		display: flex;
