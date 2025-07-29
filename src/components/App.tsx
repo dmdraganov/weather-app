@@ -14,8 +14,6 @@ function App() {
 	const [location, setLocation] = useState('Lobnya');
 	const URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=7&lang=en`;
 
-	console.log(weatherData);
-
 	//API Request
 	useEffect(() => {
 		const abortController = new AbortController();

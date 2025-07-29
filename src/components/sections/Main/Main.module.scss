@@ -8,4 +8,11 @@
 	.flexGap {
 		gap: 30px;
 	}
+
+	.verticalFlexContainer {
+		& * {
+			min-height: 0;
+			min-width: 0;
+		}
+	}
 }

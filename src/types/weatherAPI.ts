@@ -7,22 +7,19 @@ interface IWeatherBase {
 	temp_c: number;
 	condition: ICondition;
 	wind_kph: number;
-	humidity: number;
-	uv: number;
 }
 
 interface IHourForecast extends IWeatherBase {
-	time_epoch: number;
 	time: string;
-	cloud: number;
-	will_it_rain: number;
-	will_it_snow: number;
+	is_day: number;
 }
 
 interface ICurrent extends IWeatherBase {
 	is_day: number;
 	cloud: number;
 	feelslike_c: number;
+	humidity: number;
+	uv: number;
 }
 
 export interface IDayForecast {
