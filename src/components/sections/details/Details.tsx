@@ -60,7 +60,6 @@ const Details = () => {
 						className={`${styles.slide} ${
 							i === selectedDay ? styles.active : ''
 						}`}
-						onClick={() => setSelectedDay(i)}
 					>
 						<span>{day.dayName}</span>
 						<svg className={styles.icon}>
