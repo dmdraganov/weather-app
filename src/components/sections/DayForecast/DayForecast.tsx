@@ -32,8 +32,8 @@ const DayForecast = () => {
 	const canvasContainerRef = useRef<HTMLDivElement>(null);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const dragStartXRef = useRef(0);
-	const totalOffsetRef = useRef(0);
-	const prevOffsetRef = useRef(0);
+	const newOffsetRef = useRef(0);
+	const offsetRef = useRef(0);
 
 	const realTimeHour = new Date().getHours();
 
@@ -110,33 +110,31 @@ const DayForecast = () => {
 		}
 	}, [chartData, dpr]);
 
-	const handleStartDrag = (e: PointerEvent) => {
-		const canvasContainer = canvasContainerRef.current!;
-		canvasContainer.setPointerCapture(e.pointerId);
+	const handleDragStart = (e: PointerEvent) => {
+		canvasContainerRef.current!.setPointerCapture(e.pointerId);
 		dragStartXRef.current = e.clientX;
 
 		setIsDragging(true);
 	};
 
-	const handleDrag = ({ clientX }: PointerEvent) => {
+	const handleDragMove = ({ clientX }: PointerEvent) => {
 		if (!isDragging) return;
 		const canvasContainer = canvasContainerRef.current!;
 		const dragStartX = dragStartXRef.current;
-		const prevOffset = prevOffsetRef.current;
+		const offset = offsetRef.current;
 
 		const maxOffset = -(canvasWidth - canvasContainer.clientWidth);
-		const totalOffset = prevOffset + (clientX - dragStartX);
+		const newOffset = offset + (clientX - dragStartX);
 
-		if (totalOffset <= 0 && totalOffset >= maxOffset) {
-			totalOffsetRef.current = totalOffset;
-			canvasContainer.style.transform = `translateX(${totalOffset}px)`;
+		if (newOffset <= 0 && newOffset >= maxOffset) {
+			newOffsetRef.current = newOffset;
+			canvasContainer.style.transform = `translateX(${newOffset}px)`;
 		}
 	};
 
-	const handleStopDrag = (e: PointerEvent) => {
-		const canvasContainer = canvasContainerRef.current!;
-		canvasContainer.releasePointerCapture(e.pointerId);
-		prevOffsetRef.current = totalOffsetRef.current;
+	const handleDragEnd = (e: PointerEvent) => {
+		canvasContainerRef.current!.releasePointerCapture(e.pointerId);
+		offsetRef.current = newOffsetRef.current;
 
 		setIsDragging(false);
 	};
@@ -149,10 +147,13 @@ const DayForecast = () => {
 			<div
 				className={`${styles.chart} flex-container__flex-item`}
 				ref={chartContainerRef}
-				onPointerDown={handleStartDrag}
-				onPointerMove={handleDrag}
-				onPointerUp={handleStopDrag}
-				onPointerCancel={handleStopDrag}
+				onPointerDown={handleDragStart}
+				onPointerMove={handleDragMove}
+				onPointerUp={handleDragEnd}
+				onPointerCancel={handleDragEnd}
+				style={{
+					cursor: isDragging ? 'grabbing' : 'grab',
+				}}
 			>
 				<div ref={canvasContainerRef} className={styles.canvasContainer}>
 					<canvas
