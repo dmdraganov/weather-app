@@ -1,29 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useFetch } from '../hooks/useFetch';
 import type { IWeatherData } from '../types/weatherAPI';
 import Header from './sections/Header/Header';
 import Main from './sections/Main/Main';
 import APIContext from '../contexts/APIContext';
-import { fetchData } from '../utilities/fetchAPI';
 
 const API_KEY = 'd2269f3a17594db4a68213744252005';
+const location = 'Lobnya';
+const URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=7&lang=en`;
 
 function App() {
-	const [weatherData, setWeatherData] = useState<IWeatherData | null>(null);
-
-	//variables for API request
-	const [location, setLocation] = useState('Lobnya');
-	const URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=7&lang=en`;
-
-	//API Request
-	useEffect(() => {
-		const abortController = new AbortController();
-
-		fetchData(URL, { signal: abortController.signal }).then(data => {
-			setWeatherData(data);
-		});
-
-		return () => abortController.abort('abort reason: component unmount');
-	}, [location]);
+	const weatherData = useFetch<IWeatherData>(URL);
 
 	return (
 		<>
