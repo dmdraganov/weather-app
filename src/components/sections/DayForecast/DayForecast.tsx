@@ -8,7 +8,7 @@ import {
 	type PointerEvent,
 } from 'react';
 import APIContext from '../../../contexts/APIContext';
-import { getWeatherIcon } from '../../../utilities/iconMapper';
+import getWeatherIcon from '../../../utilities/iconMapper';
 
 interface IChartData {
 	time: string;

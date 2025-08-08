@@ -1,9 +1,9 @@
 import './Header.scss';
-import { formatDate } from '../../../utilities/dateFormatter';
+import formatDate from '../../../utilities/dateFormatter';
 import sprite from '/src/assets/icons/sprite.svg';
 import APIContext from '../../../contexts/APIContext';
 import { useContext } from 'react';
-import { getWeatherIcon } from '../../../utilities/iconMapper';
+import getWeatherIcon from '../../../utilities/iconMapper';
 import ArrowButton from '../../ArrowButton/ArrowButton';
 
 const Header = () => {

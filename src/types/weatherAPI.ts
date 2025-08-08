@@ -24,6 +24,12 @@ interface ICurrent extends IWeatherBase {
 
 export interface IDayForecast {
 	date_epoch: number;
+	astro: {
+		sunrise: string;
+		sunset: string;
+		moon_phase: string;
+		moon_illumination: number;
+	};
 	day: {
 		maxtemp_c: number;
 		mintemp_c: number;

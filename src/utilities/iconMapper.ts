@@ -4,7 +4,7 @@ const rainThunderCodes = [1273, 1276];
 const snowThunderNightCodes = [1279, 1282];
 const thunderNightCodes = [1087];
 
-export const getWeatherIcon = (code: number, isDay: boolean = true): string => {
+const getWeatherIcon = (code: number, isDay: boolean = true): string => {
 	let iconID: string;
 
 	if (code === 1000) {
@@ -26,3 +26,5 @@ export const getWeatherIcon = (code: number, isDay: boolean = true): string => {
 	}
 	return sprite + '#' + iconID;
 };
+
+export default getWeatherIcon;

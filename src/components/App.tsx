@@ -10,6 +10,7 @@ const URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${locat
 
 function App() {
 	const weatherData = useFetch<IWeatherData>(URL);
+	console.log(weatherData);
 
 	return (
 		<>

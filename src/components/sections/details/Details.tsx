@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import styles from './Details.module.scss';
-import sprite from '../../../assets/icons/sprite.svg';
 import APIContext from '../../../contexts/APIContext';
-import { formatDate } from '../../../utilities/dateFormatter';
-import { getWeatherIcon } from '../../../utilities/iconMapper';
+import formatDate from '../../../utilities/dateFormatter';
+import getWeatherIcon from '../../../utilities/iconMapper';
 import Slider from '../../Slider/Slider';
+import ListItem from '../../ListItem/ListItem';
 
 const Details = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(0);
@@ -71,15 +71,7 @@ const Details = () => {
 			<h2 className={styles.heading}>Air conditions</h2>
 			<ul className={styles.conditionsList}>
 				{conditionsList.map(({ iconID, title, value }) => (
-					<li key={title} className={styles.condition}>
-						<svg className={styles.icon}>
-							<use xlinkHref={sprite + '#' + iconID} />
-						</svg>
-						<div className={styles.text}>
-							<h3 className={styles.conditionTitle}>{title}</h3>
-							<span>{value}</span>
-						</div>
-					</li>
+					<ListItem key={title} iconID={iconID} title={title} value={value} />
 				))}
 			</ul>
 		</section>

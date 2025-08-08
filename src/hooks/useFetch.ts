@@ -14,7 +14,6 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 				if (!response.ok) throw new Error(String(response.status));
 
 				const data = await response.json();
-				console.log('run');
 				setData(data);
 			} catch (error) {
 				console.error(error);

@@ -2,15 +2,23 @@
 
 .container {
 	flex: 1.5;
-	max-width: 900px;
+
+	position: relative;
 
 	.chart {
-		touch-action: none;
-		user-select: none;
-		width: 100%;
+		position: absolute;
+		top: 45px;
+		bottom: 20px;
+		left: 0;
+		right: 0;
+		max-width: 100%;
+
 		overflow: hidden;
 		display: flex;
 		align-items: center;
+
+		touch-action: none;
+		user-select: none;
 
 		.canvasContainer {
 			translate: 0 -20px;

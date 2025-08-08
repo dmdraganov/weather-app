@@ -1,6 +1,6 @@
 type TNameStyle = 'short' | 'long' | 'narrow';
 
-export const formatDate = (
+const formatDate = (
 	date: Date,
 	dayNameStyle: TNameStyle = 'short',
 	monthNameStyle: TNameStyle = 'short',
@@ -14,3 +14,5 @@ export const formatDate = (
 	});
 	return [dayName, date.getDate(), monthName, date.getFullYear()];
 };
+
+export default formatDate;

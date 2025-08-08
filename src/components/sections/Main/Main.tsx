@@ -1,7 +1,7 @@
 import styles from './Main.module.scss';
 import Details from '../Details/Details';
 import DayForecast from '../DayForecast/DayForecast';
-import Activities from '../Activities/Activities';
+import AstroForecast from '../AstroForecast/AstroForecast';
 import NavMenu from '../NavMenu/NavMenu';
 
 const Main = () => {
@@ -12,9 +12,9 @@ const Main = () => {
 			>
 				<NavMenu />
 				<div
-					className={`${styles.verticalFlexContainer} ${styles.flexGap} flex-container flex-container__flex-item flex-container--column`}
+					className={`${styles.verticalFlexContainer} ${styles.flexGap} flex-container flex-container--column`}
 				>
-					<Activities />
+					<AstroForecast />
 					<DayForecast />
 				</div>
 				<Details />

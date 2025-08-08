@@ -1,5 +1,6 @@
 import styles from './NavMenu.module.scss';
 import LinkButton from '../../LinkButton/LinkButton';
+import avatarImage from '/src/assets/images/imageExapmle.jpg';
 
 const buttonArr = [
 	{
@@ -26,11 +27,7 @@ const NavMenu = () => {
 			className={`${styles.navMenu} division flex-container flex-container--column flex-container--vert-align flex-container--space-between`}
 		>
 			<a href='#'>
-				<img
-					className={styles.avatarImage}
-					src='/src/assets/images/imageExapmle.jpg'
-					alt=''
-				/>
+				<img className={styles.avatarImage} src={avatarImage} alt='' />
 			</a>
 			<div
 				className={`${styles.buttonsContainer} flex-container flex-container--column`}
