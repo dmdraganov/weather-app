@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import styles from './Details.module.scss';
-import APIContext from '../../../contexts/APIContext';
+import APIContext from '../../../contexts/ApiContext';
 import formatDate from '../../../utilities/dateFormatter';
 import getWeatherIcon from '../../../utilities/iconMapper';
 import Slider from '../../Slider/Slider';

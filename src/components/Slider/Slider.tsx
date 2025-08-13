@@ -37,16 +37,16 @@ const Slider = ({
 		slideWidthRef.current = sliderRef.current!.clientWidth / visibleSlides;
 		startOffsetRef.current =
 			Math.floor(visibleSlides / 2) * slideWidthRef.current;
+
+		slidesRef.current!.style.translate = `${startOffsetRef.current}px`;
 	}, [visibleSlides]);
 
 	useEffect(() => {
 		if (isDragging) return;
 		const slideWidth = slideWidthRef.current;
-		const startOffset = startOffsetRef.current;
 		offsetRef.current = -(slideWidth * selectedSlide);
-		const finalOffset = startOffset + offsetRef.current;
 
-		slidesRef.current!.style.transform = `translateX(${finalOffset}px)`;
+		slidesRef.current!.style.transform = `translateX(${offsetRef.current}px)`;
 	}, [selectedSlide, isDragging]);
 
 	const validateSlide = (action: 'prev' | 'next') => (prev: number) => {
@@ -74,11 +74,9 @@ const Slider = ({
 		const offset = offsetRef.current;
 		const slideWidth = slideWidthRef.current;
 		const dragStartX = dragStartXRef.current;
-		const startOffset = startOffsetRef.current;
 
 		const newOffset = offset + (clientX - dragStartX);
-		const finalOffset = newOffset + startOffset;
-		slidesRef.current!.style.transform = `translateX(${finalOffset}px)`;
+		slidesRef.current!.style.transform = `translateX(${newOffset}px)`;
 
 		const newSelectedSlide = Math.round(-newOffset / slideWidth);
 

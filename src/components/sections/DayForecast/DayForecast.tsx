@@ -7,7 +7,7 @@ import {
 	useState,
 	type PointerEvent,
 } from 'react';
-import APIContext from '../../../contexts/APIContext';
+import ApiContext from '../../../contexts/ApiContext';
 import getWeatherIcon from '../../../utilities/iconMapper';
 
 interface IChartData {
@@ -24,7 +24,7 @@ const CANVAS_HEIGHT = 100;
 const canvasWidth = 25 * POINTS_DISTANCE;
 
 const DayForecast = () => {
-	const dayForecast = useContext(APIContext)!.forecast.forecastday;
+	const dayForecast = useContext(ApiContext)!.forecast.forecastday;
 	const [chartData, setChartData] = useState<IChartData[] | null>(null);
 	const [dpr, setDpr] = useState(window.devicePixelRatio);
 	const [isDragging, setIsDragging] = useState(false);
@@ -75,7 +75,6 @@ const DayForecast = () => {
 			const currentDpr = window.devicePixelRatio;
 			if (Math.abs(currentDpr - dpr) > 0.15) setDpr(currentDpr);
 		};
-		window.addEventListener('resize', handleDprChange);
 		window.addEventListener('resize', handleDprChange);
 
 		canvasRef.current!.style.width = `${canvasWidth}px`;

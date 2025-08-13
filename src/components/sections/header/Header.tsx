@@ -1,13 +1,12 @@
 import './Header.scss';
 import formatDate from '../../../utilities/dateFormatter';
 import sprite from '/src/assets/icons/sprite.svg';
-import APIContext from '../../../contexts/APIContext';
+import ApiContext from '../../../contexts/ApiContext';
 import { useContext } from 'react';
 import getWeatherIcon from '../../../utilities/iconMapper';
-import ArrowButton from '../../ArrowButton/ArrowButton';
 
 const Header = () => {
-	const weatherData = useContext(APIContext);
+	const weatherData = useContext(ApiContext);
 	const currentWeather = weatherData!.current;
 	const condition = currentWeather.condition;
 	const location = weatherData!.location.name;

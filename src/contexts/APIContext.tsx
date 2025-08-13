@@ -1,7 +1,6 @@
-import { createContext, useState } from 'react';
-import type { ReactNode } from 'react';
+import { createContext } from 'react';
 import type { IWeatherData } from '../types/weatherAPI';
 
-const APIContext = createContext<IWeatherData | null>(null);
+const ApiContext = createContext<IWeatherData | null>(null);
 
-export default APIContext;
+export default ApiContext;
