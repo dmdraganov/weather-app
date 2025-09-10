@@ -1,11 +1,14 @@
 @use '../../../styles/variables' as *;
+@use '/src/utilities/flex.module.scss' as *;
 
 .container {
-	flex: 1.5;
-
+	flex: 1.2;
+	padding-bottom: 0;
 	position: relative;
 
 	.chart {
+		@extend %flex;
+		@extend %vertCenter;
 		position: absolute;
 		top: 45px;
 		bottom: 20px;
@@ -14,8 +17,6 @@
 		max-width: 100%;
 
 		overflow: hidden;
-		display: flex;
-		align-items: center;
 
 		touch-action: none;
 		user-select: none;
@@ -23,7 +24,7 @@
 		.canvasContainer {
 			translate: 0 -20px;
 			position: relative;
-			height: 100px;
+			height: 120px;
 
 			.canvas {
 				height: 100%;

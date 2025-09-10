@@ -1,0 +1,23 @@
+%flex {
+	display: flex;
+}
+
+%column {
+	flex-direction: column;
+}
+
+%spaceBetween {
+	justify-content: space-between;
+}
+
+%vertCenter {
+	align-items: center;
+}
+
+%fill {
+	flex: 1;
+}
+
+%gap {
+	gap: 30px;
+}

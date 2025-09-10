@@ -1,11 +1,14 @@
+@use '/src/utilities/flex.module.scss' as *;
 .container {
-	display: flex;
+	@extend %flex;
+	@extend %column;
 	flex-direction: column;
 
 	.list {
-		flex: 1;
-		display: flex;
-		align-items: center;
+		margin-top: 10px;
+		@extend %fill;
+		@extend %flex;
+		@extend %vertCenter;
 		gap: 10px;
 	}
 }

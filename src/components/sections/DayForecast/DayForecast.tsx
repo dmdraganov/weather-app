@@ -20,7 +20,7 @@ interface IChartData {
 }
 
 const POINTS_DISTANCE = 150;
-const CANVAS_HEIGHT = 100;
+const CANVAS_HEIGHT = 120;
 const canvasWidth = 25 * POINTS_DISTANCE;
 
 const DayForecast = () => {
@@ -139,12 +139,10 @@ const DayForecast = () => {
 	};
 
 	return (
-		<section
-			className={`${styles.container} division flex-container flex-container--column`}
-		>
+		<section className={styles.container + ' division'}>
 			<SectionHeading iconID='clock' text='24-hours forecast' />
 			<div
-				className={`${styles.chart} flex-container__flex-item`}
+				className={styles.chart}
 				ref={chartContainerRef}
 				onPointerDown={handleDragStart}
 				onPointerMove={handleDragMove}

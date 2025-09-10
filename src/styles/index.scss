@@ -19,26 +19,6 @@ body {
 	margin: 0 auto;
 }
 
-.flex-container {
-	display: flex;
-
-	&--column {
-		flex-direction: column;
-	}
-
-	&--space-between {
-		justify-content: space-between;
-	}
-
-	&--vert-align {
-		align-items: center;
-	}
-
-	&__flex-item {
-		flex: 1;
-	}
-}
-
 .division {
 	background-color: $light-yellow;
 	border-radius: 40px;

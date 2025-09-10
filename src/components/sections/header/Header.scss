@@ -1,10 +1,13 @@
 @use '/src/styles/variables' as *;
+@use '/src/utilities/flex.module.scss' as *;
 
 .header {
 	flex: 0.6;
-	padding: 60px 0 25px 0;
+	padding: 15px;
 
 	&__container {
+		@extend %flex;
+		@extend %spaceBetween;
 		padding: 0 55px;
 		height: 100%;
 	}

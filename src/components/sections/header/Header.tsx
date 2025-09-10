@@ -17,7 +17,7 @@ const Header = () => {
 	return (
 		<header className='header'>
 			<div className='container'>
-				<div className='header__container flex-container flex-container--space-between'>
+				<div className='header__container'>
 					<div className='header__info'>
 						<a className='header__locations-button' href='#'>
 							<svg className='header__location-icon'>

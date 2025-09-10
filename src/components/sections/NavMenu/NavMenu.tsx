@@ -27,15 +27,11 @@ const buttonArr = [
 
 const NavMenu = () => {
 	return (
-		<nav
-			className={`${styles.navMenu} division flex-container flex-container--column flex-container--vert-align flex-container--space-between`}
-		>
+		<nav className={styles.navMenu + ' division'}>
 			<a href='#'>
 				<img className={styles.avatarImage} src={avatarImage} alt='' />
 			</a>
-			<div
-				className={`${styles.buttonsContainer} flex-container flex-container--column`}
-			>
+			<div className={styles.buttonsContainer}>
 				{buttonArr.map(element => (
 					<LinkButton key={element.text} to={element.path} {...element} />
 				))}

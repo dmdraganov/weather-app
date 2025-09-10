@@ -8,7 +8,11 @@ interface IProps {
 
 const ArrowButton = ({ route = 'right', onClick }: IProps) => {
 	return (
-		<button className={styles.button} onClick={onClick}>
+		<button
+			aria-label={route === 'right' ? 'next' : 'prev'}
+			className={styles.button}
+			onClick={onClick}
+		>
 			<svg
 				className={`${route !== 'right' ? styles.invert : ''} ${styles.icon}`}
 			>

@@ -1,16 +1,19 @@
+@use '/src/utilities/flex.module.scss' as *;
+
 .main {
 	padding-bottom: 30px;
 
 	.container {
+		@extend %flex;
+		@extend %gap;
 		height: 100%;
 	}
 
-	.flexGap {
-		gap: 30px;
-	}
-
 	.verticalFlexContainer {
-		flex: 1;
+		@extend %fill;
+		@extend %flex;
+		@extend %gap;
+		@extend %column;
 
 		& * {
 			min-height: 0;

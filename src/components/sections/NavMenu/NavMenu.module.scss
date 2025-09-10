@@ -1,6 +1,13 @@
+@use '/src/utilities/flex.module.scss' as *;
+
 .navMenu {
+	@extend %flex;
+	@extend %vertCenter;
+	@extend %column;
+	@extend %spaceBetween;
+
 	min-width: 100px;
-	height: 100%;
+	min-height: 100%;
 	padding: 20px 0;
 }
 
@@ -12,6 +19,8 @@
 }
 
 .buttonsContainer {
+	@extend %flex;
+	@extend %column;
 	padding-top: 20px;
 	gap: 20px;
 }

@@ -3,10 +3,13 @@ import type { IWeatherData } from './types/weatherAPI';
 import Home from './pages/Home';
 import ApiContext from './contexts/ApiContext';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import Location from './pages/Location';
+import getUrl from './utilities/urlBuilder';
 
-const API_KEY = 'd2269f3a17594db4a68213744252005';
+const API = 'forecast';
 const location = 'Lobnya';
-const URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=7&lang=en`;
+
+const Url = getUrl({ API, location });
 
 const ApiProviderLayout = ({ value }: { value: IWeatherData }) => {
 	return (
@@ -17,7 +20,7 @@ const ApiProviderLayout = ({ value }: { value: IWeatherData }) => {
 };
 
 function App() {
-	const weatherData = useFetch<IWeatherData>(URL);
+	const weatherData = useFetch<IWeatherData>(Url);
 
 	return (
 		<>
@@ -26,7 +29,7 @@ function App() {
 					<Routes>
 						<Route element={<ApiProviderLayout value={weatherData} />}>
 							<Route path='/' element={<Home />} />
-							<Route path='/location' />
+							<Route path='/location' element={<Location />} />
 						</Route>
 						<Route path='/settings' />
 						<Route path='*' />
