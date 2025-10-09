@@ -1,0 +1,43 @@
+@use '../../styles/variables' as *;
+@use '../../utilities/flex.module.scss' as *;
+
+.item {
+	margin-top: 20px;
+	@extend %flex;
+	align-items: center;
+
+	&Text {
+		@extend %fill;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	&Heading {
+		font-weight: 600;
+	}
+
+	&Addition {
+		display: block;
+	}
+
+	.favoriteButton {
+		background: none;
+		border: none;
+		padding: 0;
+
+		.favoriteIcon {
+			width: 25px;
+			height: 25px;
+			color: rgba(255, 255, 255, 0);
+			stroke: $white;
+			stroke-width: 2px;
+
+			&:hover {
+				color: rgba(255, 255, 255, 0.5);
+				cursor: pointer;
+			}
+		}
+	}
+}

@@ -1,5 +1,5 @@
 import styles from './Main.module.scss';
-import Details from '../Details/Details';
+import ForecastMetrics from '../ForecastMetrics/ForecastMetrics';
 import DayForecast from '../DayForecast/DayForecast';
 import AstroForecast from '../AstroForecast/AstroForecast';
 import NavMenu from '../NavMenu/NavMenu';
@@ -13,7 +13,7 @@ const Main = () => {
 					<AstroForecast />
 					<DayForecast />
 				</div>
-				<Details />
+				<ForecastMetrics />
 			</div>
 		</main>
 	);

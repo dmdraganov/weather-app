@@ -1,12 +1,12 @@
 import styles from './AstroForecast.module.scss';
 import SectionHeading from '../../SectionHeading/SectionHeading';
 import { useContext } from 'react';
-import ApiContext from '../../../contexts/ApiContext';
+import { WeatherContext } from '../../../contexts/ApiContext';
 import ListItem from '../../ListItem/ListItem';
 import formatTime from '../../../utilities/timeFormatter';
 
 const AstroForecast = () => {
-	const forecasts = useContext(ApiContext)!.forecast.forecastday;
+	const forecasts = useContext(WeatherContext)!.forecast.forecastday;
 	const { sunrise, sunset, moon_phase, moon_illumination } = forecasts[0].astro;
 
 	const conditionsList = [

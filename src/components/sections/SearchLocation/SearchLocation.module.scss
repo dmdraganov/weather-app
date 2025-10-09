@@ -1,0 +1,34 @@
+@use '../../../styles/variables' as *;
+
+.searchContainer {
+	position: relative;
+
+	.inputContainer {
+		position: relative;
+		z-index: 2;
+
+		.inputField {
+			padding: 10px;
+			border: 2px solid $white;
+			width: 100%;
+
+			border-radius: 20px;
+
+			&::placeholder {
+				color: $white;
+			}
+		}
+	}
+
+	.list {
+		overflow: hidden;
+		z-index: 1;
+		background-color: $grey;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		padding-top: 60px;
+		transition: max-height 0.15s ease-in-out;
+	}
+}

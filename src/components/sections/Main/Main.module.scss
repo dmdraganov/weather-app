@@ -1,8 +1,6 @@
 @use '/src/utilities/flex.module.scss' as *;
 
 .main {
-	padding-bottom: 30px;
-
 	.container {
 		@extend %flex;
 		@extend %gap;

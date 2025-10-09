@@ -1,14 +1,14 @@
 import { useContext, useState } from 'react';
-import styles from './Details.module.scss';
-import APIContext from '../../../contexts/ApiContext';
+import styles from './ForecastMetrics.module.scss';
+import { WeatherContext } from '../../../contexts/ApiContext';
 import formatDate from '../../../utilities/dateFormatter';
 import getWeatherIcon from '../../../utilities/iconMapper';
 import Slider from '../../Slider/Slider';
 import ListItem from '../../ListItem/ListItem';
 
-const Details = () => {
+const ForecastMetrics = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(0);
-	const forecasts = useContext(APIContext)!.forecast.forecastday;
+	const forecasts = useContext(WeatherContext)!.forecast.forecastday;
 	const dayForecast = forecasts[selectedDay].day;
 
 	const sliderDaysList = forecasts.map(element => {
@@ -78,4 +78,4 @@ const Details = () => {
 	);
 };
 
-export default Details;
+export default ForecastMetrics;

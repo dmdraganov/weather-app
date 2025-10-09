@@ -1,15 +1,54 @@
-import { useRef } from 'react';
-import SectionHeading from '../../SectionHeading/SectionHeading';
-import './SearchLocation.scss';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import styles from './SearchLocation.module.scss';
 import { useFetch } from '../../../hooks/useFetch';
+import getUrl from '../../../utilities/urlBuilder';
+import type { ILocation } from '../../../types/locationApi';
+import LocationItem from '../../LocationItem/LocationItem';
 
 const SearchLocation = () => {
-	const searchInputRef = useRef<HTMLInputElement>(null);
+	const [inputValue, setInputValue] = useState<string>('');
+	const [maxHeight, setMaxHeight] = useState<number>(0);
+	const resultListRef = useRef<HTMLUListElement>(null);
+
+	const url = getUrl('search', inputValue || ' ');
+	const locationList = useFetch<ILocation[]>(url);
+
+	useEffect(() => {
+		const resultList = resultListRef.current;
+		if (resultList) setMaxHeight(resultList!.scrollHeight);
+	}, [locationList]);
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setInputValue(e.target.value);
+	};
 
 	return (
-		<div className='division'>
-			<SectionHeading iconID='location' text='Search location' />
-			<input ref={searchInputRef} type='text' placeholder='Choose' />
+		<div className={styles.searchContainer}>
+			<div className={'division ' + styles.inputContainer}>
+				<input
+					onChange={handleInputChange}
+					className={styles.inputField}
+					type='text'
+					placeholder='Search location'
+					value={inputValue}
+				/>
+			</div>
+
+			<ul
+				className={'division ' + styles.list}
+				ref={resultListRef}
+				style={{ maxHeight: maxHeight }}
+			>
+				{locationList &&
+					inputValue &&
+					locationList.map((location, i) => (
+						<LocationItem
+							key={location.id}
+							location={location}
+							isFirst={i === 0}
+						/>
+					))}
+			</ul>
 		</div>
 	);
 };

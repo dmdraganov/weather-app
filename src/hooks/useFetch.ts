@@ -5,6 +5,7 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 
 	useEffect(() => {
 		const abortController = new AbortController();
+
 		const fetchData = async () => {
 			try {
 				const response = await fetch(url, {
@@ -14,7 +15,9 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 				if (!response.ok) throw new Error(String(response.status));
 
 				const data = await response.json();
+
 				setData(data);
+				console.log(data);
 			} catch (error) {
 				console.error(error);
 			}
