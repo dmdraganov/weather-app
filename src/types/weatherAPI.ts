@@ -1,20 +1,22 @@
-export interface ICondition {
+import type { Location } from './locationApi';
+
+export interface Condition {
 	text: string;
 	code: number;
 }
 
-interface IWeatherBase {
+interface WeatherBase {
 	temp_c: number;
-	condition: ICondition;
+	condition: Condition;
 	wind_kph: number;
 }
 
-interface IHourForecast extends IWeatherBase {
+interface HourForecast extends WeatherBase {
 	time: string;
 	is_day: number;
 }
 
-interface ICurrent extends IWeatherBase {
+interface Current extends WeatherBase {
 	is_day: number;
 	cloud: number;
 	feelslike_c: number;
@@ -22,7 +24,7 @@ interface ICurrent extends IWeatherBase {
 	uv: number;
 }
 
-export interface IDayForecast {
+export interface DayForecast {
 	date_epoch: number;
 	astro: {
 		sunrise: string;
@@ -37,25 +39,18 @@ export interface IDayForecast {
 		avghumidity: number;
 		daily_chance_of_rain: number;
 		daily_chance_of_snow: number;
-		condition: ICondition;
+		condition: Condition;
 		uv: number;
 	};
-	hour: IHourForecast[];
+	hour: HourForecast[];
 }
 
-interface IForecast {
-	forecastday: IDayForecast[];
+interface Forecast {
+	forecastday: DayForecast[];
 }
 
-interface ILocation {
-	country: string;
-	name: string;
-	lat: number;
-	lon: number;
-}
-
-export interface IWeatherData {
-	current: ICurrent;
-	forecast: IForecast;
-	location: ILocation;
+export interface WeatherData {
+	current: Current;
+	forecast: Forecast;
+	location: Location;
 }

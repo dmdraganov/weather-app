@@ -7,10 +7,10 @@ import {
 	useState,
 	type PointerEvent,
 } from 'react';
-import { WeatherContext } from '../../../contexts/ApiContext';
+import { WeatherContext } from '../../../contexts/WeatherContext';
 import getWeatherIcon from '../../../utilities/iconMapper';
 
-interface IChartData {
+interface ChartData {
 	time: string;
 	temp: number;
 	conditionIcon: string;
@@ -25,7 +25,7 @@ const canvasWidth = 25 * POINTS_DISTANCE;
 
 const DayForecast = () => {
 	const dayForecast = useContext(WeatherContext)!.forecast.forecastday;
-	const [chartData, setChartData] = useState<IChartData[] | null>(null);
+	const [chartData, setChartData] = useState<ChartData[] | null>(null);
 	const [dpr, setDpr] = useState(window.devicePixelRatio);
 	const [isDragging, setIsDragging] = useState(false);
 	const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -39,7 +39,7 @@ const DayForecast = () => {
 
 	useEffect(() => {
 		const hourlyForecast = [...dayForecast[0].hour, ...dayForecast[1].hour];
-		const chartData: IChartData[] = hourlyForecast
+		const chartData: ChartData[] = hourlyForecast
 			.slice(realTimeHour, realTimeHour + 24)
 			.map(({ time, temp_c, condition, wind_kph, is_day }, i) => ({
 				time: i ? time.split(' ')[1] : 'Now',
@@ -58,7 +58,9 @@ const DayForecast = () => {
 		chartData.forEach((hourForecast, index) => {
 			hourForecast.y =
 				(CANVAS_HEIGHT - 6) * ((maxTemp - hourForecast.temp) / maxDiff) + 3;
-			hourForecast.x = canvasWidth * ((index + 1) / (chartData.length + 1));
+
+			hourForecast.x =
+				canvasWidth * ((index + 1) / chartData.length) - POINTS_DISTANCE / 2;
 		});
 
 		setChartData(chartData);

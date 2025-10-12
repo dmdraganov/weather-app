@@ -1,40 +1,35 @@
 import styles from './LocationItem.module.scss';
 import sprite from '/src/assets/icons/sprite.svg';
-import type { ILocation } from '../../types/locationApi';
-import { useContext, useState } from 'react';
-import {
-	CurrentLocationContext,
-	FavoriteLocationsContext,
-} from '../../contexts/ApiContext';
+import type { Location } from '../../types/locationApi';
+import { useContext } from 'react';
+import { CurrentLocationContext } from '../../contexts/CurrentLocationContext';
+import { FavoriteLocationsContext } from '../../contexts/FavoriteLocationsContext';
 
-interface ILocationItemProps {
-	location: ILocation;
+interface LocationItemProps {
+	location: Location;
 	isFirst?: boolean;
 }
 
-const LocationItem = ({ location, isFirst = false }: ILocationItemProps) => {
+const LocationItem = ({ location, isFirst = false }: LocationItemProps) => {
 	const [, setCurrentLocation] = useContext(CurrentLocationContext);
 	const [favoriteLocations, setFavoriteLocations] = useContext(
 		FavoriteLocationsContext
 	);
-	const [isHovered, setIsHovered] = useState(false);
-	const isFavorite = favoriteLocations?.includes(location);
+
+	const isFavorite = favoriteLocations.some(
+		favoriteLocation => favoriteLocation.id === location.id
+	);
 
 	const handleAddToFavorites = () => {
-		if (!favoriteLocations?.includes(location)) {
-			setFavoriteLocations(prev => [...prev, location]);
-		} else {
-			setFavoriteLocations(prev => prev.filter(elem => elem != location));
-		}
+		setFavoriteLocations(prev =>
+			!isFavorite
+				? [...prev, location]
+				: prev.filter(elem => elem.id != location.id)
+		);
 	};
 
 	return (
-		<li
-			className={styles.item}
-			style={isFirst ? { marginTop: 44 } : undefined}
-			onMouseEnter={() => setIsHovered(true)}
-			onMouseLeave={() => setIsHovered(false)}
-		>
+		<li className={styles.item} style={isFirst ? { marginTop: 44 } : undefined}>
 			<div
 				className={styles.itemText}
 				onClick={() => setCurrentLocation(location)}
@@ -47,7 +42,7 @@ const LocationItem = ({ location, isFirst = false }: ILocationItemProps) => {
 			<button
 				className={styles.favoriteButton}
 				onClick={handleAddToFavorites}
-				style={!isHovered && !isFavorite ? { opacity: 0 } : undefined}
+				style={isFavorite ? { opacity: 1 } : undefined}
 			>
 				<svg
 					className={styles.favoriteIcon}

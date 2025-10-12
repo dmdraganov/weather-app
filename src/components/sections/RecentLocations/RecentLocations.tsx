@@ -1,27 +1,37 @@
 import styles from './RecentLocations.module.scss';
 import SectionHeading from '../../SectionHeading/SectionHeading';
-import { useContext, useEffect, useState } from 'react';
-import type { ILocation } from '../../../types/locationApi';
+import { useContext, useEffect } from 'react';
+import type { Location } from '../../../types/locationApi';
 import LocationItem from '../../LocationItem/LocationItem';
-import { CurrentLocationContext } from '../../../contexts/ApiContext';
+import { CurrentLocationContext } from '../../../contexts/CurrentLocationContext';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
+
+const MAX_LOCATIONS_AMOUNT = 3;
 
 const RecentLocations = () => {
 	const [currentLocation] = useContext(CurrentLocationContext);
-	const [recentLocations, setRecentLocations] = useState<ILocation[]>([]);
+	const [recentLocations, setRecentLocations] = useLocalStorage<Location[]>(
+		'recentLocations',
+		[]
+	);
 
 	useEffect(() => {
-		setRecentLocations(prev =>
-			prev.length < 3 && !prev.includes(currentLocation)
-				? [...prev, currentLocation]
-				: [...prev.slice(1), currentLocation]
-		);
+		if (currentLocation) {
+			setRecentLocations(prev => {
+				if (prev.some(location => location.id === currentLocation.id))
+					return [...prev];
+				if (prev.length >= MAX_LOCATIONS_AMOUNT)
+					return [...prev.slice(1), currentLocation];
+				else return [...prev, currentLocation];
+			});
+		}
 	}, [currentLocation]);
 
 	return (
 		<div className='division'>
 			<SectionHeading iconID='clock' text='Recent locations' />
 			<ul>
-				{recentLocations &&
+				{recentLocations.length &&
 					recentLocations.map(location => (
 						<LocationItem key={location.id} location={location} />
 					))}

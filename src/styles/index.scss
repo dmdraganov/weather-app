@@ -9,6 +9,9 @@ body {
 
 #root {
 	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	padding: 5px 0;
 }
 
 .container {

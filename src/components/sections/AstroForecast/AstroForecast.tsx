@@ -1,7 +1,7 @@
 import styles from './AstroForecast.module.scss';
 import SectionHeading from '../../SectionHeading/SectionHeading';
 import { useContext } from 'react';
-import { WeatherContext } from '../../../contexts/ApiContext';
+import { WeatherContext } from '../../../contexts/WeatherContext';
 import ListItem from '../../ListItem/ListItem';
 import formatTime from '../../../utilities/timeFormatter';
 

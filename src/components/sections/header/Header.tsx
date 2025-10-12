@@ -1,7 +1,7 @@
-import './Header.scss';
+import styles from './Header.module.scss';
 import formatDate from '../../../utilities/dateFormatter';
 import sprite from '/src/assets/icons/sprite.svg';
-import { WeatherContext } from '../../../contexts/ApiContext';
+import { WeatherContext } from '../../../contexts/WeatherContext';
 import { useContext } from 'react';
 import getWeatherIcon from '../../../utilities/iconMapper';
 import { Link } from 'react-router-dom';
@@ -16,24 +16,26 @@ const Header = () => {
 	const [weekday, ...rest] = formatDate(currentDate, 'long');
 
 	return (
-		<header className='header'>
+		<header className={styles.header}>
 			<div className='container'>
-				<div className='header__container'>
-					<div className='header__info'>
-						<Link className='header__locations-button' to='/location'>
-							<svg className='header__location-icon'>
+				<div className={styles.container}>
+					<div className={styles.info}>
+						<Link className={styles.locationsButton} to='/location'>
+							<svg className={styles.locationIcon}>
 								<use xlinkHref={sprite + '#location'} />
 							</svg>
 							<span>{location}</span>
-							<svg className='header__arrow-icon'>
+							<svg className={styles.arrowIcon}>
 								<use xlinkHref={sprite + '#arrow'} />
 							</svg>
 						</Link>
-						<span className='header__weather-condition'>{condition.text}</span>
-						<span className='header__weather-temp'>{temp} &deg;C</span>
-						<time dateTime={''}>
-							{weekday} | {rest.join(' ')}
-						</time>
+						<span className={styles.weatherCondition}>{condition.text}</span>
+						<div className={styles.flexContainer}>
+							<span className={styles.weatherTemp}>{temp} &deg;C</span>
+							<time dateTime={''}>
+								{weekday} | {rest.join(' ')}
+							</time>
+						</div>
 					</div>
 					<svg>
 						<use

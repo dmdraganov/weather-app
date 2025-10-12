@@ -1,14 +1,13 @@
-@use '../utilities/flex.module.scss' as *;
-@use '../styles/variables' as *;
+@use '../../styles/variables' as *;
 
 .headerContainer {
-	padding: 15px 55px;
-	@extend %flex;
+	padding: 10px 55px;
+	display: flex;
 
 	.backButton {
 		position: relative;
 		font-size: $lg;
-		@extend %flex;
+		display: flex;
 		gap: 5px;
 		align-items: end;
 
@@ -34,16 +33,16 @@
 }
 
 .mainContainer {
-	@extend %flex;
+	display: flex;
 }
 
 .textContainer {
 	flex: 0.5;
-	@extend %flex;
-	@extend %column;
-	@extend %gap;
+	display: flex;
+	flex-direction: column;
+	row-gap: 30px;
 }
 
 .mapContainer {
-	@extend %fill;
+	flex: 1;
 }

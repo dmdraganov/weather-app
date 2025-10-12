@@ -1,19 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
-import FavoriteLocations from '../components/sections/FavoriteLocations/FavoriteLocations';
-import RecentLocations from '../components/sections/RecentLocations/RecentLocations';
-import SearchLocation from '../components/sections/SearchLocation/SearchLocation';
+import { useContext } from 'react';
+import FavoriteLocations from '../../components/sections/FavoriteLocations/FavoriteLocations';
+import RecentLocations from '../../components/sections/RecentLocations/RecentLocations';
+import SearchLocation from '../../components/sections/SearchLocation/SearchLocation';
 import styles from './LocationPage.module.scss';
-import {
-	CurrentLocationContext,
-	FavoriteLocationsContext,
-} from '../contexts/ApiContext';
+import { CurrentLocationContext } from '../../contexts/CurrentLocationContext';
 import sprite from '/src/assets/icons/sprite.svg';
 import { Link } from 'react-router-dom';
-import type { ILocation } from '../types/locationApi';
+import { FavoriteLocationsProvider } from '../../contexts/FavoriteLocationsContext';
 
 const LocationPage = () => {
 	const [currentLocation] = useContext(CurrentLocationContext);
-	const [favoriteLocations, setFavoriteLocations] = useState<ILocation[]>([]);
 
 	return (
 		<>
@@ -39,13 +35,11 @@ const LocationPage = () => {
 			<main>
 				<div className={'container ' + styles.mainContainer}>
 					<div className={styles.textContainer}>
-						<FavoriteLocationsContext.Provider
-							value={[favoriteLocations, setFavoriteLocations]}
-						>
+						<FavoriteLocationsProvider>
 							<SearchLocation />
 							<FavoriteLocations />
 							<RecentLocations />
-						</FavoriteLocationsContext.Provider>
+						</FavoriteLocationsProvider>
 					</div>
 					<div className={styles.mapContainer}></div>
 				</div>

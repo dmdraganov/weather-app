@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import styles from './ForecastMetrics.module.scss';
-import { WeatherContext } from '../../../contexts/ApiContext';
+import { WeatherContext } from '../../../contexts/WeatherContext';
 import formatDate from '../../../utilities/dateFormatter';
 import getWeatherIcon from '../../../utilities/iconMapper';
 import Slider from '../../Slider/Slider';

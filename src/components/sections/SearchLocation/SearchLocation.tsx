@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './SearchLocation.module.scss';
 import { useFetch } from '../../../hooks/useFetch';
 import getUrl from '../../../utilities/urlBuilder';
-import type { ILocation } from '../../../types/locationApi';
+import type { Location } from '../../../types/locationApi';
 import LocationItem from '../../LocationItem/LocationItem';
 
 const SearchLocation = () => {
@@ -11,12 +11,12 @@ const SearchLocation = () => {
 	const resultListRef = useRef<HTMLUListElement>(null);
 
 	const url = getUrl('search', inputValue || ' ');
-	const locationList = useFetch<ILocation[]>(url);
+	const locationsList = useFetch<Location[]>(url);
 
 	useEffect(() => {
 		const resultList = resultListRef.current;
 		if (resultList) setMaxHeight(resultList!.scrollHeight);
-	}, [locationList]);
+	}, [locationsList]);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
@@ -39,9 +39,9 @@ const SearchLocation = () => {
 				ref={resultListRef}
 				style={{ maxHeight: maxHeight }}
 			>
-				{locationList &&
+				{locationsList &&
 					inputValue &&
-					locationList.map((location, i) => (
+					locationsList.map((location, i) => (
 						<LocationItem
 							key={location.id}
 							location={location}

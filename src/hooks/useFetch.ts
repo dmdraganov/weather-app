@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
-export const useFetch = <T>(url: string, options?: RequestInit) => {
+export const useFetch = <T>(url: string | null, options?: RequestInit) => {
 	const [data, setData] = useState<T | null>(null);
 
 	useEffect(() => {
+		if (!url) return;
+
 		const abortController = new AbortController();
 
 		const fetchData = async () => {
@@ -17,9 +19,8 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 				const data = await response.json();
 
 				setData(data);
-				console.log(data);
 			} catch (error) {
-				console.error(error);
+				console.error(error, url);
 			}
 		};
 		fetchData();

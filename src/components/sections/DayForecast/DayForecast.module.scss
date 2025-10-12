@@ -1,5 +1,4 @@
 @use '../../../styles/variables' as *;
-@use '/src/utilities/flex.module.scss' as *;
 
 .container {
 	flex: 1.2;
@@ -7,8 +6,8 @@
 	position: relative;
 
 	.chart {
-		@extend %flex;
-		@extend %vertCenter;
+		display: flex;
+		align-items: center;
 		position: absolute;
 		top: 45px;
 		bottom: 20px;

@@ -1,15 +1,14 @@
 import type { Dispatch, SetStateAction } from 'react';
 
-export type TCurrentLocationContext = [ILocation, TSetCurrentLocation];
+export type CurrentLocationContextValue = [Location | null, SetCurrentLocation];
+type SetCurrentLocation = Dispatch<SetStateAction<Location | null>>;
 
-export type TFavoriteLocationsContext = [
-	ILocation[],
-	React.Dispatch<React.SetStateAction<ILocation[]>>
+export type FavoriteLocationsContextValue = [
+	Location[],
+	React.Dispatch<React.SetStateAction<Location[]>>
 ];
 
-export type TSetCurrentLocation = Dispatch<SetStateAction<ILocation>>;
-
-export interface ILocation {
+export interface Location {
 	id: number;
 	name: string;
 	region?: string;

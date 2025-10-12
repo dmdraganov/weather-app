@@ -28,14 +28,9 @@ const buttonArr = [
 const NavMenu = () => {
 	return (
 		<nav className={styles.navMenu + ' division'}>
-			<a href='#'>
-				<img className={styles.avatarImage} src={avatarImage} alt='' />
-			</a>
-			<div className={styles.buttonsContainer}>
-				{buttonArr.map(element => (
-					<LinkButton key={element.text} to={element.path} {...element} />
-				))}
-			</div>
+			{buttonArr.map(element => (
+				<LinkButton key={element.text} to={element.path} {...element} />
+			))}
 		</nav>
 	);
 };
