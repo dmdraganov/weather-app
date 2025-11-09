@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as *;
+@use '../../../../styles/variables' as *;
 
 .container {
 	width: 325px;
@@ -14,7 +14,7 @@
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: $gap-md;
 	}
 }
 

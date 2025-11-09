@@ -1,10 +1,10 @@
 import styles from './RecentLocations.module.scss';
-import SectionHeading from '../../SectionHeading/SectionHeading';
+import SectionHeading from '../../../../components/SectionHeading/SectionHeading';
 import { useContext, useEffect } from 'react';
-import type { Location } from '../../../types/locationApi';
-import LocationItem from '../../LocationItem/LocationItem';
-import { CurrentLocationContext } from '../../../contexts/CurrentLocationContext';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
+import type { Location } from '../../../../types/locationApi';
+import LocationItem from '../../../../components/LocationItem/LocationItem';
+import { CurrentLocationContext } from '../../../../contexts/CurrentLocationContext';
+import { useLocalStorage } from '../../../../hooks/useLocalStorage';
 
 const MAX_LOCATIONS_AMOUNT = 3;
 
@@ -28,15 +28,15 @@ const RecentLocations = () => {
 	}, [currentLocation]);
 
 	return (
-		<div className='division'>
+		<section className='division'>
 			<SectionHeading iconID='clock' text='Recent locations' />
 			<ul>
-				{recentLocations.length &&
+				{!!recentLocations.length &&
 					recentLocations.map(location => (
 						<LocationItem key={location.id} location={location} />
 					))}
 			</ul>
-		</div>
+		</section>
 	);
 };
 

@@ -1,9 +1,9 @@
 import styles from './AstroForecast.module.scss';
-import SectionHeading from '../../SectionHeading/SectionHeading';
+import SectionHeading from '../../../../components/SectionHeading/SectionHeading';
 import { useContext } from 'react';
-import { WeatherContext } from '../../../contexts/WeatherContext';
-import ListItem from '../../ListItem/ListItem';
-import formatTime from '../../../utilities/timeFormatter';
+import { WeatherContext } from '../../../../contexts/WeatherContext';
+import ListItem from '../../../../components/ListItem/ListItem';
+import formatTime from '../../../../utilities/timeFormatter';
 
 const AstroForecast = () => {
 	const forecasts = useContext(WeatherContext)!.forecast.forecastday;

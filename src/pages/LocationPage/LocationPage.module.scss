@@ -1,48 +1,35 @@
 @use '../../styles/variables' as *;
 
-.headerContainer {
-	padding: 10px 55px;
+.locationPage {
+	height: 100%;
 	display: flex;
+	flex-direction: column;
+}
 
-	.backButton {
-		position: relative;
-		font-size: $lg;
-		display: flex;
-		gap: 5px;
-		align-items: end;
+.headerContainer {
+	padding: 0 55px 10px 55px;
+}
 
-		.arrowIcon {
-			position: absolute;
-			left: -20px;
-			bottom: 3px;
-
-			width: 20px;
-			height: 20px;
-			rotate: 180deg;
-		}
-
-		.locationIcon {
-			width: 30px;
-			height: 30px;
-		}
-
-		&:hover {
-			opacity: 0.8;
-		}
-	}
+.main {
+	flex: 1;
+	padding: 10px 0;
 }
 
 .mainContainer {
 	display: flex;
-}
+	column-gap: $gap-lg;
 
-.textContainer {
-	flex: 0.5;
-	display: flex;
-	flex-direction: column;
-	row-gap: 30px;
-}
+	.textContainer {
+		flex: 0.5;
+	}
 
-.mapContainer {
-	flex: 1;
+	.sectionsContainer {
+		display: flex;
+		flex-direction: column;
+		row-gap: $gap-lg;
+	}
+
+	.mapContainer {
+		flex: 1;
+	}
 }

@@ -13,6 +13,7 @@ export const WeatherProvider = ({ children }: PropsWithChildren) => {
 	const weatherData = useFetch<WeatherData>(
 		currentLocation ? getUrl(API, currentLocation.name) : null
 	);
+	console.log(currentLocation ? getUrl(API, currentLocation.name) : null);
 
 	return (
 		<WeatherContext.Provider value={weatherData}>

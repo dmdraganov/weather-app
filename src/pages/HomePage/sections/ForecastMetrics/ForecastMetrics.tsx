@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import styles from './ForecastMetrics.module.scss';
-import { WeatherContext } from '../../../contexts/WeatherContext';
-import formatDate from '../../../utilities/dateFormatter';
-import getWeatherIcon from '../../../utilities/iconMapper';
-import Slider from '../../Slider/Slider';
-import ListItem from '../../ListItem/ListItem';
+import { WeatherContext } from '../../../../contexts/WeatherContext';
+import formatDate from '../../../../utilities/dateFormatter';
+import getWeatherIcon from '../../../../utilities/iconMapper';
+import Slider from '../../../../components/Slider/Slider';
+import ListItem from '../../../../components/ListItem/ListItem';
 
 const ForecastMetrics = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(0);

@@ -1,5 +1,5 @@
 import styles from './DayForecast.module.scss';
-import SectionHeading from '../../SectionHeading/SectionHeading';
+import SectionHeading from '../../../../components/SectionHeading/SectionHeading';
 import {
 	useContext,
 	useEffect,
@@ -7,8 +7,9 @@ import {
 	useState,
 	type PointerEvent,
 } from 'react';
-import { WeatherContext } from '../../../contexts/WeatherContext';
-import getWeatherIcon from '../../../utilities/iconMapper';
+import { WeatherContext } from '../../../../contexts/WeatherContext';
+import getWeatherIcon from '../../../../utilities/iconMapper';
+import type { HourForecast } from '../../../../types/weatherAPI';
 
 interface ChartData {
 	time: string;
@@ -38,41 +39,6 @@ const DayForecast = () => {
 	const realTimeHour = new Date().getHours();
 
 	useEffect(() => {
-		const hourlyForecast = [...dayForecast[0].hour, ...dayForecast[1].hour];
-		const chartData: ChartData[] = hourlyForecast
-			.slice(realTimeHour, realTimeHour + 24)
-			.map(({ time, temp_c, condition, wind_kph, is_day }, i) => ({
-				time: i ? time.split(' ')[1] : 'Now',
-				temp: temp_c,
-				conditionIcon: getWeatherIcon(condition.code, !!is_day),
-				windSpeed: wind_kph,
-				x: 0,
-				y: 0,
-			}));
-
-		const tempArr = chartData.map(({ temp }) => temp);
-		const minTemp = Math.min(...tempArr);
-		const maxTemp = Math.max(...tempArr);
-		const maxDiff = maxTemp - minTemp;
-
-		chartData.forEach((hourForecast, index) => {
-			hourForecast.y =
-				(CANVAS_HEIGHT - 6) * ((maxTemp - hourForecast.temp) / maxDiff) + 3;
-
-			hourForecast.x =
-				canvasWidth * ((index + 1) / chartData.length) - POINTS_DISTANCE / 2;
-		});
-
-		setChartData(chartData);
-	}, [dayForecast, realTimeHour, POINTS_DISTANCE]);
-
-	useEffect(() => {
-		const canvas = canvasRef.current!;
-		canvas.width = canvasWidth * dpr;
-		canvas.height = CANVAS_HEIGHT * dpr;
-	}, [dpr]);
-
-	useEffect(() => {
 		const handleDprChange = () => {
 			const currentDpr = window.devicePixelRatio;
 			if (Math.abs(currentDpr - dpr) > 0.15) setDpr(currentDpr);
@@ -87,29 +53,73 @@ const DayForecast = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!chartData) return;
-		const canvas = canvasRef.current!;
+		const chartData = toChartData([
+			...dayForecast[0].hour,
+			...dayForecast[1].hour,
+		]);
+		setChartData(chartData);
+	}, [dayForecast, realTimeHour, POINTS_DISTANCE]);
+
+	useEffect(() => {
+		if (!canvasRef.current) return;
+		const canvas = canvasRef.current;
+		canvas.width = canvasWidth * dpr;
+		canvas.height = CANVAS_HEIGHT * dpr;
+	}, [dpr]);
+
+	useEffect(() => {
+		if (!chartData || !canvasRef.current) return;
+		const canvas = canvasRef.current;
+		printChart(canvas, chartData);
+	}, [chartData, dpr]);
+
+	const toChartData = (hourlyForecast: HourForecast[]): ChartData[] => {
+		const formattedHourlyForecast: ChartData[] = hourlyForecast
+			.slice(realTimeHour, realTimeHour + 24)
+			.map(({ time, temp_c, condition, is_day, wind_kph }, index) => ({
+				time: index ? time.split(' ')[1] : 'Now',
+				temp: temp_c,
+				conditionIcon: getWeatherIcon(condition.code, !!is_day),
+				windSpeed: wind_kph,
+				x: 0,
+				y: 0,
+			}));
+
+		const tempArr = formattedHourlyForecast.map(({ temp }) => temp);
+		const minTemp = Math.min(...tempArr);
+		const maxTemp = Math.max(...tempArr);
+		const maxDiff = maxTemp - minTemp;
+
+		formattedHourlyForecast.forEach((hourForecast, index, arr) => {
+			hourForecast.y =
+				(CANVAS_HEIGHT - 6) * ((maxTemp - hourForecast.temp) / maxDiff) + 3;
+			hourForecast.x =
+				canvasWidth * ((index + 1) / arr.length) - POINTS_DISTANCE / 2;
+		});
+		return formattedHourlyForecast;
+	};
+
+	const printChart = (canvas: HTMLCanvasElement, chartData: ChartData[]) => {
 		const ctx = canvas.getContext('2d');
 
-		if (ctx) {
-			ctx.scale(dpr, dpr);
-			ctx.clearRect(0, 0, canvas.width, CANVAS_HEIGHT);
+		if (!ctx) return;
+		ctx.scale(dpr, dpr);
+		ctx.clearRect(0, 0, canvas.width, CANVAS_HEIGHT);
 
-			ctx.beginPath();
-			ctx.strokeStyle = '#ffc355';
-			ctx.lineWidth = 2;
+		ctx.beginPath();
+		ctx.strokeStyle = '#ffc355';
+		ctx.lineWidth = 2;
 
-			ctx.moveTo(0, chartData[0].y);
-			chartData.forEach(({ x, y }) => ctx.lineTo(x, y));
-			ctx.lineTo(canvasWidth, chartData[23].y);
-			ctx.stroke();
+		ctx.moveTo(0, chartData[0].y);
+		chartData.forEach(({ x, y }) => ctx.lineTo(x, y));
+		ctx.lineTo(canvasWidth, chartData[23].y);
+		ctx.stroke();
 
-			ctx.beginPath();
-			ctx.arc(chartData[0].x, chartData[0].y, 3, 0, 2 * Math.PI);
-			ctx.fillStyle = '#ffffffff';
-			ctx.fill();
-		}
-	}, [chartData, dpr]);
+		ctx.beginPath();
+		ctx.arc(chartData[0].x, chartData[0].y, 3, 0, 2 * Math.PI);
+		ctx.fillStyle = '#ffffffff';
+		ctx.fill();
+	};
 
 	const handleDragStart = (e: PointerEvent) => {
 		canvasContainerRef.current!.setPointerCapture(e.pointerId);

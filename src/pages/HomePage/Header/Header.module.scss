@@ -14,10 +14,10 @@
 	.info {
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+		gap: $gap-sm;
 
 		.locationsButton {
-			font-size: $lg;
+			font-size: $font-lg;
 			display: flex;
 			align-items: end;
 			gap: 5px;
@@ -38,12 +38,12 @@
 			flex: 1;
 			display: flex;
 			align-items: center;
-			font-size: $xlg;
+			font-size: $font-xlg;
 		}
 
 		.flexContainer {
 			.weatherTemp {
-				font-size: $max;
+				font-size: $font-max;
 				display: block;
 			}
 		}

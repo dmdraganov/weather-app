@@ -1,10 +1,12 @@
+@use '../../../../styles/variables' as *;
+
 .navMenu {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 
-	row-gap: 20px;
+	row-gap: $gap-md;
 	min-width: 100px;
 	min-height: 100%;
 	padding-left: 0;

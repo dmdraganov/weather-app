@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './SearchLocation.module.scss';
-import { useFetch } from '../../../hooks/useFetch';
-import getUrl from '../../../utilities/urlBuilder';
-import type { Location } from '../../../types/locationApi';
-import LocationItem from '../../LocationItem/LocationItem';
+import { useFetch } from '../../../../hooks/useFetch';
+import getUrl from '../../../../utilities/urlBuilder';
+import type { Location } from '../../../../types/locationApi';
+import LocationItem from '../../../../components/LocationItem/LocationItem';
 
 const SearchLocation = () => {
 	const [inputValue, setInputValue] = useState<string>('');
@@ -23,7 +23,7 @@ const SearchLocation = () => {
 	};
 
 	return (
-		<div className={styles.searchContainer}>
+		<section className={styles.searchContainer}>
 			<div className={'division ' + styles.inputContainer}>
 				<input
 					onChange={handleInputChange}
@@ -49,7 +49,7 @@ const SearchLocation = () => {
 						/>
 					))}
 			</ul>
-		</div>
+		</section>
 	);
 };
 

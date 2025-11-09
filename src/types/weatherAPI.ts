@@ -11,7 +11,7 @@ interface WeatherBase {
 	wind_kph: number;
 }
 
-interface HourForecast extends WeatherBase {
+export interface HourForecast extends WeatherBase {
 	time: string;
 	is_day: number;
 }

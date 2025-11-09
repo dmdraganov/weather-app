@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as *;
+@use '../../../../styles/variables' as *;
 
 .searchContainer {
 	position: relative;
@@ -9,13 +9,13 @@
 
 		.inputField {
 			padding: 10px;
-			border: 2px solid $white;
+			border: 2px solid $color-white;
 			width: 100%;
 
 			border-radius: 20px;
 
 			&::placeholder {
-				color: $white;
+				color: $color-white;
 			}
 		}
 	}
@@ -23,7 +23,7 @@
 	.list {
 		overflow: hidden;
 		z-index: 1;
-		background-color: $grey;
+		background-color: $color-grey;
 		position: absolute;
 		top: 0;
 		left: 0;

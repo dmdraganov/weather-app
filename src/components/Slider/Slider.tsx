@@ -18,6 +18,8 @@ interface SliderProps {
 	children: ReactNode;
 }
 
+const BREAKPOINT = 10;
+
 const Slider = ({
 	children,
 	visibleSlides,
@@ -26,12 +28,39 @@ const Slider = ({
 	setSelectedSlide,
 }: SliderProps) => {
 	const [isDragging, setIsDragging] = useState(false);
+	const hasCooldownRef = useRef(false);
 	const sliderRef = useRef<HTMLDivElement>(null);
 	const slidesRef = useRef<HTMLDivElement>(null);
 	const slideWidthRef = useRef(0);
 	const startOffsetRef = useRef(0);
 	const offsetRef = useRef(0);
 	const dragStartXRef = useRef(0);
+
+	useEffect(() => {
+		if (!sliderRef.current) return;
+
+		const handleWheel = (e: globalThis.WheelEvent) => {
+			if (!(Math.abs(e.deltaX) > Math.abs(e.deltaY)) || hasCooldownRef.current)
+				return;
+
+			e.preventDefault();
+			e.stopPropagation();
+
+			if (e.deltaX < -BREAKPOINT) switchSlide('prev');
+			else if (e.deltaX > BREAKPOINT) switchSlide('next');
+			else return;
+			hasCooldownRef.current = true;
+			setTimeout(() => (hasCooldownRef.current = false), 500);
+		};
+
+		window.addEventListener('wheel', handleWheel, {
+			passive: false,
+		});
+
+		return () => {
+			window.removeEventListener('wheel', handleWheel);
+		};
+	}, []);
 
 	useEffect(() => {
 		slideWidthRef.current = sliderRef.current!.clientWidth / visibleSlides;
@@ -49,17 +78,21 @@ const Slider = ({
 		slidesRef.current!.style.transform = `translateX(${offsetRef.current}px)`;
 	}, [selectedSlide, isDragging]);
 
-	const validateSlide = (action: 'prev' | 'next') => (prev: number) => {
-		if (action === 'prev') return prev > 0 ? prev - 1 : 0;
-		return prev < slidesAmount - 1 ? prev + 1 : slidesAmount - 1;
+	const switchSlide = (action: 'prev' | 'next') => {
+		setSelectedSlide(prev => {
+			let slideNumber: number;
+			if (action === 'prev') slideNumber = prev > 0 ? prev - 1 : 0;
+			else slideNumber = prev < slidesAmount - 1 ? prev + 1 : slidesAmount - 1;
+			return slideNumber;
+		});
 	};
 
 	const handlePrevClick = () => {
-		setSelectedSlide(validateSlide('prev'));
+		switchSlide('prev');
 	};
 
 	const handleNextClick = () => {
-		setSelectedSlide(validateSlide('next'));
+		switchSlide('next');
 	};
 
 	const handleDragStart = (e: PointerEvent) => {
@@ -69,21 +102,19 @@ const Slider = ({
 		setIsDragging(true);
 	};
 
-	const handleDragMove = ({ clientX }: PointerEvent) => {
+	const handleDragMove = (e: PointerEvent) => {
 		if (!isDragging) return;
 		const offset = offsetRef.current;
 		const slideWidth = slideWidthRef.current;
 		const dragStartX = dragStartXRef.current;
 
-		const newOffset = offset + (clientX - dragStartX);
+		const newOffset = offset + (e.clientX - dragStartX);
 		slidesRef.current!.style.transform = `translateX(${newOffset}px)`;
 
 		const newSelectedSlide = Math.round(-newOffset / slideWidth);
 
 		if (newSelectedSlide !== selectedSlide)
-			setSelectedSlide(
-				validateSlide(newSelectedSlide > selectedSlide ? 'next' : 'prev')
-			);
+			switchSlide(newSelectedSlide > selectedSlide ? 'next' : 'prev');
 	};
 
 	const handleDragEnd = (e: PointerEvent) => {

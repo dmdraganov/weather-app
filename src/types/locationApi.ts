@@ -1,7 +1,10 @@
 import type { Dispatch, SetStateAction } from 'react';
 
-export type CurrentLocationContextValue = [Location | null, SetCurrentLocation];
-type SetCurrentLocation = Dispatch<SetStateAction<Location | null>>;
+export type CurrentLocationContextValue = [
+	Location | null,
+	Dispatch<SetStateAction<Location | null>>,
+	Dispatch<SetStateAction<Coords | null>>
+];
 
 export type FavoriteLocationsContextValue = [
 	Location[],
@@ -17,3 +20,5 @@ export interface Location {
 	lon: number;
 	url: string;
 }
+
+export type Coords = [number, number];

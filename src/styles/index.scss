@@ -2,9 +2,9 @@
 @use './reset';
 
 body {
-	color: white;
+	color: $color-white;
 	font-family: 'Inter', Arial, Helvetica, sans-serif;
-	background-color: $yellow;
+	background-color: $color-yellow;
 }
 
 #root {
@@ -23,7 +23,7 @@ body {
 }
 
 .division {
-	background-color: $light-yellow;
+	background-color: $color-light-yellow;
 	border-radius: 40px;
 	padding: 20px 35px;
 }

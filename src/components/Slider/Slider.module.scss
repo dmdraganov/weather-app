@@ -1,14 +1,16 @@
 .slider {
+	overflow-x: scroll;
+	overscroll-behavior-x: contain;
 	height: 60px;
 	position: relative;
-	overflow: hidden;
 	touch-action: none;
 	user-select: none;
 
 	.slides {
+		padding-right: 50px;
+		width: max-content;
 		height: 100%;
 		display: flex;
-		//transition: ease-in-out translate 0.15s;
 	}
 
 	.prevButton,
