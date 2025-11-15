@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import LocationItem from '../../../../components/LocationItem/LocationItem';
 import SectionHeading from '../../../../components/SectionHeading/SectionHeading';
-import styles from './FavoriteLocations.module.scss';
 import { FavoriteLocationsContext } from '../../../../contexts/FavoriteLocationsContext';
 
 const FavoriteLocations = () => {

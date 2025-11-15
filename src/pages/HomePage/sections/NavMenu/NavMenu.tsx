@@ -1,6 +1,5 @@
 import styles from './NavMenu.module.scss';
 import LinkButton from '../../../../components/LinkButton/LinkButton';
-import avatarImage from '/src/assets/images/imageExample.jpg';
 
 const buttonArr = [
 	{

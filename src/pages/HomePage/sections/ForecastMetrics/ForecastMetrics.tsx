@@ -11,10 +11,10 @@ const ForecastMetrics = () => {
 	const forecasts = useContext(WeatherContext)!.forecast.forecastday;
 	const dayForecast = forecasts[selectedDay].day;
 
-	const sliderDaysList = forecasts.map(element => {
+	const sliderDaysList = forecasts.map(({ date_epoch, day }) => {
 		return {
-			dayName: formatDate(new Date(element.date_epoch * 1000))[0],
-			iconCode: element.day.condition.code,
+			dayName: formatDate(new Date(date_epoch * 1000))[0],
+			iconCode: day.condition.code,
 		};
 	});
 

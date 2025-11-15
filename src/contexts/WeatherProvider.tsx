@@ -1,10 +1,9 @@
-import { createContext, useContext, type PropsWithChildren } from 'react';
+import { useContext, type PropsWithChildren } from 'react';
 import { CurrentLocationContext } from './CurrentLocationContext';
 import type { WeatherData } from '../types/weatherAPI';
 import { useFetch } from '../hooks/useFetch';
 import getUrl from '../utilities/urlBuilder';
-
-export const WeatherContext = createContext<WeatherData | null>(null);
+import { WeatherContext } from './WeatherContext';
 
 const API = 'forecast';
 

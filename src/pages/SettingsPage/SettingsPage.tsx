@@ -1,5 +1,3 @@
-import styles from './SettingsPage.module.scss';
-
 const SettingsPage = () => {
 	return <></>;
 };

@@ -1,4 +1,3 @@
-import styles from './RecentLocations.module.scss';
 import SectionHeading from '../../../../components/SectionHeading/SectionHeading';
 import { useContext, useEffect } from 'react';
 import type { Location } from '../../../../types/locationApi';

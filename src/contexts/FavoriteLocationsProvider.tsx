@@ -1,12 +1,7 @@
-import { createContext, type PropsWithChildren } from 'react';
-import type {
-	FavoriteLocationsContextValue,
-	Location,
-} from '../types/locationApi';
+import type { PropsWithChildren } from 'react';
+import type { Location } from '../types/locationApi';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-
-export const FavoriteLocationsContext =
-	createContext<FavoriteLocationsContextValue>([[], () => {}]);
+import { FavoriteLocationsContext } from './FavoriteLocationsContext';
 
 export const FavoriteLocationsProvider = ({ children }: PropsWithChildren) => {
 	const favoriteLocationsState = useLocalStorage<Location[]>(

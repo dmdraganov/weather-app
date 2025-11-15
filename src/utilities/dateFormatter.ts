@@ -1,9 +1,9 @@
-type TNameStyle = 'short' | 'long' | 'narrow';
+type NameStyle = 'short' | 'long' | 'narrow';
 
 const formatDate = (
 	date: Date,
-	dayNameStyle: TNameStyle = 'short',
-	monthNameStyle: TNameStyle = 'short',
+	dayNameStyle: NameStyle = 'short',
+	monthNameStyle: NameStyle = 'short',
 	locale = 'en-US'
 ) => {
 	const dayName = date.toLocaleString(locale, {

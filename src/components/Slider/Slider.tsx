@@ -8,6 +8,7 @@ import {
 	type Dispatch,
 	type ReactNode,
 	type SetStateAction,
+	useCallback,
 } from 'react';
 
 interface SliderProps {
@@ -36,6 +37,19 @@ const Slider = ({
 	const offsetRef = useRef(0);
 	const dragStartXRef = useRef(0);
 
+	const switchSlide = useCallback(
+		(action: 'prev' | 'next') => {
+			setSelectedSlide(prev => {
+				let slideNumber: number;
+				if (action === 'prev') slideNumber = prev > 0 ? prev - 1 : 0;
+				else
+					slideNumber = prev < slidesAmount - 1 ? prev + 1 : slidesAmount - 1;
+				return slideNumber;
+			});
+		},
+		[slidesAmount]
+	);
+
 	useEffect(() => {
 		if (!sliderRef.current) return;
 
@@ -60,7 +74,7 @@ const Slider = ({
 		return () => {
 			window.removeEventListener('wheel', handleWheel);
 		};
-	}, []);
+	}, [switchSlide]);
 
 	useEffect(() => {
 		slideWidthRef.current = sliderRef.current!.clientWidth / visibleSlides;
@@ -77,15 +91,6 @@ const Slider = ({
 
 		slidesRef.current!.style.transform = `translateX(${offsetRef.current}px)`;
 	}, [selectedSlide, isDragging]);
-
-	const switchSlide = (action: 'prev' | 'next') => {
-		setSelectedSlide(prev => {
-			let slideNumber: number;
-			if (action === 'prev') slideNumber = prev > 0 ? prev - 1 : 0;
-			else slideNumber = prev < slidesAmount - 1 ? prev + 1 : slidesAmount - 1;
-			return slideNumber;
-		});
-	};
 
 	const handlePrevClick = () => {
 		switchSlide('prev');

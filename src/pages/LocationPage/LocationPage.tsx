@@ -2,7 +2,7 @@ import FavoriteLocations from './sections/FavoriteLocations/FavoriteLocations';
 import RecentLocations from './sections/RecentLocations/RecentLocations';
 import SearchLocation from './sections/SearchLocation/SearchLocation';
 import styles from './LocationPage.module.scss';
-import { FavoriteLocationsProvider } from '../../contexts/FavoriteLocationsContext';
+import { FavoriteLocationsProvider } from '../../contexts/FavoriteLocationsProvider';
 import LocationButton from '../../components/LocationButton/LocationButton';
 import WorldMap from './sections/WorldMap/WorldMap';
 

@@ -3,12 +3,12 @@ import type { Dispatch, SetStateAction } from 'react';
 export type CurrentLocationContextValue = [
 	Location | null,
 	Dispatch<SetStateAction<Location | null>>,
-	Dispatch<SetStateAction<Coords | null>>
+	Dispatch<SetStateAction<Coords | null>>,
 ];
 
 export type FavoriteLocationsContextValue = [
 	Location[],
-	React.Dispatch<React.SetStateAction<Location[]>>
+	React.Dispatch<React.SetStateAction<Location[]>>,
 ];
 
 export interface Location {

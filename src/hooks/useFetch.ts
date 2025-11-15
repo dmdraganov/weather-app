@@ -25,7 +25,7 @@ export const useFetch = <T>(url: string | null, options?: RequestInit) => {
 		};
 		fetchData();
 		return () => abortController.abort('abort reason: component unmount');
-	}, [url]);
+	}, [url, options]);
 
 	return data;
 };

@@ -1,8 +1,8 @@
 import HomePage from './pages/HomePage/HomePage';
-import { CurrentLocationProvider } from './contexts/CurrentLocationContext';
+import { CurrentLocationProvider } from './contexts/CurrentLocationProvider';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import LocationPage from './pages/LocationPage/LocationPage';
-import { WeatherProvider } from './contexts/WeatherContext';
+import { WeatherProvider } from './contexts/WeatherProvider';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 
 const CurrentLocationProviderLayout = () => (

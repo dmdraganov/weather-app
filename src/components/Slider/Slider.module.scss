@@ -1,6 +1,5 @@
 .slider {
-	overflow-x: scroll;
-	overscroll-behavior-x: contain;
+	overflow: hidden;
 	height: 60px;
 	position: relative;
 	touch-action: none;
