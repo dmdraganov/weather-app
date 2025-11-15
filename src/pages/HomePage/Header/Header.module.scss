@@ -1,51 +1,51 @@
 @use '/src/styles/variables' as *;
 
 .header {
-	flex: 1;
-	padding: 10px 0;
+  flex: 1;
+  padding: 10px 0;
 
-	.container {
-		display: flex;
-		justify-content: space-between;
-		padding: 0 55px;
-		height: 100%;
-	}
+  .container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 55px;
+    height: 100%;
+  }
 
-	.info {
-		display: flex;
-		flex-direction: column;
-		gap: $gap-sm;
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-sm;
 
-		.locationsButton {
-			font-size: $font-lg;
-			display: flex;
-			align-items: end;
-			gap: 5px;
-		}
+    .locationsButton {
+      font-size: $font-lg;
+      display: flex;
+      align-items: end;
+      gap: 5px;
+    }
 
-		.locationIcon {
-			width: 30px;
-			height: 30px;
-		}
+    .locationIcon {
+      width: 30px;
+      height: 30px;
+    }
 
-		.arrowIcon {
-			width: 20px;
-			height: 20px;
-			margin-bottom: 3px;
-		}
+    .arrowIcon {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 3px;
+    }
 
-		.weatherCondition {
-			flex: 1;
-			display: flex;
-			align-items: center;
-			font-size: $font-xlg;
-		}
+    .weatherCondition {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      font-size: $font-xlg;
+    }
 
-		.flexContainer {
-			.weatherTemp {
-				font-size: $font-max;
-				display: block;
-			}
-		}
-	}
+    .flexContainer {
+      .weatherTemp {
+        font-size: $font-max;
+        display: block;
+      }
+    }
+  }
 }

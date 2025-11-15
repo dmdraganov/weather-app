@@ -4,14 +4,14 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import { FavoriteLocationsContext } from './FavoriteLocationsContext';
 
 export const FavoriteLocationsProvider = ({ children }: PropsWithChildren) => {
-	const favoriteLocationsState = useLocalStorage<Location[]>(
-		'favoriteLocations',
-		[]
-	);
+  const favoriteLocationsState = useLocalStorage<Location[]>(
+    'favoriteLocations',
+    []
+  );
 
-	return (
-		<FavoriteLocationsContext.Provider value={favoriteLocationsState}>
-			{children}
-		</FavoriteLocationsContext.Provider>
-	);
+  return (
+    <FavoriteLocationsContext.Provider value={favoriteLocationsState}>
+      {children}
+    </FavoriteLocationsContext.Provider>
+  );
 };

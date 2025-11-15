@@ -1,60 +1,60 @@
 @use '../../../../styles/variables' as *;
 
 .container {
-	flex: 1.2;
-	padding-bottom: 0;
-	position: relative;
+  flex: 1.2;
+  padding-bottom: 0;
+  position: relative;
 
-	.chart {
-		display: flex;
-		align-items: center;
-		position: absolute;
-		top: 45px;
-		bottom: 20px;
-		left: 0;
-		right: 0;
-		max-width: 100%;
+  .chart {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 45px;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    max-width: 100%;
 
-		overflow: hidden;
+    overflow: hidden;
 
-		touch-action: none;
-		user-select: none;
+    touch-action: none;
+    user-select: none;
 
-		.canvasContainer {
-			translate: 0 -20px;
-			position: relative;
-			height: 120px;
+    .canvasContainer {
+      translate: 0 -20px;
+      position: relative;
+      height: 120px;
 
-			.canvas {
-				height: 100%;
-			}
+      .canvas {
+        height: 100%;
+      }
 
-			.chartPoint {
-				transform: translate(-50%, -25px);
-				text-align: center;
+      .chartPoint {
+        transform: translate(-50%, -25px);
+        text-align: center;
 
-				.temp::after {
-					content: '\00B0';
-					position: absolute;
-				}
+        .temp::after {
+          content: '\00B0';
+          position: absolute;
+        }
 
-				.bottomContainer {
-					margin-top: 15px;
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					font-size: $font-sm;
+        .bottomContainer {
+          margin-top: 15px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: $font-sm;
 
-					.icon {
-						width: 30px;
-						height: 30px;
-					}
-					.time {
-					}
-					.windSpeed {
-					}
-				}
-			}
-		}
-	}
+          .icon {
+            width: 30px;
+            height: 30px;
+          }
+          .time {
+          }
+          .windSpeed {
+          }
+        }
+      }
+    }
+  }
 }

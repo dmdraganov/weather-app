@@ -1,161 +1,161 @@
 import styles from './Slider.module.scss';
 import ArrowButton from '../ArrowButton/ArrowButton';
 import {
-	useEffect,
-	useRef,
-	useState,
-	type PointerEvent,
-	type Dispatch,
-	type ReactNode,
-	type SetStateAction,
-	useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type PointerEvent,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+  useCallback,
 } from 'react';
 
 interface SliderProps {
-	selectedSlide: number;
-	visibleSlides: number;
-	slidesAmount: number;
-	setSelectedSlide: Dispatch<SetStateAction<number>>;
-	children: ReactNode;
+  selectedSlide: number;
+  visibleSlides: number;
+  slidesAmount: number;
+  setSelectedSlide: Dispatch<SetStateAction<number>>;
+  children: ReactNode;
 }
 
 const BREAKPOINT = 10;
 
 const Slider = ({
-	children,
-	visibleSlides,
-	slidesAmount,
-	selectedSlide,
-	setSelectedSlide,
+  children,
+  visibleSlides,
+  slidesAmount,
+  selectedSlide,
+  setSelectedSlide,
 }: SliderProps) => {
-	const [isDragging, setIsDragging] = useState(false);
-	const hasCooldownRef = useRef(false);
-	const sliderRef = useRef<HTMLDivElement>(null);
-	const slidesRef = useRef<HTMLDivElement>(null);
-	const slideWidthRef = useRef(0);
-	const startOffsetRef = useRef(0);
-	const offsetRef = useRef(0);
-	const dragStartXRef = useRef(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const hasCooldownRef = useRef(false);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const slidesRef = useRef<HTMLDivElement>(null);
+  const slideWidthRef = useRef(0);
+  const startOffsetRef = useRef(0);
+  const offsetRef = useRef(0);
+  const dragStartXRef = useRef(0);
 
-	const switchSlide = useCallback(
-		(action: 'prev' | 'next') => {
-			setSelectedSlide(prev => {
-				let slideNumber: number;
-				if (action === 'prev') slideNumber = prev > 0 ? prev - 1 : 0;
-				else
-					slideNumber = prev < slidesAmount - 1 ? prev + 1 : slidesAmount - 1;
-				return slideNumber;
-			});
-		},
-		[slidesAmount]
-	);
+  const switchSlide = useCallback(
+    (action: 'prev' | 'next') => {
+      setSelectedSlide((prev) => {
+        let slideNumber: number;
+        if (action === 'prev') slideNumber = prev > 0 ? prev - 1 : 0;
+        else
+          slideNumber = prev < slidesAmount - 1 ? prev + 1 : slidesAmount - 1;
+        return slideNumber;
+      });
+    },
+    [slidesAmount]
+  );
 
-	useEffect(() => {
-		if (!sliderRef.current) return;
+  useEffect(() => {
+    if (!sliderRef.current) return;
 
-		const handleWheel = (e: globalThis.WheelEvent) => {
-			if (!(Math.abs(e.deltaX) > Math.abs(e.deltaY)) || hasCooldownRef.current)
-				return;
+    const handleWheel = (e: globalThis.WheelEvent) => {
+      if (!(Math.abs(e.deltaX) > Math.abs(e.deltaY)) || hasCooldownRef.current)
+        return;
 
-			e.preventDefault();
-			e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
 
-			if (e.deltaX < -BREAKPOINT) switchSlide('prev');
-			else if (e.deltaX > BREAKPOINT) switchSlide('next');
-			else return;
-			hasCooldownRef.current = true;
-			setTimeout(() => (hasCooldownRef.current = false), 500);
-		};
+      if (e.deltaX < -BREAKPOINT) switchSlide('prev');
+      else if (e.deltaX > BREAKPOINT) switchSlide('next');
+      else return;
+      hasCooldownRef.current = true;
+      setTimeout(() => (hasCooldownRef.current = false), 500);
+    };
 
-		window.addEventListener('wheel', handleWheel, {
-			passive: false,
-		});
+    window.addEventListener('wheel', handleWheel, {
+      passive: false,
+    });
 
-		return () => {
-			window.removeEventListener('wheel', handleWheel);
-		};
-	}, [switchSlide]);
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, [switchSlide]);
 
-	useEffect(() => {
-		slideWidthRef.current = sliderRef.current!.clientWidth / visibleSlides;
-		startOffsetRef.current =
-			Math.floor(visibleSlides / 2) * slideWidthRef.current;
+  useEffect(() => {
+    slideWidthRef.current = sliderRef.current!.clientWidth / visibleSlides;
+    startOffsetRef.current =
+      Math.floor(visibleSlides / 2) * slideWidthRef.current;
 
-		slidesRef.current!.style.translate = `${startOffsetRef.current}px`;
-	}, [visibleSlides]);
+    slidesRef.current!.style.translate = `${startOffsetRef.current}px`;
+  }, [visibleSlides]);
 
-	useEffect(() => {
-		if (isDragging) return;
-		const slideWidth = slideWidthRef.current;
-		offsetRef.current = -(slideWidth * selectedSlide);
+  useEffect(() => {
+    if (isDragging) return;
+    const slideWidth = slideWidthRef.current;
+    offsetRef.current = -(slideWidth * selectedSlide);
 
-		slidesRef.current!.style.transform = `translateX(${offsetRef.current}px)`;
-	}, [selectedSlide, isDragging]);
+    slidesRef.current!.style.transform = `translateX(${offsetRef.current}px)`;
+  }, [selectedSlide, isDragging]);
 
-	const handlePrevClick = () => {
-		switchSlide('prev');
-	};
+  const handlePrevClick = () => {
+    switchSlide('prev');
+  };
 
-	const handleNextClick = () => {
-		switchSlide('next');
-	};
+  const handleNextClick = () => {
+    switchSlide('next');
+  };
 
-	const handleDragStart = (e: PointerEvent) => {
-		if ((e.target as HTMLElement).closest('button')) return;
-		sliderRef.current!.setPointerCapture(e.pointerId);
-		dragStartXRef.current = e.clientX;
-		setIsDragging(true);
-	};
+  const handleDragStart = (e: PointerEvent) => {
+    if ((e.target as HTMLElement).closest('button')) return;
+    sliderRef.current!.setPointerCapture(e.pointerId);
+    dragStartXRef.current = e.clientX;
+    setIsDragging(true);
+  };
 
-	const handleDragMove = (e: PointerEvent) => {
-		if (!isDragging) return;
-		const offset = offsetRef.current;
-		const slideWidth = slideWidthRef.current;
-		const dragStartX = dragStartXRef.current;
+  const handleDragMove = (e: PointerEvent) => {
+    if (!isDragging) return;
+    const offset = offsetRef.current;
+    const slideWidth = slideWidthRef.current;
+    const dragStartX = dragStartXRef.current;
 
-		const newOffset = offset + (e.clientX - dragStartX);
-		slidesRef.current!.style.transform = `translateX(${newOffset}px)`;
+    const newOffset = offset + (e.clientX - dragStartX);
+    slidesRef.current!.style.transform = `translateX(${newOffset}px)`;
 
-		const newSelectedSlide = Math.round(-newOffset / slideWidth);
+    const newSelectedSlide = Math.round(-newOffset / slideWidth);
 
-		if (newSelectedSlide !== selectedSlide)
-			switchSlide(newSelectedSlide > selectedSlide ? 'next' : 'prev');
-	};
+    if (newSelectedSlide !== selectedSlide)
+      switchSlide(newSelectedSlide > selectedSlide ? 'next' : 'prev');
+  };
 
-	const handleDragEnd = (e: PointerEvent) => {
-		sliderRef.current!.releasePointerCapture(e.pointerId);
-		setIsDragging(false);
-	};
+  const handleDragEnd = (e: PointerEvent) => {
+    sliderRef.current!.releasePointerCapture(e.pointerId);
+    setIsDragging(false);
+  };
 
-	return (
-		<div
-			className={styles.slider}
-			ref={sliderRef}
-			onPointerDown={handleDragStart}
-			onPointerMove={handleDragMove}
-			onPointerUp={handleDragEnd}
-			onPointerCancel={handleDragEnd}
-			style={{
-				cursor: isDragging ? 'grabbing' : 'grab',
-			}}
-		>
-			<div
-				className={styles.slides}
-				ref={slidesRef}
-				style={{
-					transition: isDragging ? 'none' : 'ease-in-out transform 0.15s',
-				}}
-			>
-				{children}
-			</div>
-			<div className={styles.prevButton}>
-				<ArrowButton route='left' onClick={handlePrevClick} />
-			</div>
-			<div className={styles.nextButton}>
-				<ArrowButton route='right' onClick={handleNextClick} />
-			</div>
-		</div>
-	);
+  return (
+    <div
+      className={styles.slider}
+      ref={sliderRef}
+      onPointerDown={handleDragStart}
+      onPointerMove={handleDragMove}
+      onPointerUp={handleDragEnd}
+      onPointerCancel={handleDragEnd}
+      style={{
+        cursor: isDragging ? 'grabbing' : 'grab',
+      }}
+    >
+      <div
+        className={styles.slides}
+        ref={slidesRef}
+        style={{
+          transition: isDragging ? 'none' : 'ease-in-out transform 0.15s',
+        }}
+      >
+        {children}
+      </div>
+      <div className={styles.prevButton}>
+        <ArrowButton route='left' onClick={handlePrevClick} />
+      </div>
+      <div className={styles.nextButton}>
+        <ArrowButton route='right' onClick={handleNextClick} />
+      </div>
+    </div>
+  );
 };
 
 export default Slider;

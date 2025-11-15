@@ -1,29 +1,29 @@
 .slider {
-	overflow: hidden;
-	height: 60px;
-	position: relative;
-	touch-action: none;
-	user-select: none;
+  overflow: hidden;
+  height: 60px;
+  position: relative;
+  touch-action: none;
+  user-select: none;
 
-	.slides {
-		padding-right: 50px;
-		width: max-content;
-		height: 100%;
-		display: flex;
-	}
+  .slides {
+    padding-right: 50px;
+    width: max-content;
+    height: 100%;
+    display: flex;
+  }
 
-	.prevButton,
-	.nextButton {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-	}
+  .prevButton,
+  .nextButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-	.prevButton {
-		left: 0;
-	}
+  .prevButton {
+    left: 0;
+  }
 
-	.nextButton {
-		right: 0;
-	}
+  .nextButton {
+    right: 0;
+  }
 }

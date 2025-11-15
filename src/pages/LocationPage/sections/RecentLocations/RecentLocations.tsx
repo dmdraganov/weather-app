@@ -8,35 +8,35 @@ import { useLocalStorage } from '../../../../hooks/useLocalStorage';
 const MAX_LOCATIONS_AMOUNT = 3;
 
 const RecentLocations = () => {
-	const [currentLocation] = useContext(CurrentLocationContext);
-	const [recentLocations, setRecentLocations] = useLocalStorage<Location[]>(
-		'recentLocations',
-		[]
-	);
+  const [currentLocation] = useContext(CurrentLocationContext);
+  const [recentLocations, setRecentLocations] = useLocalStorage<Location[]>(
+    'recentLocations',
+    []
+  );
 
-	useEffect(() => {
-		if (currentLocation) {
-			setRecentLocations(prev => {
-				if (prev.some(location => location.id === currentLocation.id))
-					return [...prev];
-				if (prev.length >= MAX_LOCATIONS_AMOUNT)
-					return [...prev.slice(1), currentLocation];
-				else return [...prev, currentLocation];
-			});
-		}
-	}, [currentLocation]);
+  useEffect(() => {
+    if (currentLocation) {
+      setRecentLocations((prev) => {
+        if (prev.some((location) => location.id === currentLocation.id))
+          return [...prev];
+        if (prev.length >= MAX_LOCATIONS_AMOUNT)
+          return [...prev.slice(1), currentLocation];
+        else return [...prev, currentLocation];
+      });
+    }
+  }, [currentLocation]);
 
-	return (
-		<section className='division'>
-			<SectionHeading iconID='clock' text='Recent locations' />
-			<ul>
-				{!!recentLocations.length &&
-					recentLocations.map(location => (
-						<LocationItem key={location.id} location={location} />
-					))}
-			</ul>
-		</section>
-	);
+  return (
+    <section className='division'>
+      <SectionHeading iconID='clock' text='Recent locations' />
+      <ul>
+        {!!recentLocations.length &&
+          recentLocations.map((location) => (
+            <LocationItem key={location.id} location={location} />
+          ))}
+      </ul>
+    </section>
+  );
 };
 
 export default RecentLocations;

@@ -1,34 +1,34 @@
 @use '../../styles/variables' as *;
 
 .button {
-	position: relative;
-	font-size: $font-lg;
-	display: flex;
-	gap: 5px;
-	align-items: end;
+  position: relative;
+  font-size: $font-lg;
+  display: flex;
+  gap: 5px;
+  align-items: end;
 
-	.arrowIcon {
-		width: 20px;
-		height: 20px;
-	}
+  .arrowIcon {
+    width: 20px;
+    height: 20px;
+  }
 
-	.backArrowIcon {
-		position: absolute;
-		left: -20px;
-		bottom: 3px;
-		rotate: 180deg;
-	}
+  .backArrowIcon {
+    position: absolute;
+    left: -20px;
+    bottom: 3px;
+    rotate: 180deg;
+  }
 
-	.forwardArrowIcon {
-		margin-bottom: 3px;
-	}
+  .forwardArrowIcon {
+    margin-bottom: 3px;
+  }
 
-	.locationIcon {
-		width: 30px;
-		height: 30px;
-	}
+  .locationIcon {
+    width: 30px;
+    height: 30px;
+  }
 
-	&:hover {
-		opacity: 0.8;
-	}
+  &:hover {
+    opacity: 0.8;
+  }
 }

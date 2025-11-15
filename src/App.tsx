@@ -6,32 +6,32 @@ import { WeatherProvider } from './contexts/WeatherProvider';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 
 const CurrentLocationProviderLayout = () => (
-	<CurrentLocationProvider>
-		<Outlet />
-	</CurrentLocationProvider>
+  <CurrentLocationProvider>
+    <Outlet />
+  </CurrentLocationProvider>
 );
 
 function App() {
-	return (
-		<BrowserRouter>
-			<Routes>
-				<Route element={<CurrentLocationProviderLayout />}>
-					<Route
-						path='/'
-						element={
-							<WeatherProvider>
-								<HomePage />
-							</WeatherProvider>
-						}
-					/>
-					<Route path='/location' element={<LocationPage />} />
-				</Route>
-				<Route path='/explore' />
-				<Route path='/settings' element={<SettingsPage />} />
-				<Route path='*' />
-			</Routes>
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<CurrentLocationProviderLayout />}>
+          <Route
+            path='/'
+            element={
+              <WeatherProvider>
+                <HomePage />
+              </WeatherProvider>
+            }
+          />
+          <Route path='/location' element={<LocationPage />} />
+        </Route>
+        <Route path='/explore' />
+        <Route path='/settings' element={<SettingsPage />} />
+        <Route path='*' />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

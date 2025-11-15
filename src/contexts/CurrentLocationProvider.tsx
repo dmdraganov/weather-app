@@ -8,36 +8,36 @@ import { useNavigate } from 'react-router-dom';
 import { CurrentLocationContext } from './CurrentLocationContext';
 
 export const CurrentLocationProvider = ({ children }: PropsWithChildren) => {
-	const [coords, setCoords] = useState<Coords | null>(null);
-	const [currentLocation, setCurrentLocation] =
-		useLocalStorage<Location | null>('location', null);
-	const navigate = useNavigate();
+  const [coords, setCoords] = useState<Coords | null>(null);
+  const [currentLocation, setCurrentLocation] =
+    useLocalStorage<Location | null>('location', null);
+  const navigate = useNavigate();
 
-	const locationsList = useFetch<Location[]>(
-		coords ? getUrl('search', coords) : null
-	);
+  const locationsList = useFetch<Location[]>(
+    coords ? getUrl('search', coords) : null
+  );
 
-	useEffect(() => {
-		(async () => {
-			try {
-				const response = await fetchGeolocation();
-				if (response) setCoords(response);
-			} catch (error) {
-				console.log(error);
-			}
-		})();
-	}, []);
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetchGeolocation();
+        if (response) setCoords(response);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
-	useEffect(() => {
-		if (locationsList?.length) setCurrentLocation(locationsList[0]);
-		else if (!currentLocation) navigate('/location');
-	}, [locationsList, currentLocation]);
+  useEffect(() => {
+    if (locationsList?.length) setCurrentLocation(locationsList[0]);
+    else if (!currentLocation) navigate('/location');
+  }, [locationsList, currentLocation]);
 
-	return (
-		<CurrentLocationContext.Provider
-			value={[currentLocation, setCurrentLocation, setCoords]}
-		>
-			{children}
-		</CurrentLocationContext.Provider>
-	);
+  return (
+    <CurrentLocationContext.Provider
+      value={[currentLocation, setCurrentLocation, setCoords]}
+    >
+      {children}
+    </CurrentLocationContext.Provider>
+  );
 };
