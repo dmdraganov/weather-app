@@ -29,7 +29,8 @@ export const CurrentLocationProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    if (locationsList?.length) setCurrentLocation(locationsList[0]);
+    if (locationsList?.length && !currentLocation)
+      setCurrentLocation(locationsList[0]);
     else if (!currentLocation) navigate('/location');
   }, [locationsList, currentLocation]);
 

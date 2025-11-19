@@ -30,7 +30,7 @@ const RecentLocations = () => {
     <section className='division'>
       <SectionHeading iconID='clock' text='Recent locations' />
       <ul>
-        {!!recentLocations.length &&
+        {recentLocations.length &&
           recentLocations.map((location) => (
             <LocationItem key={location.id} location={location} />
           ))}

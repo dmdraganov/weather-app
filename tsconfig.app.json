@@ -6,6 +6,13 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@yandex/ymaps3-types"
+    ],
+    "paths": {
+      "ymaps3": ["./node_modules/@yandex/ymaps3-types"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
