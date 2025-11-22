@@ -2,29 +2,28 @@ import SectionHeading from '../../../../components/SectionHeading/SectionHeading
 import { useContext, useEffect } from 'react';
 import type { Location } from '../../../../types/locationApi';
 import LocationItem from '../../../../components/LocationItem/LocationItem';
-import { CurrentLocationContext } from '../../../../contexts/CurrentLocationContext';
+import { SelectedLocationContext } from '../../../../contexts/SelectedLocationContext';
 import { useLocalStorage } from '../../../../hooks/useLocalStorage';
 
 const MAX_LOCATIONS_AMOUNT = 3;
 
 const RecentLocations = () => {
-  const [currentLocation] = useContext(CurrentLocationContext);
+  const [selectedLocation] = useContext(SelectedLocationContext);
   const [recentLocations, setRecentLocations] = useLocalStorage<Location[]>(
     'recentLocations',
     []
   );
 
   useEffect(() => {
-    if (currentLocation) {
-      setRecentLocations((prev) => {
-        if (prev.some((location) => location.id === currentLocation.id))
-          return [...prev];
-        if (prev.length >= MAX_LOCATIONS_AMOUNT)
-          return [...prev.slice(1), currentLocation];
-        else return [...prev, currentLocation];
-      });
-    }
-  }, [currentLocation]);
+    if (!selectedLocation) return;
+    if (recentLocations.some((location) => location.id === selectedLocation.id))
+      return;
+    setRecentLocations((prev) =>
+      prev.length >= MAX_LOCATIONS_AMOUNT
+        ? [...prev.slice(-2), selectedLocation]
+        : [...prev, selectedLocation]
+    );
+  }, [selectedLocation]);
 
   return (
     <section className='division'>

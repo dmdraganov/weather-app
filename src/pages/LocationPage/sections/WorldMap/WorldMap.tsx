@@ -3,28 +3,38 @@ import {
   YMapMarker,
   YMapDefaultFeaturesLayer,
   YMapDefaultSchemeLayer,
+  YMapDefaultMarker,
+  YMapListener,
   reactify,
 } from '../../../../lib/ymaps';
 import { useContext } from 'react';
-import { CurrentLocationContext } from '../../../../contexts/CurrentLocationContext';
+import { SelectedLocationContext } from '../../../../contexts/SelectedLocationContext';
 import styles from './WorldMap.module.scss';
 import type { YMapLocation } from '@yandex/ymaps3-types/imperative/YMap';
+import type { DomEvent, DomEventHandlerObject } from 'ymaps3';
 
 const DEFAULT_LOCATION: YMapLocation = { center: [40.52, 34.34], zoom: 2 };
 const ZOOM = 10;
 
 const WorldMap = () => {
-  const [currentLocation, ,] = useContext(CurrentLocationContext);
-  const location: YMapLocation = currentLocation
-    ? { center: [currentLocation?.lon, currentLocation?.lat], zoom: ZOOM }
+  const [selectedLocation, setLocation] = useContext(SelectedLocationContext);
+
+  const location: YMapLocation = selectedLocation
+    ? { center: [selectedLocation?.lon, selectedLocation?.lat], zoom: ZOOM }
     : DEFAULT_LOCATION;
-  console.log(location);
+
+  const handleClick = (object: DomEventHandlerObject, e: DomEvent) => {
+    const [lon, lat] = e.coordinates;
+    setLocation([lat, lon]);
+  };
 
   return (
     YMap &&
     YMapDefaultFeaturesLayer &&
     YMapDefaultSchemeLayer &&
     YMapMarker &&
+    YMapDefaultMarker &&
+    YMapListener &&
     reactify && (
       <YMap
         location={reactify.useDefault(location, [
@@ -35,36 +45,16 @@ const WorldMap = () => {
       >
         <YMapDefaultSchemeLayer />
         <YMapDefaultFeaturesLayer />
-        <YMapMarker
+        <YMapListener layer='any' onClick={handleClick} />
+        <YMapDefaultMarker
           coordinates={reactify.useDefault(location.center, [
             location.center[0],
             location.center[1],
           ])}
-        >
-          asdasd
-        </YMapMarker>
+        ></YMapDefaultMarker>
       </YMap>
     )
   );
 };
 
 export default WorldMap;
-
-// state={
-//           currentLocation
-//             ? { center: coords, zoom: ZOOM }
-//             : { center: DEFAULT_COORDS, zoom: DEFAULT_ZOOM }
-//         }
-//         className={styles.map}
-//         instanceRef={(ref) => {
-//           mapRef.current = ref;
-//         }}
-//         onClick={(e: MapEvent) => {
-//           const coords: Coords = e.get('coords');
-//           if (coords) setCoords(coords);
-//           if (mapRef.current) mapRef.current.setCenter(coords, ZOOM);
-//         }}
-//         options={{
-//           suppressMapOpenBlock: true,
-//           yandexMapDisablePoiInteractivity: true,
-//         }}

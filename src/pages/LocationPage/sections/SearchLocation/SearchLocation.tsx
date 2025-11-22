@@ -10,7 +10,7 @@ const SearchLocation = () => {
   const [maxHeight, setMaxHeight] = useState<number>(0);
   const resultListRef = useRef<HTMLUListElement>(null);
 
-  const url = getUrl('search', inputValue || ' ');
+  const url = inputValue && getUrl('search', inputValue);
   const locationsList = useFetch<Location[]>(url);
 
   useEffect(() => {
@@ -18,9 +18,8 @@ const SearchLocation = () => {
     if (resultList) setMaxHeight(resultList!.scrollHeight);
   }, [locationsList]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setInputValue(e.target.value);
-  };
 
   return (
     <section className={styles.searchContainer}>

@@ -1,21 +1,21 @@
 import HomePage from './pages/HomePage/HomePage';
-import { CurrentLocationProvider } from './contexts/CurrentLocationProvider';
+import { SelectedLocationProvider } from './contexts/SelectedLocationProvider';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import LocationPage from './pages/LocationPage/LocationPage';
 import { WeatherProvider } from './contexts/WeatherProvider';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 
-const CurrentLocationProviderLayout = () => (
-  <CurrentLocationProvider>
+const SelectedLocationProviderLayout = () => (
+  <SelectedLocationProvider>
     <Outlet />
-  </CurrentLocationProvider>
+  </SelectedLocationProvider>
 );
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<CurrentLocationProviderLayout />}>
+        <Route element={<SelectedLocationProviderLayout />}>
           <Route
             path='/'
             element={

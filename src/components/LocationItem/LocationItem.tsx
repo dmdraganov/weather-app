@@ -2,7 +2,7 @@ import styles from './LocationItem.module.scss';
 import sprite from '/src/assets/icons/sprite.svg';
 import type { Location } from '../../types/locationApi';
 import { useContext } from 'react';
-import { CurrentLocationContext } from '../../contexts/CurrentLocationContext';
+import { SelectedLocationContext } from '../../contexts/SelectedLocationContext';
 import { FavoriteLocationsContext } from '../../contexts/FavoriteLocationsContext';
 
 interface LocationItemProps {
@@ -11,7 +11,7 @@ interface LocationItemProps {
 }
 
 const LocationItem = ({ location, isFirst = false }: LocationItemProps) => {
-  const [, setCurrentLocation] = useContext(CurrentLocationContext);
+  const [, setSelectedLocation] = useContext(SelectedLocationContext);
   const [favoriteLocations, setFavoriteLocations] = useContext(
     FavoriteLocationsContext
   );
@@ -32,7 +32,7 @@ const LocationItem = ({ location, isFirst = false }: LocationItemProps) => {
     <li className={styles.item} style={isFirst ? { marginTop: 44 } : undefined}>
       <div
         className={styles.itemText}
-        onClick={() => setCurrentLocation(location)}
+        onClick={() => setSelectedLocation(location)}
       >
         <h3 className={styles.itemHeading}>{location.name}</h3>
         <span className={styles.itemAddition}>

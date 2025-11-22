@@ -1,9 +1,6 @@
-import type { Dispatch, SetStateAction } from 'react';
-
-export type CurrentLocationContextValue = [
+export type SelectedLocationContextValue = [
   Location | null,
-  Dispatch<SetStateAction<Location | null>>,
-  Dispatch<SetStateAction<Coords | null>>,
+  (location: Location | Coords) => void,
 ];
 
 export type FavoriteLocationsContextValue = [

@@ -1,20 +1,20 @@
 import { useContext } from 'react';
-import { CurrentLocationContext } from '../../contexts/CurrentLocationContext';
+import { SelectedLocationContext } from '../../contexts/SelectedLocationContext';
 import { Link } from 'react-router-dom';
 import styles from './LocationButton.module.scss';
 import sprite from '../../assets/icons/sprite.svg';
 
 const LocationButton = ({ route }: { route: 'back' | 'forward' }) => {
-  const [currentLocation] = useContext(CurrentLocationContext);
+  const [selectedLocation] = useContext(SelectedLocationContext);
   const isBack = route === 'back';
   return (
-    currentLocation && (
+    selectedLocation && (
       <Link to={isBack ? '/' : 'location'} className={styles.button}>
         <svg className={styles.locationIcon}>
           <use xlinkHref={sprite + '#location'} />
         </svg>
-        {currentLocation && (
-          <h1 className={styles.currentLocation}>{currentLocation.name}</h1>
+        {selectedLocation && (
+          <h1 className={styles.selectedLocation}>{selectedLocation.name}</h1>
         )}
         <svg
           className={

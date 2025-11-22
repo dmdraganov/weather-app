@@ -5,9 +5,7 @@ export const useFetch = <T>(url: string | null, options?: RequestInit) => {
 
   useEffect(() => {
     if (!url) return;
-
     const abortController = new AbortController();
-
     const fetchData = async () => {
       try {
         const response = await fetch(url, {
