@@ -8,14 +8,16 @@ const FavoriteLocations = () => {
   const [favoriteLocations] = useContext(FavoriteLocationsContext);
 
   return (
-    <section className={'division ' + styles.container}>
-      <SectionHeading iconId='heart' text='Favorite locations' />
-      <ul className={styles.list}>
-        {favoriteLocations.map((location) => (
-          <LocationItem key={location.id} location={location} />
-        ))}
-      </ul>
-    </section>
+    !!favoriteLocations.length && (
+      <section className={'division ' + styles.container}>
+        <SectionHeading iconId='heart' text='Favorite locations' />
+        <ul className={styles.list}>
+          {favoriteLocations.map((location) => (
+            <LocationItem key={location.id} location={location} />
+          ))}
+        </ul>
+      </section>
+    )
   );
 };
 

@@ -27,15 +27,16 @@ const RecentLocations = () => {
   }, [selectedLocation]);
 
   return (
-    <section className='division'>
-      <SectionHeading iconId='clock' text='Recent locations' />
-      <ul className={styles.list}>
-        {recentLocations.length &&
-          recentLocations.map((location) => (
+    !!recentLocations.length && (
+      <section className='division'>
+        <SectionHeading iconId='clock' text='Recent locations' />
+        <ul className={styles.list}>
+          {recentLocations.map((location) => (
             <LocationItem key={location.id} location={location} />
           ))}
-      </ul>
-    </section>
+        </ul>
+      </section>
+    )
   );
 };
 

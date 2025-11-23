@@ -8,25 +8,27 @@ const LocationButton = ({ route }: { route: 'back' | 'forward' }) => {
   const [selectedLocation] = useContext(LocationContext);
   const isBack = route === 'back';
   return (
-    selectedLocation && (
-      <Link to={isBack ? '/' : 'location'} className={styles.button}>
-        <svg className={styles.locationIcon}>
-          <use xlinkHref={sprite + '#location'} />
-        </svg>
-        {selectedLocation && (
-          <h1 className={styles.selectedLocation}>{selectedLocation.name}</h1>
-        )}
-        <svg
-          className={
-            styles.arrowIcon +
-            ' ' +
-            (isBack ? styles.backArrowIcon : styles.forwardArrowIcon)
-          }
-        >
-          <use xlinkHref={sprite + '#arrow'} />
-        </svg>
-      </Link>
-    )
+    <Link
+      to={isBack ? '/' : '/location'}
+      className={styles.button}
+      style={!selectedLocation ? { visibility: 'hidden' } : undefined}
+    >
+      <svg className={styles.locationIcon}>
+        <use xlinkHref={sprite + '#location'} />
+      </svg>
+      {selectedLocation && (
+        <h1 className={styles.selectedLocation}>{selectedLocation.name}</h1>
+      )}
+      <svg
+        className={
+          styles.arrowIcon +
+          ' ' +
+          (isBack ? styles.backArrowIcon : styles.forwardArrowIcon)
+        }
+      >
+        <use xlinkHref={sprite + '#arrow'} />
+      </svg>
+    </Link>
   );
 };
 
