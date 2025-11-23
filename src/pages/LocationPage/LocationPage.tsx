@@ -5,19 +5,21 @@ import styles from './LocationPage.module.scss';
 import { FavoriteLocationsProvider } from '../../contexts/FavoriteLocationsProvider';
 import LocationButton from '../../components/LocationButton/LocationButton';
 import WorldMap from './sections/WorldMap/WorldMap';
+import CurrentLocation from './sections/CurrentLocation/CurrentLocation';
 
 const LocationPage = () => {
   return (
-    <div className={styles.locationPage}>
+    <div className={styles.page}>
       <main className={styles.main}>
         <div className={'container ' + styles.mainContainer}>
           <div className={styles.textContainer}>
-            <div className={styles.headerContainer}>
+            <header className={styles.headerContainer}>
               <LocationButton route='back' />
-            </div>
+            </header>
             <div className={styles.sectionsContainer}>
               <FavoriteLocationsProvider>
                 <SearchLocation />
+                <CurrentLocation />
                 <FavoriteLocations />
                 <RecentLocations />
               </FavoriteLocationsProvider>

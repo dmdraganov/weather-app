@@ -2,14 +2,14 @@ import styles from './ListItem.module.scss';
 import sprite from '../../assets/icons/sprite.svg';
 
 interface ListItemProps {
-  iconID: string;
+  iconId: string;
   title: string;
   value: string | number;
   isVertical?: boolean;
 }
 
 const ListItem = ({
-  iconID,
+  iconId,
   title,
   value,
   isVertical = false,
@@ -17,7 +17,7 @@ const ListItem = ({
   return (
     <li className={styles.item + ' ' + (isVertical && styles.itemVertical)}>
       <svg className={styles.icon}>
-        <use xlinkHref={sprite + '#' + iconID} />
+        <use xlinkHref={sprite + '#' + iconId} />
       </svg>
       <div className={styles.text + ' ' + (isVertical && styles.textVertical)}>
         <h3 className={styles.itemTitle}>{title}</h3>

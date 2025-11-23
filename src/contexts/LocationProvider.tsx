@@ -5,9 +5,9 @@ import { fetchGeolocation } from '../utilities/geolocationProvider';
 import getUrl from '../utilities/urlBuilder';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useNavigate } from 'react-router-dom';
-import { SelectedLocationContext } from './SelectedLocationContext';
+import { LocationContext } from './LocationContext';
 
-export const SelectedLocationProvider = ({ children }: PropsWithChildren) => {
+export const LocationProvider = ({ children }: PropsWithChildren) => {
   const [geolocationCoords, setGeolocationCoords] = useState<Coords | null>(
     null
   );
@@ -58,8 +58,10 @@ export const SelectedLocationProvider = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <SelectedLocationContext.Provider value={[selectedLocation, setLocation]}>
+    <LocationContext.Provider
+      value={[selectedLocation, setLocation, currentLocation]}
+    >
       {children}
-    </SelectedLocationContext.Provider>
+    </LocationContext.Provider>
   );
 };

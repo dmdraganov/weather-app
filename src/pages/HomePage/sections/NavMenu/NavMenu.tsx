@@ -3,22 +3,22 @@ import LinkButton from '../../../../components/LinkButton/LinkButton';
 
 const buttonArr = [
   {
-    iconID: 'rain-day',
+    iconId: 'rain-day',
     text: 'weather',
     path: '/',
   },
   {
-    iconID: 'explore',
+    iconId: 'explore',
     text: 'explore',
     path: '/explore',
   },
   {
-    iconID: 'location',
+    iconId: 'location',
     text: 'cities',
     path: '/location',
   },
   {
-    iconID: 'settings',
+    iconId: 'settings',
     text: 'settings',
     path: '/settings',
   },

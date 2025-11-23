@@ -20,27 +20,27 @@ const ForecastMetrics = () => {
 
   const conditionsList = [
     {
-      iconID: 'thermometer',
+      iconId: 'thermometer',
       title: 'Temp',
       value: `${dayForecast.mintemp_c}\u00B0 / ${dayForecast.maxtemp_c}\u00B0`,
     },
     {
-      iconID: 'wind',
+      iconId: 'wind',
       title: 'Wind',
       value: dayForecast.maxwind_kph + ' km/h',
     },
     {
-      iconID: 'blob',
+      iconId: 'blob',
       title: 'Chance of rain',
       value: dayForecast.daily_chance_of_rain + '%',
     },
     {
-      iconID: 'blob',
+      iconId: 'blob',
       title: 'Average humidity',
       value: dayForecast.avghumidity + '%',
     },
     {
-      iconID: 'sunny',
+      iconId: 'sunny',
       title: 'UV index',
       value: dayForecast.uv,
     },
@@ -70,8 +70,8 @@ const ForecastMetrics = () => {
       </Slider>
       <h2 className={styles.heading}>Air conditions</h2>
       <ul className={styles.conditionsList}>
-        {conditionsList.map(({ iconID, title, value }) => (
-          <ListItem key={title} iconID={iconID} title={title} value={value} />
+        {conditionsList.map(({ iconId, title, value }) => (
+          <ListItem key={title} iconId={iconId} title={title} value={value} />
         ))}
       </ul>
     </section>

@@ -157,7 +157,7 @@ const DayForecast = () => {
 
   return (
     <section className={styles.container + ' division'}>
-      <SectionHeading iconID='clock' text='24-hours forecast' />
+      <SectionHeading iconId='clock' text='24-hours forecast' />
       <div
         className={styles.chart}
         ref={chartContainerRef}

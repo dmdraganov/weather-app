@@ -11,22 +11,22 @@ const AstroForecast = () => {
 
   const conditionsList = [
     {
-      iconID: 'sunny',
+      iconId: 'sunny',
       title: 'Sunrise',
       value: formatTime(sunrise),
     },
     {
-      iconID: 'wind',
+      iconId: 'wind',
       title: 'Sunset',
       value: formatTime(sunset),
     },
     {
-      iconID: 'clear',
+      iconId: 'clear',
       title: 'Moon phase',
       value: moon_phase,
     },
     {
-      iconID: 'blob',
+      iconId: 'blob',
       title: 'Moon illumination',
       value: moon_illumination + '%',
     },
@@ -36,7 +36,7 @@ const AstroForecast = () => {
     <section
       className={`${styles.container} division flex-container__flex-item`}
     >
-      <SectionHeading iconID='clear' text='Astronomical forecast' />
+      <SectionHeading iconId='clear' text='Astronomical forecast' />
       <ul className={styles.list}>
         {conditionsList.map((element) => (
           <ListItem key={element.title} {...element} isVertical={true} />

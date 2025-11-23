@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { SelectedLocationContext } from '../../contexts/SelectedLocationContext';
+import { LocationContext } from '../../contexts/LocationContext';
 import { Link } from 'react-router-dom';
 import styles from './LocationButton.module.scss';
 import sprite from '../../assets/icons/sprite.svg';
 
 const LocationButton = ({ route }: { route: 'back' | 'forward' }) => {
-  const [selectedLocation] = useContext(SelectedLocationContext);
+  const [selectedLocation] = useContext(LocationContext);
   const isBack = route === 'back';
   return (
     selectedLocation && (

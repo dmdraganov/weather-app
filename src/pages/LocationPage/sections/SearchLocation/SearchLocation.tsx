@@ -8,15 +8,19 @@ import LocationItem from '../../../../components/LocationItem/LocationItem';
 const SearchLocation = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [maxHeight, setMaxHeight] = useState<number>(0);
-  const resultListRef = useRef<HTMLUListElement>(null);
+  const listContainerRef = useRef<HTMLDivElement>(null);
 
   const url = inputValue && getUrl('search', inputValue);
   const locationsList = useFetch<Location[]>(url);
 
   useEffect(() => {
-    const resultList = resultListRef.current;
-    if (resultList) setMaxHeight(resultList!.scrollHeight);
+    const listContainer = listContainerRef.current;
+    if (listContainer) setMaxHeight(listContainer.scrollHeight);
   }, [locationsList]);
+
+  useEffect(() => {
+    if (!inputValue) setMaxHeight(0);
+  }, [inputValue]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setInputValue(e.target.value);
@@ -33,21 +37,19 @@ const SearchLocation = () => {
         />
       </div>
 
-      <ul
-        className={'division ' + styles.list}
-        ref={resultListRef}
-        style={{ maxHeight: maxHeight }}
-      >
-        {locationsList &&
-          inputValue &&
-          locationsList.map((location, i) => (
-            <LocationItem
-              key={location.id}
-              location={location}
-              isFirst={i === 0}
-            />
-          ))}
-      </ul>
+      {!!locationsList?.length && (
+        <div
+          className={styles.listContainer}
+          style={{ maxHeight: maxHeight }}
+          ref={listContainerRef}
+        >
+          <ul className={styles.list}>
+            {locationsList.map((location) => (
+              <LocationItem key={location.id} location={location} />
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 };

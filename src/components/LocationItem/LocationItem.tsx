@@ -2,16 +2,15 @@ import styles from './LocationItem.module.scss';
 import sprite from '/src/assets/icons/sprite.svg';
 import type { Location } from '../../types/locationApi';
 import { useContext } from 'react';
-import { SelectedLocationContext } from '../../contexts/SelectedLocationContext';
+import { LocationContext } from '../../contexts/LocationContext';
 import { FavoriteLocationsContext } from '../../contexts/FavoriteLocationsContext';
 
 interface LocationItemProps {
   location: Location;
-  isFirst?: boolean;
 }
 
-const LocationItem = ({ location, isFirst = false }: LocationItemProps) => {
-  const [, setSelectedLocation] = useContext(SelectedLocationContext);
+const LocationItem = ({ location }: LocationItemProps) => {
+  const [, setLocation] = useContext(LocationContext);
   const [favoriteLocations, setFavoriteLocations] = useContext(
     FavoriteLocationsContext
   );
@@ -29,11 +28,8 @@ const LocationItem = ({ location, isFirst = false }: LocationItemProps) => {
   };
 
   return (
-    <li className={styles.item} style={isFirst ? { marginTop: 44 } : undefined}>
-      <div
-        className={styles.itemText}
-        onClick={() => setSelectedLocation(location)}
-      >
+    <li className={styles.item}>
+      <div className={styles.itemText} onClick={() => setLocation(location)}>
         <h3 className={styles.itemHeading}>{location.name}</h3>
         <span className={styles.itemAddition}>
           {location.country + (location.region ? ', ' + location.region : '')}

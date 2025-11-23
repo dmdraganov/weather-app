@@ -1,6 +1,7 @@
-export type SelectedLocationContextValue = [
+export type LocationContextValue = [
   Location | null,
   (location: Location | Coords) => void,
+  Location | null,
 ];
 
 export type FavoriteLocationsContextValue = [

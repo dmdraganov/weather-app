@@ -1,17 +1,14 @@
 @use './variables' as *;
 @use './reset';
 
+html {
+  scrollbar-gutter: stable both-edges;
+}
+
 body {
   color: $color-white;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   background-color: $color-yellow;
-}
-
-#root {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 5px 0;
 }
 
 .container {
