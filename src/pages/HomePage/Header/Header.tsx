@@ -17,7 +17,9 @@ const Header = () => {
       <div className='container'>
         <div className={styles.container}>
           <div className={styles.info}>
-            <LocationButton route='forward' />
+            <div className={styles.locationButton}>
+              <LocationButton route='forward' />
+            </div>
             <span className={styles.weatherCondition}>{condition.text}</span>
             <div className={styles.flexContainer}>
               <span className={styles.weatherTemp}>{temp} &deg;C</span>
@@ -26,7 +28,7 @@ const Header = () => {
               </time>
             </div>
           </div>
-          <svg>
+          <svg className={styles.weatherIcon}>
             <use
               xlinkHref={getWeatherIcon(
                 condition.code,

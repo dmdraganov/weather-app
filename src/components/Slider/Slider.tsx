@@ -29,7 +29,6 @@ const Slider = ({
   setSelectedSlide,
 }: SliderProps) => {
   const [isDragging, setIsDragging] = useState(false);
-  const hasCooldownRef = useRef(false);
   const sliderRef = useRef<HTMLDivElement>(null);
   const slidesRef = useRef<HTMLDivElement>(null);
   const slideWidthRef = useRef(0);
@@ -51,33 +50,7 @@ const Slider = ({
   );
 
   useEffect(() => {
-    if (!sliderRef.current) return;
-
-    const handleWheel = (e: globalThis.WheelEvent) => {
-      if (!(Math.abs(e.deltaX) > Math.abs(e.deltaY)) || hasCooldownRef.current)
-        return;
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (e.deltaX < -BREAKPOINT) switchSlide('prev');
-      else if (e.deltaX > BREAKPOINT) switchSlide('next');
-      else return;
-      hasCooldownRef.current = true;
-      setTimeout(() => (hasCooldownRef.current = false), 500);
-    };
-
-    window.addEventListener('wheel', handleWheel, {
-      passive: false,
-    });
-
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-    };
-  }, [switchSlide]);
-
-  useEffect(() => {
-    slideWidthRef.current = sliderRef.current!.clientWidth / visibleSlides;
+    slideWidthRef.current = slidesRef.current!.clientWidth / visibleSlides;
     startOffsetRef.current =
       Math.floor(visibleSlides / 2) * slideWidthRef.current;
 

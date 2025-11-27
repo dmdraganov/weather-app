@@ -1,29 +1,31 @@
 @use '../../../../styles/variables' as *;
 
 .container {
-  flex: 1.2;
+  flex: 1 1 200px;
   padding-bottom: 0;
   position: relative;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-mobile) {
+    order: 0;
+  }
 
   .chart {
     display: flex;
     align-items: center;
     position: absolute;
     top: 45px;
-    bottom: 20px;
+    bottom: 50px;
     left: 0;
     right: 0;
     max-width: 100%;
-
-    overflow: hidden;
 
     touch-action: none;
     user-select: none;
 
     .canvasContainer {
-      translate: 0 -20px;
       position: relative;
-      height: 120px;
+      height: 50%;
 
       .canvas {
         height: 100%;

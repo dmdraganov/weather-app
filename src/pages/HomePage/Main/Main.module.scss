@@ -1,15 +1,19 @@
 @use '../../../styles/variables' as *;
 
 .main {
-  padding: 10px 0;
+  flex: 1;
+
   .container {
     display: flex;
     gap: $gap-lg;
     height: 100%;
+    @media (max-width: $breakpoint-mobile) {
+      flex-direction: column;
+    }
   }
 
   .verticalFlexContainer {
-    flex: 1;
+    flex: 2.5;
     display: flex;
     flex-direction: column;
     row-gap: $gap-lg;
@@ -17,6 +21,11 @@
     & * {
       min-height: 0;
       min-width: 0;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      flex: none;
+      display: contents;
     }
   }
 }

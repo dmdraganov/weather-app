@@ -2,6 +2,7 @@
 
 .page {
   min-height: 100vh;
+  padding: 20px 0;
 }
 
 .main {
@@ -10,11 +11,15 @@
     column-gap: $gap-lg;
 
     .textContainer {
-      padding: 15px 0;
       flex: 0.5;
 
       .headerContainer {
-        padding: 0 55px 10px 55px;
+        padding: 0 55px;
+        margin-bottom: 10px;
+
+        @media (max-width: $breakpoint-mobile) {
+          padding: 0 10px;
+        }
       }
 
       .sectionsContainer {
@@ -26,9 +31,8 @@
     }
 
     .mapContainer {
+      height: calc(100vh - 40px);
       flex: 1;
-      padding: 15px 0;
-      height: 100vh;
       overflow: hidden;
     }
   }

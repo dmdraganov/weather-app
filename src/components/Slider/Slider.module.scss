@@ -4,10 +4,10 @@
   position: relative;
   touch-action: none;
   user-select: none;
+  display: flex;
+  justify-content: center;
 
   .slides {
-    padding-right: 50px;
-    width: max-content;
     height: 100%;
     display: flex;
   }

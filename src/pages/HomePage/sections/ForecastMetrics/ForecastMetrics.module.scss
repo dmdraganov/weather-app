@@ -1,9 +1,16 @@
 @use '../../../../styles/variables' as *;
 
 .container {
-  width: 325px;
+  flex: 1;
+  max-width: 325px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: $breakpoint-mobile) {
+    min-width: 100%;
+    order: 1;
+  }
 
   .heading {
     text-transform: uppercase;

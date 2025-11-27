@@ -33,9 +33,7 @@ const AstroForecast = () => {
   ];
 
   return (
-    <section
-      className={`${styles.container} division flex-container__flex-item`}
-    >
+    <section className={`${styles.container} division`}>
       <SectionHeading iconId='clear' text='Astronomical forecast' />
       <ul className={styles.list}>
         {conditionsList.map((element) => (

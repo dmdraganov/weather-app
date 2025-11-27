@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type PointerEvent,
@@ -21,9 +22,8 @@ interface ChartData {
   y: number;
 }
 
-const POINTS_DISTANCE = 150;
-const CANVAS_HEIGHT = 120;
-const canvasWidth = 25 * POINTS_DISTANCE;
+const POINTS_DISTANCE = 130;
+const CANVAS_WIDTH = 25 * POINTS_DISTANCE;
 
 const DayForecast = () => {
   const dayForecast = useContext(WeatherContext)!.forecast.forecastday;
@@ -36,11 +36,10 @@ const DayForecast = () => {
   const dragStartXRef = useRef(0);
   const newOffsetRef = useRef(0);
   const offsetRef = useRef(0);
-
   const realTimeHour = new Date().getHours();
 
   const toChartData = useCallback(
-    (hourlyForecast: HourForecast[]): ChartData[] => {
+    (hourlyForecast: HourForecast[], canvasHeight: number): ChartData[] => {
       const formattedHourlyForecast: ChartData[] = hourlyForecast
         .slice(realTimeHour, realTimeHour + 24)
         .map(({ time, temp_c, condition, is_day, wind_kph }, index) => ({
@@ -59,22 +58,24 @@ const DayForecast = () => {
 
       formattedHourlyForecast.forEach((hourForecast, index, arr) => {
         hourForecast.y =
-          (CANVAS_HEIGHT - 6) * ((maxTemp - hourForecast.temp) / maxDiff) + 3;
+          (canvasHeight! - 6) * ((maxTemp - hourForecast.temp) / maxDiff) + 3;
         hourForecast.x =
-          canvasWidth * ((index + 1) / arr.length) - POINTS_DISTANCE / 2;
+          CANVAS_WIDTH * ((index + 1) / arr.length) - POINTS_DISTANCE / 2;
       });
       return formattedHourlyForecast;
     },
     [realTimeHour]
   );
 
-  const printChart = useCallback(
-    (canvas: HTMLCanvasElement, chartData: ChartData[]) => {
+  const drawChart = useCallback(
+    (chartData: ChartData[], canvasHeight: number) => {
+      if (!canvasRef.current) return;
+      const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
 
       if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvasHeight);
       ctx.scale(dpr, dpr);
-      ctx.clearRect(0, 0, canvas.width, CANVAS_HEIGHT);
 
       ctx.beginPath();
       ctx.strokeStyle = '#ffc355';
@@ -82,7 +83,7 @@ const DayForecast = () => {
 
       ctx.moveTo(0, chartData[0].y);
       chartData.forEach(({ x, y }) => ctx.lineTo(x, y));
-      ctx.lineTo(canvasWidth, chartData[23].y);
+      ctx.lineTo(CANVAS_WIDTH, chartData[23].y);
       ctx.stroke();
 
       ctx.beginPath();
@@ -99,37 +100,37 @@ const DayForecast = () => {
       if (Math.abs(currentDpr - dpr) > 0.15) setDpr(currentDpr);
     };
     window.addEventListener('resize', handleDprChange);
-    canvasRef.current!.style.width = `${canvasWidth}px`;
+
+    canvasRef.current!.style.width = `${CANVAS_WIDTH}px`;
     return () => {
       window.removeEventListener('resize', handleDprChange);
     };
-  }, [dpr]);
+  }, []);
 
-  useEffect(() => {
-    const chartData = toChartData([
-      ...dayForecast[0].hour,
-      ...dayForecast[1].hour,
-    ]);
+  useLayoutEffect(() => {
+    if (
+      !canvasRef.current ||
+      !chartContainerRef.current ||
+      !canvasContainerRef.current
+    )
+      return;
+    const height = canvasContainerRef.current.clientHeight;
+    canvasContainerRef.current.style.height = `${height} px`;
+    const canvas = canvasRef.current;
+    canvas.width = CANVAS_WIDTH * dpr;
+    canvas.height = height * dpr;
+
+    const chartData = toChartData(
+      [...dayForecast[0].hour, ...dayForecast[1].hour],
+      height
+    );
     setChartData(chartData);
-  }, [dayForecast, toChartData]);
-
-  useEffect(() => {
-    if (!canvasRef.current) return;
-    const canvas = canvasRef.current;
-    canvas.width = canvasWidth * dpr;
-    canvas.height = CANVAS_HEIGHT * dpr;
-  }, [dpr]);
-
-  useEffect(() => {
-    if (!chartData || !canvasRef.current) return;
-    const canvas = canvasRef.current;
-    printChart(canvas, chartData);
-  }, [chartData, dpr, printChart]);
+    drawChart(chartData, height);
+  }, [dpr, dayForecast, toChartData, drawChart]);
 
   const handleDragStart = (e: PointerEvent) => {
     canvasContainerRef.current!.setPointerCapture(e.pointerId);
     dragStartXRef.current = e.clientX;
-
     setIsDragging(true);
   };
 
@@ -139,7 +140,7 @@ const DayForecast = () => {
     const dragStartX = dragStartXRef.current;
     const offset = offsetRef.current;
 
-    const maxOffset = -(canvasWidth - canvasContainer.clientWidth);
+    const maxOffset = -(CANVAS_WIDTH - canvasContainer.clientWidth);
     const newOffset = offset + (clientX - dragStartX);
 
     if (newOffset <= 0 && newOffset >= maxOffset) {
@@ -151,7 +152,6 @@ const DayForecast = () => {
   const handleDragEnd = (e: PointerEvent) => {
     canvasContainerRef.current!.releasePointerCapture(e.pointerId);
     offsetRef.current = newOffsetRef.current;
-
     setIsDragging(false);
   };
 
@@ -170,11 +170,7 @@ const DayForecast = () => {
         }}
       >
         <div ref={canvasContainerRef} className={styles.canvasContainer}>
-          <canvas
-            ref={canvasRef}
-            className={styles.canvas}
-            height={CANVAS_HEIGHT}
-          />
+          <canvas ref={canvasRef} className={styles.canvas} />
           {chartData &&
             chartData.map(
               ({ x, y, time, temp, conditionIcon, windSpeed }, i) => (

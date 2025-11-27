@@ -1,44 +1,54 @@
 @use '/src/styles/variables' as *;
 
 .header {
-  flex: 1;
-  padding: 10px 0;
+  height: 300px;
+  margin-bottom: 30px;
+
+  @media (max-width: $breakpoint-mobile) {
+    height: 450px;
+  }
 
   .container {
     display: flex;
     justify-content: space-between;
     padding: 0 55px;
     height: 100%;
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
   }
 
   .info {
     display: flex;
     flex-direction: column;
     gap: $gap-sm;
+    justify-content: space-between;
 
-    .locationsButton {
-      font-size: $font-lg;
-      display: flex;
-      align-items: end;
-      gap: 5px;
+    @media (max-width: $breakpoint-mobile) {
+      display: contents;
     }
 
-    .locationIcon {
-      width: 30px;
-      height: 30px;
-    }
-
-    .arrowIcon {
-      width: 20px;
-      height: 20px;
-      margin-bottom: 3px;
+    .locationButton {
+      @media (max-width: $breakpoint-mobile) {
+        order: -3;
+        align-self: flex-start;
+        margin-bottom: 110px;
+      }
     }
 
     .weatherCondition {
-      flex: 1;
       display: flex;
       align-items: center;
       font-size: $font-xlg;
+      @media (max-width: $breakpoint-mobile) {
+        order: -2;
+        font-size: $font-lg;
+      }
     }
 
     .flexContainer {
@@ -47,5 +57,12 @@
         display: block;
       }
     }
+  }
+}
+
+.weatherIcon {
+  @media (max-width: $breakpoint-mobile) {
+    order: -1;
+    flex: 1;
   }
 }

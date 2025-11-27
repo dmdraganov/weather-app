@@ -1,6 +1,11 @@
+@use '../../styles/variables.scss' as *;
+
 .page {
   height: 100vh;
+  @media (max-width: $breakpoint-tablet) {
+    height: auto;
+  }
   display: flex;
   flex-direction: column;
-  padding: 5px 0;
+  padding: 20px 0;
 }

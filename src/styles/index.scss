@@ -30,3 +30,10 @@ body {
     padding: 0 10px;
   }
 }
+
+@media (max-width: $breakpoint-mobile) {
+  .division {
+    padding: 15px 15px;
+    border-radius: 15px;
+  }
+}

@@ -1,7 +1,8 @@
 .item {
-  flex: 1;
+  flex-grow: 1;
   display: flex;
   gap: 5px;
+  min-width: 105px;
 
   &Vertical {
     flex-direction: column;
