@@ -17,7 +17,7 @@ const DEFAULT_LOCATION: YMapLocation = { center: [40.52, 34.34], zoom: 2 };
 const ZOOM = 10;
 
 const WorldMap = () => {
-  const [selectedLocation, setLocation] = useContext(LocationContext);
+  const { selectedLocation, setLocation } = useContext(LocationContext);
 
   const location: YMapLocation = selectedLocation
     ? { center: [selectedLocation?.lon, selectedLocation?.lat], zoom: ZOOM }

@@ -8,11 +8,6 @@ const buttonArr = [
     path: '/',
   },
   {
-    iconId: 'explore',
-    text: 'explore',
-    path: '/explore',
-  },
-  {
     iconId: 'location',
     text: 'cities',
     path: '/location',

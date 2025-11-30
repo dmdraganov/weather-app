@@ -1,14 +1,23 @@
 @use './variables' as *;
 @use './reset';
 
-html {
+:root {
   scrollbar-gutter: stable both-edges;
+  --bg-color: #{$color-yellow};
+  --accent-color: #{$color-accent-yellow};
+  --light-color: #{$color-light-yellow};
+}
+
+[data-theme='dark'] {
+  --bg-color: #{$color-grey};
+  --accent-color: #{$color-white};
+  --light-color: #{$color-dark-grey};
 }
 
 body {
+  background-color: var(--bg-color);
   color: $color-white;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-  background-color: $color-yellow;
 }
 
 .container {
@@ -20,7 +29,7 @@ body {
 }
 
 .division {
-  background-color: $color-light-yellow;
+  background-color: var(--light-color);
   border-radius: 40px;
   padding: 20px 35px;
 }

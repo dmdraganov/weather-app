@@ -5,7 +5,7 @@ import styles from './LocationButton.module.scss';
 import sprite from '../../assets/icons/sprite.svg';
 
 const LocationButton = ({ route }: { route: 'back' | 'forward' }) => {
-  const [selectedLocation] = useContext(LocationContext);
+  const { selectedLocation } = useContext(LocationContext);
   const isBack = route === 'back';
   return (
     <Link

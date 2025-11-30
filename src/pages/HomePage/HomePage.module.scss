@@ -2,10 +2,10 @@
 
 .page {
   height: 100vh;
-  @media (max-width: $breakpoint-tablet) {
-    height: auto;
-  }
   display: flex;
   flex-direction: column;
   padding: 20px 0;
+  @media (max-width: $breakpoint-tablet) {
+    height: auto;
+  }
 }

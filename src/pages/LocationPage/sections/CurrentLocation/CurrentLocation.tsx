@@ -5,7 +5,7 @@ import SectionHeading from '../../../../components/SectionHeading/SectionHeading
 import styles from './CurrentLocation.module.scss';
 
 const CurrentLocation = () => {
-  const [, , currentLocation] = useContext(LocationContext);
+  const { currentLocation } = useContext(LocationContext);
 
   return (
     currentLocation && (

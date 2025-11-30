@@ -59,7 +59,7 @@ export const LocationProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <LocationContext.Provider
-      value={[selectedLocation, setLocation, currentLocation]}
+      value={{ selectedLocation, setLocation, currentLocation }}
     >
       {children}
     </LocationContext.Provider>

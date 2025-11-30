@@ -8,7 +8,7 @@ import { WeatherContext } from './WeatherContext';
 const API = 'forecast';
 
 export const WeatherProvider = ({ children }: PropsWithChildren) => {
-  const [selectedLocation] = useContext(LocationContext);
+  const { selectedLocation } = useContext(LocationContext);
   const weatherData = useFetch<WeatherData>(
     selectedLocation && getUrl(API, selectedLocation.name)
   );

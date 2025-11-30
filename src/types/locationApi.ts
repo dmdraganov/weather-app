@@ -1,14 +1,3 @@
-export type LocationContextValue = [
-  Location | null,
-  (location: Location | Coords) => void,
-  Location | null,
-];
-
-export type FavoriteLocationsContextValue = [
-  Location[],
-  React.Dispatch<React.SetStateAction<Location[]>>,
-];
-
 export interface Location {
   id: number;
   name: string;

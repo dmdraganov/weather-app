@@ -13,7 +13,7 @@ import LocationItem from '../../../../components/LocationItem/LocationItem';
 import { LocationContext } from '../../../../contexts/LocationContext';
 
 const SearchLocation = () => {
-  const [selectedLocation] = useContext(LocationContext);
+  const { selectedLocation } = useContext(LocationContext);
   const [inputValue, setInputValue] = useState<string>('');
   const [maxHeight, setMaxHeight] = useState<number>(0);
   const listContainerRef = useRef<HTMLDivElement>(null);

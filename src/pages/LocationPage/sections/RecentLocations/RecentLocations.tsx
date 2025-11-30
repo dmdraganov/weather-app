@@ -9,7 +9,7 @@ import styles from './RecentLocations.module.scss';
 const MAX_LOCATIONS_AMOUNT = 3;
 
 const RecentLocations = () => {
-  const [selectedLocation] = useContext(LocationContext);
+  const { selectedLocation } = useContext(LocationContext);
   const [recentLocations, setRecentLocations] = useLocalStorage<Location[]>(
     'recentLocations',
     []

@@ -10,7 +10,7 @@ interface LocationItemProps {
 }
 
 const LocationItem = ({ location }: LocationItemProps) => {
-  const [, setLocation] = useContext(LocationContext);
+  const { setLocation } = useContext(LocationContext);
   const [favoriteLocations, setFavoriteLocations] = useContext(
     FavoriteLocationsContext
   );

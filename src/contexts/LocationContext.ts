@@ -1,8 +1,8 @@
 import { createContext } from 'react';
-import type { LocationContextValue } from '../types/locationApi';
+import type { LocationContextValue } from '../types/contexts';
 
-export const LocationContext = createContext<LocationContextValue>([
-  null,
-  () => {},
-  null,
-]);
+export const LocationContext = createContext<LocationContextValue>({
+  selectedLocation: null,
+  setLocation: () => {},
+  currentLocation: null,
+});
