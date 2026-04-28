@@ -18,7 +18,7 @@ const SearchLocation = () => {
   const [maxHeight, setMaxHeight] = useState<number>(0);
   const listContainerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const url = inputValue && getUrl('search', inputValue);
+  const url = inputValue ? getUrl('search', inputValue) : null;
   const locationsList = useFetch<Location[]>(url);
 
   const updateListHeight = () => {
