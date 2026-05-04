@@ -1,0 +1,58 @@
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { Location } from './models';
+
+interface LocationState {
+  currentLocation: Location | null;
+  favoriteLocations: Location[];
+  recentLocations: Location[];
+  setCurrentLocation: (location: Location | null) => void;
+  toggleFavorite: (location: Location) => void;
+  setRecentLocations: (locations: Location[]) => void;
+}
+
+const MAX_RECENT_LOCATIONS = 5;
+
+export const useLocationStore = create<LocationState>()(
+  persist(
+    (set) => ({
+      currentLocation: null,
+      favoriteLocations: [],
+      recentLocations: [],
+      setCurrentLocation: (location) =>
+        set((state) => {
+          if (!location) return { currentLocation: null };
+
+          const isAlreadyRecent = state.recentLocations.some(
+            (l) => l.id === location.id
+          );
+          const newRecent = isAlreadyRecent
+            ? state.recentLocations
+            : [location, ...state.recentLocations].slice(
+                0,
+                MAX_RECENT_LOCATIONS
+              );
+
+          return {
+            currentLocation: location,
+            recentLocations: newRecent,
+          };
+        }),
+      toggleFavorite: (location) =>
+        set((state) => {
+          const isFavorite = state.favoriteLocations.some(
+            (l) => l.id === location.id
+          );
+          const newFavorites = isFavorite
+            ? state.favoriteLocations.filter((l) => l.id !== location.id)
+            : [...state.favoriteLocations, location];
+
+          return { favoriteLocations: newFavorites };
+        }),
+      setRecentLocations: (locations) => set({ recentLocations: locations }),
+    }),
+    {
+      name: 'location-storage',
+    }
+  )
+);

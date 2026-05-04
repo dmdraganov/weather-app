@@ -1,0 +1,145 @@
+@use '/src/app/styles/variables' as *;
+
+.page {
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: $gap-md;
+  margin-bottom: $gap-lg;
+  padding: 0 55px;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0 10px;
+  }
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  .arrowIcon {
+    width: 24px;
+    height: 24px;
+    transform: scaleX(-1);
+    stroke: white;
+  }
+}
+
+.title {
+  font-size: $font-lg;
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-lg;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-md;
+  padding: $gap-lg;
+  background-color: var(--light-color);
+  border-radius: 20px;
+  border: none;
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-sm;
+}
+
+.radioItem {
+  display: flex;
+  align-items: center;
+  gap: $gap-sm;
+  font-size: 1rem;
+  cursor: pointer;
+
+  input[type='radio'] {
+    appearance: none;
+    background-color: var(--bg-color);
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+
+    &::before {
+      content: '';
+      width: 0.65em;
+      height: 0.65em;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em var(--accent-color);
+    }
+
+    &:checked::before {
+      transform: scale(1);
+    }
+
+    &:focus {
+      outline: max(2px, 0.15em) solid currentColor;
+      outline-offset: max(2px, 0.15em);
+    }
+  }
+
+  label {
+    cursor: pointer;
+  }
+}
+
+.saveButton {
+  margin-top: $gap-md;
+  padding: 15px 30px;
+  background-color: var(--accent-color);
+  color: $color-dark-grey;
+  border: none;
+  border-radius: 10px;
+  font-size: $font-lg;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}

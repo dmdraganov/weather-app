@@ -1,0 +1,34 @@
+@use '/src/app/styles/variables' as *;
+
+.button {
+  position: relative;
+  font-size: $font-lg;
+  display: flex;
+  gap: 5px;
+  align-items: end;
+
+  .arrowIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .backArrowIcon {
+    position: absolute;
+    left: -20px;
+    bottom: 3px;
+    rotate: 180deg;
+  }
+
+  .forwardArrowIcon {
+    margin-bottom: 3px;
+  }
+
+  .locationIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

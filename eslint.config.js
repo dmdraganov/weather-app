@@ -1,39 +1,30 @@
 import eslint from '@eslint/js';
-import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 import prettierConfig from 'eslint-config-prettier';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
-export default defineConfig([
+export default tseslint.config(
   { ignores: ['dist'] },
+  eslint.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
+    extends: [...tseslint.configs.recommendedTypeChecked],
     languageOptions: {
       globals: globals.browser,
-      parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-        parserOptions: {
-          project: './tsconfig.json',
-        },
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
       },
     },
     plugins: {
-      '@typescript-eslint': tseslint.plugin,
-      'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      'react-hooks': reactHooks,
     },
     rules: {
-      ...eslint.configs.recommended.rules,
-      ...tseslint.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
-      ...prettierConfig.rules,
       'no-undef': 'off',
-      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         { varsIgnorePattern: '^[A-Z_]' },
@@ -44,4 +35,5 @@ export default defineConfig([
       ],
     },
   },
-]);
+  prettierConfig
+);

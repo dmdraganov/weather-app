@@ -1,0 +1,25 @@
+@use '/src/app/styles/variables' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+
+  @media (max-width: $breakpoint-mobile) {
+    order: 2;
+  }
+
+  .list {
+    margin-top: 10px;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $gap-sm;
+
+    @media (max-width: $breakpoint-mobile) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
