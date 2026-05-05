@@ -1,6 +1,6 @@
 import { useQuery, skipToken } from '@tanstack/react-query';
-import type { Coordinates } from '../models/models';
-import { getLocationByCoordinates } from '../api/location.api';
+import type { Coordinates } from '../models/coordinates.model';
+import { findLocationByCoordinates } from '../api/location.api';
 
 export const useLocationByCoordinates = (
   coordinates: Coordinates | typeof skipToken
@@ -14,6 +14,6 @@ export const useLocationByCoordinates = (
     queryFn:
       coordinates === skipToken
         ? skipToken
-        : () => getLocationByCoordinates(coordinates),
+        : () => findLocationByCoordinates(coordinates),
   });
 };

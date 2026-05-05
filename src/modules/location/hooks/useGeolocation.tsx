@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { Coordinates } from '../models/models';
+import type { Coordinates } from '../models/coordinates.model';
 import { requestGeolocation } from '../api/geolocation.api';
 
 export const useGeolocation = () => {
@@ -15,7 +15,6 @@ export const useGeolocation = () => {
       })
       .finally(() => setIsLoading(false));
   }, []);
-
 
   return { data: position, error, isLoading };
 };

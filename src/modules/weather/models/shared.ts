@@ -1,4 +1,3 @@
-/** Represents a temperature value. Extend later with .fahrenheit if needed. */
 export interface Temperature {
   celsius: number;
 }

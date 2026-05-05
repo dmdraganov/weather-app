@@ -1,4 +1,4 @@
-import type { Coordinates } from '../../location/models/models';
+import type { Coordinates } from '../../location/models/coordinates.model';
 import type { WeatherData } from '../models';
 import { request } from '../../../shared/api/request';
 import { buildApiUrl } from '../../../shared/api/url-builder';

@@ -1,4 +1,4 @@
-import type { Coordinates } from '../models/models';
+import type { Coordinates } from '../models/coordinates.model';
 
 export const requestGeolocation = (): Promise<Coordinates> => {
   return new Promise((resolve, reject) => {
@@ -15,6 +15,5 @@ export const requestGeolocation = (): Promise<Coordinates> => {
       },
       (error) => reject(new Error(error.message))
     );
-
   });
 };

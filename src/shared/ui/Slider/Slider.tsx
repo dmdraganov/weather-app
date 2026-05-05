@@ -44,7 +44,7 @@ const Slider = ({
         return slideNumber;
       });
     },
-    [slidesAmount]
+    [slidesAmount, setSelectedSlide]
   );
 
   useEffect(() => {

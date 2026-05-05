@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Location } from './models';
+import type { Location } from './location.model';
 
 interface LocationState {
   currentLocation: Location | null;
@@ -8,7 +8,7 @@ interface LocationState {
   recentLocations: Location[];
   setCurrentLocation: (location: Location | null) => void;
   toggleFavorite: (location: Location) => void;
-  setRecentLocations: (locations: Location[]) => void;
+  addRecentLocation: (locations: Location) => void;
 }
 
 const MAX_RECENT_LOCATIONS = 5;
@@ -22,20 +22,9 @@ export const useLocationStore = create<LocationState>()(
       setCurrentLocation: (location) =>
         set((state) => {
           if (!location) return { currentLocation: null };
-
-          const isAlreadyRecent = state.recentLocations.some(
-            (l) => l.id === location.id
-          );
-          const newRecent = isAlreadyRecent
-            ? state.recentLocations
-            : [location, ...state.recentLocations].slice(
-                0,
-                MAX_RECENT_LOCATIONS
-              );
-
+          state.addRecentLocation(location);
           return {
             currentLocation: location,
-            recentLocations: newRecent,
           };
         }),
       toggleFavorite: (location) =>
@@ -49,7 +38,19 @@ export const useLocationStore = create<LocationState>()(
 
           return { favoriteLocations: newFavorites };
         }),
-      setRecentLocations: (locations) => set({ recentLocations: locations }),
+      addRecentLocation: (location) =>
+        set((state) => {
+          const isAlreadyRecent = state.recentLocations.some(
+            (l) => l.id === location.id
+          );
+          const newRecent = isAlreadyRecent
+            ? state.recentLocations
+            : [location, ...state.recentLocations].slice(
+                0,
+                MAX_RECENT_LOCATIONS
+              );
+          return { recentLocations: newRecent };
+        }),
     }),
     {
       name: 'location-storage',

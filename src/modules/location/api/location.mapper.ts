@@ -1,4 +1,4 @@
-import type { Location } from '../models/models';
+import type { Location } from '../models/location.model';
 import type { LocationDto } from './location.dto';
 
 export const mapLocation = (dto: LocationDto): Location => {

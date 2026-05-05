@@ -4,8 +4,9 @@ import { skipToken, useQueryClient } from '@tanstack/react-query';
 import { useLocationStore } from '../models/store';
 import { useGeolocation } from './useGeolocation';
 import { useLocationByCoordinates } from './useLocationByCoordinates';
-import { getLocationByCoordinates } from '../api/location.api';
-import type { Coordinates, Location } from '../models/models';
+import { findLocationByCoordinates } from '../api/location.api';
+import type { Coordinates } from '../models/coordinates.model';
+import type { Location } from '../models/location.model';
 
 export const useCurrentLocation = () => {
   const { currentLocation, setCurrentLocation } = useLocationStore();
@@ -40,7 +41,7 @@ export const useCurrentLocation = () => {
           location.latitude,
           location.longitude,
         ],
-        queryFn: () => getLocationByCoordinates(location),
+        queryFn: () => findLocationByCoordinates(location),
       });
       setCurrentLocation(data);
     }

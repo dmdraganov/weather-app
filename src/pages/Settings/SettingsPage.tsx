@@ -1,13 +1,12 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ThemeContext from '../../modules/settings/context/ThemeContext';
 import RadioInput from '../../shared/ui/RadioInput/RadioInput';
-import type { Theme } from '../../modules/settings/types';
+import type { Theme } from '../../modules/theme/theme.model';
 import styles from './SettingsPage.module.scss';
 import sprite from '../../shared/assets/icons/sprite.svg';
+import { useTheme } from '../../modules/theme/hooks/useTheme';
 
 const SettingsPage = () => {
-  const [theme, setTheme] = useContext(ThemeContext);
+  const [theme, setTheme] = useTheme();
   const navigate = useNavigate();
 
   const handleBack = () => {

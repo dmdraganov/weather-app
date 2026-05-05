@@ -1,6 +1,6 @@
 import styles from './LocationItem.module.scss';
 import sprite from '/src/shared/assets/icons/sprite.svg';
-import type { Location } from '../../models/models';
+import type { Location } from '../../models/location.model';
 import { useCurrentLocation } from '../../hooks/useCurrentLocation';
 import { useLocationStore } from '../../models/store';
 
