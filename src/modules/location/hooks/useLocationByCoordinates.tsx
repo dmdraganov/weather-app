@@ -1,19 +1,26 @@
-import { useQuery, skipToken } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import type { Coordinates } from '../models/coordinates.model';
 import { findLocationByCoordinates } from '../api/location.api';
+import { useState } from 'react';
 
 export const useLocationByCoordinates = (
-  coordinates: Coordinates | typeof skipToken
+  initialCoordinates?: Coordinates | null
 ) => {
-  return useQuery({
+  const [coordinates, setCoordinates] = useState<Coordinates | null>(
+    initialCoordinates ?? null
+  );
+
+  const queryResult = useQuery({
     queryKey: [
       'location-by-coordinates',
-      coordinates === skipToken ? 'skip' : coordinates.latitude,
-      coordinates === skipToken ? 'skip' : coordinates.longitude,
+      coordinates?.latitude,
+      coordinates?.longitude,
     ],
-    queryFn:
-      coordinates === skipToken
-        ? skipToken
-        : () => findLocationByCoordinates(coordinates),
+    queryFn: () => {
+      if (!coordinates) throw new Error('Coordinates are not set');
+      return findLocationByCoordinates(coordinates);
+    },
+    enabled: coordinates !== null,
   });
+  return { coordinates, setCoordinates, ...queryResult };
 };

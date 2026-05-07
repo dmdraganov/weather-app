@@ -9,7 +9,7 @@ interface LocationItemProps {
 }
 
 const LocationItem = ({ location }: LocationItemProps) => {
-  const { setCurrentLocation } = useCurrentLocation();
+  const [, setCurrentLocation] = useCurrentLocation();
   const { favoriteLocations, toggleFavorite } = useLocationStore();
 
   const isFavorite = favoriteLocations.some(
@@ -25,7 +25,7 @@ const LocationItem = ({ location }: LocationItemProps) => {
       <div
         className={styles.itemText}
         onClick={() => {
-          void setCurrentLocation(location);
+          setCurrentLocation(location);
         }}
       >
         <h3 className={styles.itemHeading}>{location.name}</h3>

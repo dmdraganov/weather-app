@@ -5,7 +5,7 @@ export const useLocalStorage = <T>(
   initialValue: T
 ): [T, Dispatch<React.SetStateAction<T>>] => {
   const [value, setValue] = useState<T>(() => {
-    const savedValue = localStorage?.getItem(key);
+    const savedValue = localStorage.getItem(key);
     return savedValue ? (JSON.parse(savedValue) as T) : initialValue;
   });
 

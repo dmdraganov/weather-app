@@ -7,13 +7,7 @@ const LocationSearch = () => {
   const [maxHeight, setMaxHeight] = useState<number>(0);
   const listContainerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const {
-    query,
-    setQuery,
-    data,
-    isLoading: _isLoading,
-    error: _error,
-  } = useLocationsSearch();
+  const { query, setQuery, data } = useLocationsSearch();
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);

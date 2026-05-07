@@ -12,26 +12,36 @@ import styles from './WorldMap.module.scss';
 import type { YMapLocation } from '@yandex/ymaps3-types/imperative/YMap';
 import type { DomEvent, DomEventHandlerObject } from 'ymaps3';
 import { useCurrentLocation } from '../../hooks/useCurrentLocation';
+import { useLocationByCoordinates } from '../../hooks/useLocationByCoordinates';
+import { useEffect, useMemo } from 'react';
 
 const DEFAULT_LOCATION: YMapLocation = { center: [40.52, 34.34], zoom: 2 };
 const ZOOM = 10;
 
 const WorldMap = () => {
-  const { currentLocation, setCurrentLocation } = useCurrentLocation();
+  const [currentLocation, setCurrentLocation] = useCurrentLocation();
+  const { setCoordinates, data } = useLocationByCoordinates();
 
-  const location: YMapLocation = currentLocation
-    ? {
-        center: [
-          currentLocation.coordinates.longitude,
-          currentLocation.coordinates.latitude,
-        ],
-        zoom: ZOOM,
-      }
-    : DEFAULT_LOCATION;
+  useEffect(() => {
+    if (data) {
+      setCurrentLocation(data);
+    }
+  }, [data, currentLocation]);
+
+  const location = useMemo<YMapLocation>(() => {
+    if (!currentLocation) return DEFAULT_LOCATION;
+    return {
+      center: [
+        currentLocation.coordinates.longitude,
+        currentLocation.coordinates.latitude,
+      ],
+      zoom: ZOOM,
+    };
+  }, [currentLocation]);
 
   const handleClick = (_object: DomEventHandlerObject, e: DomEvent) => {
     const [lon, lat] = e.coordinates;
-    void setCurrentLocation({ latitude: lat, longitude: lon });
+    setCoordinates({ latitude: lat, longitude: lon });
   };
 
   return (

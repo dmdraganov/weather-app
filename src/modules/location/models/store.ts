@@ -6,7 +6,7 @@ interface LocationState {
   currentLocation: Location | null;
   favoriteLocations: Location[];
   recentLocations: Location[];
-  setCurrentLocation: (location: Location | null) => void;
+  setCurrentLocation: (location: Location) => void;
   toggleFavorite: (location: Location) => void;
   addRecentLocation: (locations: Location) => void;
 }

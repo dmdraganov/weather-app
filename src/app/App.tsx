@@ -1,11 +1,11 @@
 import { RouterProvider } from 'react-router-dom';
 import { AppProvider } from './providers/app.provider';
-import { router } from './router';
+import { Bootstrap } from './Bootstrap';
 
 function App() {
   return (
     <AppProvider>
-      <RouterProvider router={router} />
+      <Bootstrap />
     </AppProvider>
   );
 }

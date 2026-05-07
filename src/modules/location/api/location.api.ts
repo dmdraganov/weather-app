@@ -2,7 +2,7 @@ import { request } from '../../../shared/api/request';
 import { buildApiUrl } from '../../../shared/api/url-builder';
 import type { Coordinates } from '../models/coordinates.model';
 import type { Location } from '../models/location.model';
-import { LocationSchema, type LocationDto } from './location.dto';
+import { LocationSchema } from './location.dto';
 import { mapLocation } from './location.mapper';
 
 export const findLocationsByQuery = async (
