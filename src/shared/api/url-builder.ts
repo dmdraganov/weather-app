@@ -5,7 +5,7 @@ type ApiType = 'current' | 'forecast' | 'search' | 'astronomy';
 export const buildApiUrl = (
   type: ApiType,
   query: string | Coordinates,
-  language = 'en'
+  language: string
 ): string => {
   if (typeof query === 'object') {
     query = `${query.latitude}, ${query.longitude}`;

@@ -1,0 +1,67 @@
+@use '/src/app/styles/variables' as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-md;
+  padding: $gap-lg;
+  background-color: var(--light-color);
+  border-radius: 20px;
+  border: none;
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-sm;
+}
+
+.radioItem {
+  display: flex;
+  align-items: center;
+  gap: $gap-sm;
+  font-size: 1rem;
+  cursor: pointer;
+
+  input[type='radio'] {
+    appearance: none;
+    background-color: var(--bg-color);
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+
+    &::before {
+      content: '';
+      width: 0.65em;
+      height: 0.65em;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em var(--accent-color);
+    }
+
+    &:checked::before {
+      transform: scale(1);
+    }
+
+    &:focus {
+      outline: max(2px, 0.15em) solid currentColor;
+      outline-offset: max(2px, 0.15em);
+    }
+  }
+
+  label {
+    cursor: pointer;
+  }
+}

@@ -4,36 +4,40 @@ import { WeatherContext } from '../../contexts/WeatherContext';
 import Slider from '../../../../shared/ui/Slider/Slider';
 import ListItem from '../../../../shared/ui/ListItem/ListItem';
 import { formatDate } from '../../../../shared/utils/date-formatter';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../../../localization/hooks/useLanguage';
 
 const ForecastMetrics = () => {
   const [selectedDay, setSelectedDay] = useState<number>(0);
   const daily = useContext(WeatherContext)!.daily;
   const dayForecast = daily[selectedDay];
+  const [language] = useLanguage();
+  const { t } = useTranslation(['weather', 'shared']);
 
   const conditionsList = [
     {
       iconId: 'thermometer',
-      title: 'Temp',
+      title: t('temp', { ns: 'shared' }),
       value: `${dayForecast.temperature.min.celsius}° / ${dayForecast.temperature.max.celsius}°`,
     },
     {
       iconId: 'wind',
-      title: 'Wind',
+      title: t('wind', { ns: 'shared' }),
       value: dayForecast.wind.speedKph + ' km/h',
     },
     {
       iconId: 'blob',
-      title: 'Chance of rain',
+      title: t('chance_of_rain'),
       value: dayForecast.precipitation.rainChance + '%',
     },
     {
       iconId: 'blob',
-      title: 'Average humidity',
+      title: t('avg_humidity'),
       value: dayForecast.avgHumidity + '%',
     },
     {
       iconId: 'sunny',
-      title: 'UV index',
+      title: t('uv_index'),
       value: dayForecast.uvIndex,
     },
   ];
@@ -53,14 +57,14 @@ const ForecastMetrics = () => {
               i === selectedDay ? styles.active : ''
             }`}
           >
-            <span>{formatDate(day.date, { weekday: 'short' }).weekday}</span>
+            <span>{formatDate(day.date, { weekday: 'short', locale: language }).weekday}</span>
             <svg className={styles.icon}>
               <use xlinkHref={day.condition.icon} />
             </svg>
           </div>
         ))}
       </Slider>
-      <h2 className={styles.heading}>Air conditions</h2>
+      <h2 className={styles.heading}>{t('air_conditions')}</h2>
       <ul className={styles.conditionsList}>
         {conditionsList.map(({ iconId, title, value }) => (
           <ListItem key={title} iconId={iconId} title={title} value={value} />

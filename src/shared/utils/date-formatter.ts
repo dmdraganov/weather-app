@@ -6,7 +6,7 @@ export interface DateFormatOptions {
   month?: NameStyle;
   day?: NumericStyle;
   year?: NumericStyle;
-  locale?: string;
+  locale: string;
 }
 
 export type FormattedDate<T extends DateFormatOptions> = {
@@ -15,9 +15,10 @@ export type FormattedDate<T extends DateFormatOptions> = {
 
 export const formatDate = <T extends DateFormatOptions>(
   date: Date,
-  { locale = 'en-US', ...options }: T
+  options: T
 ): FormattedDate<T> => {
   const result: Record<string, string> = {};
+  const locale = options.locale;
 
   for (const [key, value] of Object.entries(options)) {
     if (value) {

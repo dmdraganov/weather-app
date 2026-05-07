@@ -2,12 +2,14 @@ import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import styles from './LocationSearch.module.scss';
 import LocationItem from '../../ui/LocationItem/LocationItem';
 import { useLocationsSearch } from '../../hooks/useLocationsSearch';
+import { useTranslation } from 'react-i18next';
 
 const LocationSearch = () => {
   const [maxHeight, setMaxHeight] = useState<number>(0);
   const listContainerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { query, setQuery, data } = useLocationsSearch();
+  const { t } = useTranslation('location');
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
@@ -47,7 +49,7 @@ const LocationSearch = () => {
         <input
           className={styles.inputField}
           type='text'
-          placeholder='Search location'
+          placeholder={t('search_placeholder')}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => updateListHeight()}

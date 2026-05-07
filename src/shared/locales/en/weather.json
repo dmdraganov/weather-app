@@ -1,0 +1,12 @@
+{
+  "astro_forecast": "Astronomical forecast",
+  "day_forecast": "24-hours forecast",
+  "sunrise": "Sunrise",
+  "sunset": "Sunset",
+  "moon_phase": "Moon phase",
+  "moon_illumination": "Moon illumination",
+  "air_conditions": "Air conditions",
+  "chance_of_rain": "Chance of rain",
+  "avg_humidity": "Average humidity",
+  "uv_index": "UV index"
+}

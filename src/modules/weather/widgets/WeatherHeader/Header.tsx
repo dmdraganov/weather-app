@@ -3,16 +3,19 @@ import { formatDate } from '../../../../shared/utils/date-formatter';
 import { WeatherContext } from '../../contexts/WeatherContext';
 import { useContext } from 'react';
 import LocationButton from '../../../location/ui/LocationButton/LocationButton';
+import { useLanguage } from '../../../localization/hooks/useLanguage';
 
 const Header = () => {
   const currentWeather = useContext(WeatherContext)!.current;
   const { condition, temperature } = currentWeather;
+  const [language] = useLanguage();
   const currentDate = new Date();
   const { weekday, day, month, year } = formatDate(currentDate, {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
     year: 'numeric',
+    locale: language
   });
 
   return (

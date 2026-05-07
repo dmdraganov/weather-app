@@ -1,3 +1,4 @@
+import formatTime from '../../../../shared/utils/time-formatter';
 import type { DailyWeather } from '../../models';
 import type { DailyForecastDto } from '../dtos/forecast.dto';
 import { mapHourlyWeather } from './hourly-weather.mapper';
@@ -18,8 +19,8 @@ export const mapDailyWeather = (dto: DailyForecastDto): DailyWeather => ({
   uvIndex: dto.day.uv,
   condition: mapWeatherCondition(dto.day.condition),
   astro: {
-    sunrise: dto.astro.sunrise,
-    sunset: dto.astro.sunset,
+    sunrise: formatTime(dto.astro.sunrise),
+    sunset: formatTime(dto.astro.sunset),
     moonPhase: dto.astro.moon_phase,
     moonIllumination: dto.astro.moon_illumination,
   },

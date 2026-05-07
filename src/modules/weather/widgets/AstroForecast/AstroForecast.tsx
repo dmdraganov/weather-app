@@ -3,38 +3,39 @@ import SectionHeading from '../../../../shared/ui/SectionHeading/SectionHeading'
 import { useContext } from 'react';
 import { WeatherContext } from '../../contexts/WeatherContext';
 import ListItem from '../../../../shared/ui/ListItem/ListItem';
-import formatTime from '../../../../shared/utils/time-formatter';
+import { useTranslation } from 'react-i18next';
 
 const AstroForecast = () => {
   const { sunrise, sunset, moonPhase, moonIllumination } =
     useContext(WeatherContext)!.daily[0].astro;
+  const { t } = useTranslation('weather');
 
   const conditionsList = [
     {
       iconId: 'sunny',
-      title: 'Sunrise',
-      value: formatTime(sunrise),
+      title: t('sunrise'),
+      value: sunrise,
     },
     {
       iconId: 'wind',
-      title: 'Sunset',
-      value: formatTime(sunset),
+      title: t('sunset'),
+      value: sunset,
     },
     {
       iconId: 'clear',
-      title: 'Moon phase',
+      title: t('moon_phase'),
       value: moonPhase,
     },
     {
       iconId: 'blob',
-      title: 'Moon illumination',
+      title: t('moon_illumination'),
       value: moonIllumination + '%',
     },
   ];
 
   return (
     <section className={`${styles.container} division`}>
-      <SectionHeading iconId='clear' text='Astronomical forecast' />
+      <SectionHeading iconId='clear' text={t('astro_forecast')} />
       <ul className={styles.list}>
         {conditionsList.map((element) => (
           <ListItem key={element.title} {...element} isVertical={true} />

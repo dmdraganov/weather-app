@@ -4,20 +4,23 @@ import type { Coordinates } from '../models/coordinates.model';
 import type { Location } from '../models/location.model';
 import { LocationSchema } from './location.dto';
 import { mapLocation } from './location.mapper';
+import type { Language } from '../../localization/localization.model';
 
 export const findLocationsByQuery = async (
-  query: string
+  query: string,
+  language: Language
 ): Promise<Location[]> => {
-  const url = buildApiUrl('search', query);
+  const url = buildApiUrl('search', query, language);
   const data = await request(url);
   const validated = LocationSchema.array().parse(data);
   return validated.map(mapLocation);
 };
 
 export const findLocationByCoordinates = async (
-  coordinates: Coordinates
+  coordinates: Coordinates,
+  language: Language
 ): Promise<Location> => {
-  const url = buildApiUrl('search', coordinates);
+  const url = buildApiUrl('search', coordinates, language);
   const data = await request(url);
   const [validated] = LocationSchema.array().parse(data);
   return mapLocation(validated);
