@@ -8,5 +8,7 @@
   "air_conditions": "Air conditions",
   "chance_of_rain": "Chance of rain",
   "avg_humidity": "Average humidity",
-  "uv_index": "UV index"
+  "uv_index": "UV index",
+  "temp": "Temp",
+  "wind": "Wind"
 }

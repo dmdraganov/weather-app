@@ -16,5 +16,17 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/app/main.tsx"></script>
+    <script>
+      const saved = localStorage.getItem('theme');
+      const isDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (
+        saved === 'dark' ||
+        (!saved && isDarkTheme)
+      ) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    </script>
   </body>
 </html>

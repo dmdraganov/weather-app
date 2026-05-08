@@ -1,6 +1,6 @@
 import styles from './DayForecast.module.scss';
 import SectionHeading from '../../../../shared/ui/SectionHeading/SectionHeading';
-import Chart from '../../../../shared/ui/Chart/Chart';
+import HourlyChart from '../HourlyChart/HourlyChart';
 import { useTranslation } from 'react-i18next';
 
 const DayForecast = () => {
@@ -8,7 +8,7 @@ const DayForecast = () => {
   return (
     <section className={styles.container + ' division'}>
       <SectionHeading iconId='clock' text={t('day_forecast')} />
-      <Chart />
+      <HourlyChart />
     </section>
   );
 };

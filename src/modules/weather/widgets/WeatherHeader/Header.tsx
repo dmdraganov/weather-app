@@ -15,7 +15,7 @@ const Header = () => {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
-    locale: language
+    locale: language,
   });
 
   return (

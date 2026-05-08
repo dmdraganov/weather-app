@@ -6,24 +6,25 @@ import ListItem from '../../../../shared/ui/ListItem/ListItem';
 import { formatDate } from '../../../../shared/utils/date-formatter';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '../../../localization/hooks/useLanguage';
+import { formatKmPerHour } from '../../../../shared/utils/units-formatter';
 
 const ForecastMetrics = () => {
   const [selectedDay, setSelectedDay] = useState<number>(0);
   const daily = useContext(WeatherContext)!.daily;
   const dayForecast = daily[selectedDay];
   const [language] = useLanguage();
-  const { t } = useTranslation(['weather', 'shared']);
+  const { t } = useTranslation('weather');
 
   const conditionsList = [
     {
       iconId: 'thermometer',
-      title: t('temp', { ns: 'shared' }),
+      title: t('temp'),
       value: `${dayForecast.temperature.min.celsius}° / ${dayForecast.temperature.max.celsius}°`,
     },
     {
       iconId: 'wind',
-      title: t('wind', { ns: 'shared' }),
-      value: dayForecast.wind.speedKph + ' km/h',
+      title: t('wind'),
+      value: formatKmPerHour(dayForecast.wind.speedKph, language),
     },
     {
       iconId: 'blob',
@@ -57,7 +58,12 @@ const ForecastMetrics = () => {
               i === selectedDay ? styles.active : ''
             }`}
           >
-            <span>{formatDate(day.date, { weekday: 'short', locale: language }).weekday}</span>
+            <span>
+              {
+                formatDate(day.date, { weekday: 'short', locale: language })
+                  .weekday
+              }
+            </span>
             <svg className={styles.icon}>
               <use xlinkHref={day.condition.icon} />
             </svg>
