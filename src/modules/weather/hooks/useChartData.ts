@@ -46,7 +46,7 @@ export const useChartData = () => {
 
       return points;
     },
-    [realTimeHour, t]
+    [realTimeHour, t, language]
   );
 
   return toChartData;

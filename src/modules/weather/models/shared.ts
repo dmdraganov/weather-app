@@ -1,3 +1,5 @@
+import type { IconName } from '../../../shared/ui/Icon/Icon';
+
 export interface Temperature {
   celsius: number;
 }
@@ -13,5 +15,5 @@ export interface Precipitation {
 
 export interface WeatherCondition {
   text: string;
-  icon: string;
+  icon: IconName;
 }

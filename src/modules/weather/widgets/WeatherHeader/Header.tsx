@@ -4,6 +4,7 @@ import { WeatherContext } from '../../contexts/WeatherContext';
 import { useContext } from 'react';
 import LocationButton from '../../../location/ui/LocationButton/LocationButton';
 import { useLanguage } from '../../../localization/hooks/useLanguage';
+import Icon from '../../../../shared/ui/Icon/Icon';
 
 const Header = () => {
   const currentWeather = useContext(WeatherContext)!.current;
@@ -36,9 +37,7 @@ const Header = () => {
               </time>
             </div>
           </div>
-          <svg className={styles.weatherIcon}>
-            <use xlinkHref={condition.icon} />
-          </svg>
+          <Icon name={condition.icon} className={styles.weatherIcon} />
         </div>
       </div>
     </header>

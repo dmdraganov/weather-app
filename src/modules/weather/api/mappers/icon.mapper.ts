@@ -1,28 +1,25 @@
-import sprite from '/src/shared/assets/icons/sprite.svg';
+import { IconName } from '../../../../shared/ui/Icon/icon-map';
 
 const rainThunderCodes = [1273, 1276];
 const snowThunderNightCodes = [1279, 1282];
 const thunderNightCodes = [1087];
 
-export const mapCodeToIcon = (code: number, isDay: boolean = true): string => {
-  let iconId: string;
-
+export const mapCodeToIcon = (code: number, isDay: boolean = true): IconName => {
   if (code === 1000) {
-    iconId = isDay ? 'sunny' : 'clear';
+    return isDay ? IconName.Sunny : IconName.Clear;
   } else if (code === 1003 || code === 1006) {
-    iconId = isDay ? 'partly-cloudy-day' : 'partly-cloudy-night';
+    return isDay ? IconName.PartlyCloudyDay : IconName.PartlyCloudyNight;
   } else if (code >= 1150 && code <= 1189) {
-    iconId = 'heavy-rain';
+    return IconName.HeavyRain;
   } else if (rainThunderCodes.includes(code)) {
-    iconId = 'rain-thunder';
+    return IconName.RainThunder;
   } else if (snowThunderNightCodes.includes(code)) {
-    iconId = 'snow-thunder-night';
+    return IconName.SnowThunderNight;
   } else if (thunderNightCodes.includes(code)) {
-    iconId = 'thunder-night';
+    return IconName.ThunderNight;
   } else if (code >= 1252 && code <= 1279) {
-    iconId = 'rain-day';
+    return IconName.RainDay;
   } else {
-    iconId = isDay ? 'partly-cloudy-day' : 'partly-cloudy-night';
+    return isDay ? IconName.PartlyCloudyDay : IconName.PartlyCloudyNight;
   }
-  return sprite + '#' + iconId;
 };

@@ -2,6 +2,7 @@ import { useLanguage } from '../../../localization/hooks/useLanguage';
 import { formatKmPerHour } from '../../../../shared/utils/units-formatter';
 import styles from './HourlyChart.module.scss';
 import type { ChartPointData } from '../../models/hourly-chart';
+import Icon from '../../../../shared/ui/Icon/Icon';
 
 type ChartPointProps = ChartPointData;
 
@@ -26,9 +27,7 @@ const ChartPoint = ({
     >
       <span className={styles.temp}>{temp}</span>
       <div className={styles.bottomContainer}>
-        <svg className={styles.icon}>
-          <use xlinkHref={conditionIcon} />
-        </svg>
+        <Icon name={conditionIcon} className={styles.icon} />
         <span className={styles.windSpeed}>
           {formatKmPerHour(windSpeed, language)}
         </span>

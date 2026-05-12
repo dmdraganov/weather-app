@@ -1,5 +1,6 @@
 {
   "search_placeholder": "Поиск локации",
   "favorite_locations": "Избранные локации",
-  "recent_locations": "Недавние локации"
+  "recent_locations": "Недавние локации",
+  "current_location": "Текущая локация"
 }

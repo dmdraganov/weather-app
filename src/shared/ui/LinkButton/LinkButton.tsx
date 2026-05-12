@@ -1,19 +1,19 @@
 import styles from './LinkButton.module.scss';
-import sprite from '../../assets/icons/sprite.svg';
 import { Link } from 'react-router-dom';
+import Icon from '../Icon/Icon';
+
+import type { IconName } from '../Icon/Icon';
 
 interface IProps {
-  iconId: string;
+  name: IconName;
   text: string;
   to: string;
 }
 
-const LinkButton = ({ iconId, text, to }: IProps) => {
+const LinkButton = ({ name, text, to }: IProps) => {
   return (
     <Link className={styles.linkButton} to={to}>
-      <svg className={styles.icon}>
-        <use xlinkHref={sprite + '#' + iconId} />
-      </svg>
+      <Icon name={name} className={styles.icon} />
       <span>{text}</span>
     </Link>
   );

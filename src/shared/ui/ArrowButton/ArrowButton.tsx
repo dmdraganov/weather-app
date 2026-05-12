@@ -1,5 +1,5 @@
 import styles from './ArrowButton.module.scss';
-import sprite from '../../assets/icons/sprite.svg';
+import ArrowIcon from '../../assets/icons/ui/arrow.svg?react';
 
 interface IProps {
   route?: 'left' | 'right';
@@ -13,11 +13,9 @@ const ArrowButton = ({ route = 'right', onClick }: IProps) => {
       className={styles.button}
       onClick={onClick}
     >
-      <svg
+      <ArrowIcon
         className={`${route !== 'right' ? styles.invert : ''} ${styles.icon}`}
-      >
-        <use xlinkHref={sprite + '#arrow'} />
-      </svg>
+      />
     </button>
   );
 };

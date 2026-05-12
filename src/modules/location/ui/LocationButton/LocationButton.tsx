@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './LocationButton.module.scss';
-import sprite from '../../../../shared/assets/icons/sprite.svg';
+import LocationIcon from '../../../../shared/assets/icons/ui/location.svg?react';
+import ArrowIcon from '../../../../shared/assets/icons/ui/arrow.svg?react';
 import { useLocationStore } from '../../models/store';
 
 const LocationButton = ({ route }: { route: 'back' | 'forward' }) => {
@@ -13,21 +14,17 @@ const LocationButton = ({ route }: { route: 'back' | 'forward' }) => {
       className={styles.button}
       style={!currentLocation ? { visibility: 'hidden' } : undefined}
     >
-      <svg className={styles.locationIcon}>
-        <use xlinkHref={sprite + '#location'} />
-      </svg>
+      <LocationIcon className={styles.locationIcon} />
       {currentLocation && (
         <h1 className={styles.selectedLocation}>{currentLocation.name}</h1>
       )}
-      <svg
+      <ArrowIcon
         className={
           styles.arrowIcon +
           ' ' +
           (isBack ? styles.backArrowIcon : styles.forwardArrowIcon)
         }
-      >
-        <use xlinkHref={sprite + '#arrow'} />
-      </svg>
+      />
     </Link>
   );
 };

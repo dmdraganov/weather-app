@@ -1,5 +1,5 @@
 import styles from './LocationItem.module.scss';
-import sprite from '/src/shared/assets/icons/sprite.svg';
+import HeartIcon from '../../../../shared/assets/icons/ui/heart.svg?react';
 import type { Location } from '../../models/location.model';
 import { useCurrentLocation } from '../../hooks/useCurrentLocation';
 import { useLocationStore } from '../../models/store';
@@ -38,12 +38,10 @@ const LocationItem = ({ location }: LocationItemProps) => {
         onClick={handleAddToFavorites}
         style={isFavorite ? { opacity: 1 } : undefined}
       >
-        <svg
+        <HeartIcon
           className={styles.favoriteIcon}
           style={isFavorite ? { color: 'white' } : undefined}
-        >
-          <use xlinkHref={sprite + '#heart'} />
-        </svg>
+        />
       </button>
     </li>
   );

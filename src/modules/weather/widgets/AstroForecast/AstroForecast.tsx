@@ -5,29 +5,31 @@ import { WeatherContext } from '../../contexts/WeatherContext';
 import ListItem from '../../../../shared/ui/ListItem/ListItem';
 import { useTranslation } from 'react-i18next';
 
+import { IconName } from '../../../../shared/ui/Icon/icon-map';
+
 const AstroForecast = () => {
   const { sunrise, sunset, moonPhase, moonIllumination } =
     useContext(WeatherContext)!.daily[0].astro;
   const { t } = useTranslation('weather');
 
-  const conditionsList = [
+  const conditionsList: { name: IconName; title: string; value: string | number }[] = [
     {
-      iconId: 'sunny',
+      name: IconName.Sunny,
       title: t('sunrise'),
       value: sunrise,
     },
     {
-      iconId: 'wind',
+      name: IconName.Wind,
       title: t('sunset'),
       value: sunset,
     },
     {
-      iconId: 'clear',
+      name: IconName.Clear,
       title: t('moon_phase'),
       value: moonPhase,
     },
     {
-      iconId: 'blob',
+      name: IconName.Blob,
       title: t('moon_illumination'),
       value: moonIllumination + '%',
     },
@@ -35,7 +37,7 @@ const AstroForecast = () => {
 
   return (
     <section className={`${styles.container} division`}>
-      <SectionHeading iconId='clear' text={t('astro_forecast')} />
+      <SectionHeading name={IconName.Clear} text={t('astro_forecast')} />
       <ul className={styles.list}>
         {conditionsList.map((element) => (
           <ListItem key={element.title} {...element} isVertical={true} />

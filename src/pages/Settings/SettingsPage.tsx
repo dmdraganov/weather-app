@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { ThemeSettings } from '../../modules/theme/widgets/ThemeSettings/ThemeSettings';
 import { LanguageSettings } from '../../modules/localization/widgets/LanguageSettings/LanguageSettings';
 import styles from './SettingsPage.module.scss';
-import sprite from '../../shared/assets/icons/sprite.svg';
+import ArrowIcon from '../../shared/assets/icons/ui/arrow.svg?react';
 import { useTranslation } from 'react-i18next';
 
 const SettingsPage = () => {
@@ -22,9 +22,7 @@ const SettingsPage = () => {
             onClick={handleBack}
             aria-label={t('go_back')}
           >
-            <svg className={styles.arrowIcon}>
-              <use xlinkHref={`${sprite}#arrow`} />
-            </svg>
+            <ArrowIcon className={styles.arrowIcon} />
           </button>
           <h1 className={styles.title}>{t('settings')}</h1>
         </header>

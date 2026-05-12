@@ -1,5 +1,6 @@
 {
   "search_placeholder": "Search location",
   "favorite_locations": "Favorite locations",
-  "recent_locations": "Recent locations"
+  "recent_locations": "Recent locations",
+  "current_location": "Current location"
 }

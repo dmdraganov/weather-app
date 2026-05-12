@@ -26,7 +26,7 @@ const WorldMap = () => {
     if (data) {
       setCurrentLocation(data);
     }
-  }, [data, currentLocation]);
+  }, [data, currentLocation, setCurrentLocation]);
 
   const location = useMemo<YMapLocation>(() => {
     if (!currentLocation) return DEFAULT_LOCATION;

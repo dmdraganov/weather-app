@@ -1,17 +1,17 @@
 import styles from './SectionHeading.module.scss';
-import sprite from '../../assets/icons/sprite.svg';
+import Icon from '../Icon/Icon';
+
+import type { IconName } from '../Icon/Icon';
 
 interface IProps {
-  iconId: string;
+  name: IconName;
   text: string;
 }
 
-const SectionHeading = ({ iconId, text }: IProps) => {
+const SectionHeading = ({ name, text }: IProps) => {
   return (
     <h2 className={styles.sectionHeading}>
-      <svg className={styles.icon}>
-        <use xlinkHref={sprite + '#' + iconId} />
-      </svg>
+      <Icon name={name} className={styles.icon} />
       {text}
     </h2>
   );

@@ -2,19 +2,21 @@ import styles from './NavMenu.module.scss';
 import LinkButton from '../LinkButton/LinkButton';
 import { useTranslation } from 'react-i18next';
 
-const buttonArr = [
+import { IconName } from '../../../shared/ui/Icon/icon-map';
+
+const buttonArr: { name: IconName; text: string; path: string }[] = [
   {
-    iconId: 'rain-day',
+    name: IconName.RainDay,
     text: 'weather',
     path: '/',
   },
   {
-    iconId: 'location',
+    name: IconName.Location,
     text: 'cities',
     path: '/location',
   },
   {
-    iconId: 'settings',
+    name: IconName.Settings,
     text: 'settings',
     path: '/settings',
   },
@@ -28,7 +30,7 @@ const NavMenu = () => {
         <LinkButton
           key={element.text}
           to={element.path}
-          iconId={element.iconId}
+          name={element.name}
           text={t(element.text)}
         />
       ))}

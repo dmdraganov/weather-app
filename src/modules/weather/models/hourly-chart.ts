@@ -1,7 +1,9 @@
+import type { IconName } from '../../../shared/ui/Icon/Icon';
+
 export interface ChartPointData {
   time: string;
   temp: number;
-  conditionIcon: string;
+  conditionIcon: IconName;
   windSpeed: number;
   x: number;
   y: number;

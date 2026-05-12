@@ -10,11 +10,11 @@ export const useCurrentLocationInit = (): void => {
 
   useEffect(() => {
     if (geoCoordinates && !currentLocation) setCoordinates(geoCoordinates);
-  }, [geoCoordinates, currentLocation]);
+  }, [geoCoordinates, currentLocation, setCoordinates]);
 
   useEffect(() => {
     if (geolocationData && !currentLocation) {
       setCurrentLocation(geolocationData);
     }
-  }, [geolocationData, currentLocation]);
+  }, [geolocationData, currentLocation, setCurrentLocation]);
 };

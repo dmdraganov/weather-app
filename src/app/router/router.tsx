@@ -1,9 +1,20 @@
 import { createBrowserRouter, type RouteObject } from 'react-router-dom';
-import SettingsPage from '../../pages/Settings/SettingsPage';
-import LocationPage from '../../pages/Location/LocationPage';
-import HomePage from '../../pages/Home/HomePage';
-import { WeatherProvider } from '../../modules/weather/contexts/WeatherProvider';
 import { RequireLocationLayout } from './layouts/RequireLocationLayout';
+import { lazy } from 'react';
+
+const HomePage = lazy(() => {
+  return import('../../pages/Home/HomePage');
+});
+const LocationPage = lazy(() => {
+  return import('../../pages/Location/LocationPage');
+});
+const SettingsPage = lazy(() => {
+  return import('../../pages/Settings/SettingsPage');
+});
+
+const WeatherProvider = lazy(() => {
+  return import('../../modules/weather/contexts/WeatherProvider');
+});
 
 const routes: RouteObject[] = [
   {
