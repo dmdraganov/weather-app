@@ -1,0 +1,12 @@
+@use '/src/app/styles/variables' as *;
+
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  gap: $gap-lg;
+  padding-top: $gap-md;
+}
+
+.content {
+  flex: 1;
+}

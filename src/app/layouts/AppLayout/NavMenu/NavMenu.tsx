@@ -1,8 +1,8 @@
 import styles from './NavMenu.module.scss';
-import LinkButton from '../LinkButton/LinkButton';
+import LinkButton from '../../../../shared/ui/LinkButton/LinkButton';
 import { useTranslation } from 'react-i18next';
 
-import { IconName } from '../../../shared/ui/Icon/icon-map';
+import { IconName } from '../../../../shared/ui/Icon/icon-map';
 
 const buttonArr: { name: IconName; text: string; path: string }[] = [
   {

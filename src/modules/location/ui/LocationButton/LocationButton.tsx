@@ -1,16 +1,20 @@
-import { Link } from 'react-router-dom';
 import styles from './LocationButton.module.scss';
 import LocationIcon from '../../../../shared/assets/icons/ui/location.svg?react';
 import ArrowIcon from '../../../../shared/assets/icons/ui/arrow.svg?react';
 import { useLocationStore } from '../../models/store';
 
-const LocationButton = ({ route }: { route: 'back' | 'forward' }) => {
+type Props = {
+  onClick: () => void;
+  arrowDirection: 'back' | 'forward';
+};
+
+const LocationButton = ({ onClick, arrowDirection }: Props) => {
   const { currentLocation } = useLocationStore();
 
-  const isBack = route === 'back';
+  const isBack = arrowDirection === 'back';
   return (
-    <Link
-      to={isBack ? '/' : '/location'}
+    <button
+      onClick={onClick}
       className={styles.button}
       style={!currentLocation ? { visibility: 'hidden' } : undefined}
     >
@@ -25,7 +29,7 @@ const LocationButton = ({ route }: { route: 'back' | 'forward' }) => {
           (isBack ? styles.backArrowIcon : styles.forwardArrowIcon)
         }
       />
-    </Link>
+    </button>
   );
 };
 

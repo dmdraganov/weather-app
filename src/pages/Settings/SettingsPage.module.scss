@@ -2,7 +2,6 @@
 
 .page {
   min-height: 100vh;
-  padding: 20px 0;
 }
 
 .header {
@@ -10,36 +9,11 @@
   align-items: center;
   gap: $gap-md;
   margin-bottom: $gap-lg;
-  padding: 0 55px;
 
   @media (max-width: $breakpoint-mobile) {
     padding: 0 10px;
   }
 }
-
-.backButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--light-color);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  transition: opacity 0.2s;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  .arrowIcon {
-    width: 24px;
-    height: 24px;
-    transform: scaleX(-1);
-    stroke: white;
-  }
-}
-
 .title {
   font-size: $font-lg;
   font-weight: bold;
@@ -51,7 +25,6 @@
   gap: $gap-lg;
   max-width: 600px;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
 .saveButton {

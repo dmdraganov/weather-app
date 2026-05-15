@@ -2,7 +2,6 @@
 
 .header {
   height: 300px;
-  margin-bottom: 30px;
 
   @media (max-width: $breakpoint-mobile) {
     height: 450px;
@@ -11,7 +10,7 @@
   .container {
     display: flex;
     justify-content: space-between;
-    padding: 0 55px;
+    padding: 0 35px;
     height: 100%;
 
     @media (max-width: $breakpoint-mobile) {

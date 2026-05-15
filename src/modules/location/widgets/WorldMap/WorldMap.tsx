@@ -44,14 +44,16 @@ const WorldMap = () => {
     setCoordinates({ latitude: lat, longitude: lon });
   };
 
-  return (
+  if (
     YMap &&
     YMapDefaultFeaturesLayer &&
     YMapDefaultSchemeLayer &&
     YMapMarker &&
     YMapDefaultMarker &&
     YMapListener &&
-    reactify && (
+    reactify
+  ) {
+    return (
       <YMap
         location={reactify.useDefault(location, [
           location.center[0],
@@ -69,8 +71,8 @@ const WorldMap = () => {
           ])}
         ></YMapDefaultMarker>
       </YMap>
-    )
-  );
+    );
+  }
 };
 
 export default WorldMap;

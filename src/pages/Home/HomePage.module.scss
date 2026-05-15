@@ -1,11 +1,42 @@
-@use '/src/app/styles/variables.scss' as *;
+@use '/src/app/styles/variables' as *;
 
 .page {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: $gap-lg;
   padding: 20px 0;
   @media (max-width: $breakpoint-tablet) {
     height: auto;
+  }
+}
+
+.main {
+  flex: 1;
+
+  .container {
+    display: flex;
+    gap: $gap-lg;
+    height: 100%;
+    @media (max-width: $breakpoint-mobile) {
+      flex-direction: column;
+    }
+  }
+
+  .verticalFlexContainer {
+    flex: 2.5;
+    display: flex;
+    flex-direction: column;
+    row-gap: $gap-lg;
+
+    & * {
+      min-height: 0;
+      min-width: 0;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      flex: none;
+      display: contents;
+    }
   }
 }

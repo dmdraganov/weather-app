@@ -5,12 +5,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: sticky;
+  top: $gap-md;
 
   row-gap: $gap-md;
   min-width: 100px;
-  min-height: 100%;
-  padding-left: 0;
-  padding-right: 0;
+  height: fit-content;
+  padding-left: $gap-sm;
+  padding-right: $gap-sm;
 
   @media (max-width: $breakpoint-mobile) {
     display: none;

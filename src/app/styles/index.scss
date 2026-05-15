@@ -11,7 +11,7 @@
 [data-theme='dark'] {
   --bg-color: #{$color-grey};
   --accent-color: #{$color-white};
-  --light-color: rgba(255, 255, 255, 0.05);
+  --light-color: #{$color-light-grey};
 }
 
 body {
