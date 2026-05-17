@@ -4,8 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index",
-    "build": "tsc"
+    "dev": "tsx watch src/main",
+    "build": "tsc",
+    "lint": "eslint .",
+    "format": "prettier . --write",
+    "check-format": "prettier . --check"
   },
   "dependencies": {
     "cors": "^2.8.6",

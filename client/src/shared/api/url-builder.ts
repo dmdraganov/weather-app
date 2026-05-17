@@ -10,5 +10,6 @@ export const buildApiUrl = (
   if (typeof query === 'object') {
     query = `${query.latitude}, ${query.longitude}`;
   }
-  return `http://api.weatherapi.com/v1/${type}.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=${query}&days=7&lang=${language}`;
+  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+  return `${baseUrl}/weather/${type}?q=${query}&days=7&lang=${language}`;
 };

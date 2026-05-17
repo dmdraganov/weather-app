@@ -60,6 +60,7 @@
 }
 
 .weatherIcon {
+  flex: 1;
   @media (max-width: $breakpoint-mobile) {
     order: -1;
     flex: 1;
