@@ -1,41 +1,34 @@
 import styles from './LocationItem.module.scss';
 import HeartIcon from '../../../../shared/assets/icons/ui/heart.svg?react';
-import type { Location } from '../../models/location.model';
-import { useCurrentLocation } from '../../hooks/useCurrentLocation';
-import { useLocationStore } from '../../models/store';
 
 interface LocationItemProps {
-  location: Location;
+  name: string;
+  description: string;
+  isFavorite: boolean;
+  onSetCurrentLocation: () => void;
+  onToggleFavorite: () => void;
 }
 
-const LocationItem = ({ location }: LocationItemProps) => {
-  const [, setCurrentLocation] = useCurrentLocation();
-  const { favoriteLocations, toggleFavorite } = useLocationStore();
-
-  const isFavorite = favoriteLocations.some(
-    (favoriteLocation) => favoriteLocation.id === location.id
-  );
-
-  const handleAddToFavorites = () => {
-    toggleFavorite(location);
-  };
+const LocationItem = ({ 
+  name, 
+  description, 
+  isFavorite, 
+  onSetCurrentLocation, 
+  onToggleFavorite 
+}: LocationItemProps) => {
 
   return (
     <li className={styles.item}>
       <div
         className={styles.itemText}
-        onClick={() => {
-          setCurrentLocation(location);
-        }}
+        onClick={onSetCurrentLocation}
       >
-        <h3 className={styles.itemHeading}>{location.name}</h3>
-        <span className={styles.itemAddition}>
-          {location.country + (location.region ? ', ' + location.region : '')}
-        </span>
+        <h3 className={styles.itemHeading}>{name}</h3>
+        <span className={styles.itemAddition}>{description}</span>
       </div>
       <button
         className={styles.favoriteButton}
-        onClick={handleAddToFavorites}
+        onClick={onToggleFavorite}
         style={isFavorite ? { opacity: 1 } : undefined}
       >
         <HeartIcon

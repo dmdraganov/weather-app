@@ -1,26 +1,42 @@
 import {
   YMap,
-  YMapMarker,
+  YMapComponentsProvider,
   YMapDefaultFeaturesLayer,
   YMapDefaultSchemeLayer,
   YMapDefaultMarker,
   YMapListener,
-  reactify,
-} from '../../../../shared/lib/ymaps';
+} from 'ymap3-components';
+import type {
+  YMapLocationRequest,
+  DomEvent,
+  DomEventHandlerObject,
+  LngLat,
+} from '@yandex/ymaps3-types';
 import styles from './WorldMap.module.scss';
-
-import type { YMapLocation } from '@yandex/ymaps3-types/imperative/YMap';
-import type { DomEvent, DomEventHandlerObject } from 'ymaps3';
 import { useCurrentLocation } from '../../hooks/useCurrentLocation';
-import { useLocationByCoordinates } from '../../hooks/useLocationByCoordinates';
-import { useEffect, useMemo } from 'react';
+import { useReverseGeocodeLocation } from '../../hooks/useReverseGeocodeLocation';
+import { useTranslation } from 'react-i18next';
+import { useLocationStore } from '../../models/store';
+import { useEffect, useMemo, useCallback } from 'react';
+import { useLanguage } from '../../../localization/hooks/useLanguage';
+import { mapLanguageToLocale } from '../../../localization/utils/language.mapper';
 
-const DEFAULT_LOCATION: YMapLocation = { center: [40.52, 34.34], zoom: 2 };
+const API_KEY = import.meta.env.VITE_YANDEX_API_KEY;
+
+const DEFAULT_CENTER: LngLat = [40.52, 34.34];
+const DEFAULT_LOCATION: YMapLocationRequest = {
+  center: DEFAULT_CENTER,
+  zoom: 2,
+};
 const ZOOM = 10;
 
 const WorldMap = () => {
   const [currentLocation, setCurrentLocation] = useCurrentLocation();
-  const { setCoordinates, data } = useLocationByCoordinates();
+  const { setCoordinates, data } = useReverseGeocodeLocation();
+  const [language] = useLanguage();
+  const locale = useMemo(() => mapLanguageToLocale(language), [language]);
+
+  console.log('locale', locale);
 
   useEffect(() => {
     if (data) {
@@ -28,51 +44,40 @@ const WorldMap = () => {
     }
   }, [data, currentLocation, setCurrentLocation]);
 
-  const location = useMemo<YMapLocation>(() => {
-    if (!currentLocation) return DEFAULT_LOCATION;
-    return {
-      center: [
-        currentLocation.coordinates.longitude,
-        currentLocation.coordinates.latitude,
-      ],
-      zoom: ZOOM,
-    };
+  const center = useMemo<LngLat>(() => {
+    if (!currentLocation) return DEFAULT_CENTER;
+    return [
+      currentLocation.coordinates.longitude,
+      currentLocation.coordinates.latitude,
+    ];
   }, [currentLocation]);
 
-  const handleClick = (_object: DomEventHandlerObject, e: DomEvent) => {
-    const [lon, lat] = e.coordinates;
-    setCoordinates({ latitude: lat, longitude: lon });
-  };
+  const location = useMemo<YMapLocationRequest>(
+    () => ({
+      center,
+      zoom: ZOOM,
+    }),
+    [center]
+  );
 
-  if (
-    YMap &&
-    YMapDefaultFeaturesLayer &&
-    YMapDefaultSchemeLayer &&
-    YMapMarker &&
-    YMapDefaultMarker &&
-    YMapListener &&
-    reactify
-  ) {
-    return (
-      <YMap
-        location={reactify.useDefault(location, [
-          location.center[0],
-          location.center[1],
-        ])}
-        className={styles.map}
-      >
+  const handleClick = useCallback(
+    (_object: DomEventHandlerObject, e: DomEvent) => {
+      const [lon, lat] = e.coordinates;
+      setCoordinates({ latitude: lat, longitude: lon });
+    },
+    [setCoordinates]
+  );
+
+  return (
+    <YMapComponentsProvider apiKey={API_KEY} lang={locale}>
+      <YMap location={location} className={styles.map}>
         <YMapDefaultSchemeLayer />
         <YMapDefaultFeaturesLayer />
         <YMapListener layer='any' onClick={handleClick} />
-        <YMapDefaultMarker
-          coordinates={reactify.useDefault(location.center, [
-            location.center[0],
-            location.center[1],
-          ])}
-        ></YMapDefaultMarker>
+        <YMapDefaultMarker coordinates={center} />
       </YMap>
-    );
-  }
+    </YMapComponentsProvider>
+  );
 };
 
 export default WorldMap;

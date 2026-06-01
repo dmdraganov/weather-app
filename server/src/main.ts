@@ -7,14 +7,18 @@ import { WeatherRouter } from './modules/weather/weather.routes.js';
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 
 const apiKey = process.env.WEATHER_API_KEY || '';
 const weatherService = new WeatherService(apiKey);
 const weatherController = new WeatherController(weatherService);
 const weatherRouter = new WeatherRouter(weatherController);
 
-app.use('/api/weather', weatherRouter.router);
+app.use('/weather', weatherRouter.router);
 
 app.listen(process.env.PORT || '3000', () => {
   console.log(`Server is running on port ${process.env.PORT || '3000'}`);

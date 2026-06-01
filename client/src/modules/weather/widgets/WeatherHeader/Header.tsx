@@ -9,11 +9,10 @@ import LocationSearch from '../../../location/widgets/LocationSearch/LocationSea
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const currentWeather = useContext(WeatherContext)!.current;
-  const { condition, temperature } = currentWeather;
   const [language] = useLanguage();
-  const currentDate = new Date();
+  const weatherData = useContext(WeatherContext);
 
+  const currentDate = new Date();
   const { weekday, day, month, year } = useMemo(
     () =>
       formatDate(currentDate, {
@@ -25,6 +24,11 @@ const Header = () => {
       }),
     [language, currentDate.getDate()]
   );
+
+  if (!weatherData) return null;
+
+  const currentWeather = weatherData.current;
+  const { condition, temperature } = currentWeather;
 
   return (
     <header className={styles.header}>

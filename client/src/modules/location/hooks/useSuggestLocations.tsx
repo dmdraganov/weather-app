@@ -1,16 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { findLocationsByQuery } from '../api/location.api';
+import { suggestLocations } from '../api/suggestion/suggestion.api';
 import { useLanguage } from '../../localization/hooks/useLanguage';
 
-export const useLocationsSearch = () => {
+export const useSuggestLocations = () => {
   const [query, setQuery] = useState<string>('');
   const [language] = useLanguage();
 
   const queryResult = useQuery({
     queryKey: ['locations-search', query, language],
-    queryFn: () => findLocationsByQuery(query, language),
+    queryFn: () => suggestLocations(query, language),
     enabled: query.length > 0,
   });
+  
   return { query, setQuery, ...queryResult };
 };
+

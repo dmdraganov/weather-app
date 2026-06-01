@@ -8,9 +8,13 @@ import { useTranslation } from 'react-i18next';
 import { IconName } from '../../../../shared/ui/Icon/icon-map';
 
 const AstroForecast = () => {
-  const { sunrise, sunset, moonPhase, moonIllumination } =
-    useContext(WeatherContext)!.daily[0].astro;
+  const weatherData = useContext(WeatherContext);
   const { t } = useTranslation('weather');
+
+  if (!weatherData) return null;
+
+  const { sunrise, sunset, moonPhase, moonIllumination } =
+    weatherData.daily[0].astro;
 
   const conditionsList: { name: IconName; title: string; value: string | number }[] = [
     {

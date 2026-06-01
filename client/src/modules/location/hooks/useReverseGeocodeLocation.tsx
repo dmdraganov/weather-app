@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Coordinates } from '../models/coordinates.model';
-import { findLocationByCoordinates } from '../api/location.api';
+import { reverseGeocodeLocation } from '../api/geocode/geocode.api';
 import { useState } from 'react';
 import { useLanguage } from '../../localization/hooks/useLanguage';
 
-export const useLocationByCoordinates = (
+export const useReverseGeocodeLocation = (
   initialCoordinates?: Coordinates | null
 ) => {
   const [coordinates, setCoordinates] = useState<Coordinates | null>(
@@ -21,7 +21,7 @@ export const useLocationByCoordinates = (
     ],
     queryFn: () => {
       if (!coordinates) throw new Error('Coordinates are not set');
-      return findLocationByCoordinates(coordinates, language);
+      return reverseGeocodeLocation(coordinates, language);
     },
     enabled: coordinates !== null,
   });

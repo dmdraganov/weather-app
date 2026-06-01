@@ -13,10 +13,14 @@ import { IconName } from '../../../../shared/ui/Icon/icon-map';
 
 const ForecastMetrics = () => {
   const [selectedDay, setSelectedDay] = useState<number>(0);
-  const daily = useContext(WeatherContext)!.daily;
-  const dayForecast = daily[selectedDay];
+  const weatherData = useContext(WeatherContext);
   const [language] = useLanguage();
   const { t } = useTranslation('weather');
+
+  if (!weatherData) return null;
+
+  const daily = weatherData.daily;
+  const dayForecast = daily[selectedDay];
 
   const conditionsList: { name: IconName; title: string; value: string | number }[] = [
     {

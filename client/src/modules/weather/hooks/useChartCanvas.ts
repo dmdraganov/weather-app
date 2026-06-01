@@ -15,7 +15,8 @@ import {
 } from '../models/hourly-chart';
 
 export const useChartCanvas = () => {
-  const daily = useContext(WeatherContext)!.daily;
+  const weatherData = useContext(WeatherContext);
+
   const toChartData = useChartData();
 
   const [chartData, setChartData] = useState<ChartPointData[] | null>(null);
@@ -74,16 +75,19 @@ export const useChartCanvas = () => {
   }, [dpr]);
 
   useLayoutEffect(() => {
-    if (!canvasRef.current || !containerHeight) return;
+    if (!canvasRef.current || !containerHeight || !weatherData) return;
     const height = containerHeight;
     const canvas = canvasRef.current;
     canvas.width = CANVAS_WIDTH * dpr;
     canvas.height = height * dpr;
 
-    const data = toChartData([...daily[0].hourly, ...daily[1].hourly], height);
+    const data = toChartData(
+      [...weatherData.daily[0].hourly, ...weatherData.daily[1].hourly],
+      height
+    );
     setChartData(data);
     drawChart(data, height);
-  }, [dpr, containerHeight, daily, toChartData, drawChart]);
+  }, [dpr, containerHeight, weatherData, toChartData, drawChart]);
 
   return { canvasRef, chartRef, chartData };
 };

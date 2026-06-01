@@ -7,7 +7,7 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <WeatherContext.Provider value={data ?? null}>
-      {data && children}
+      {children}
     </WeatherContext.Provider>
   );
 };

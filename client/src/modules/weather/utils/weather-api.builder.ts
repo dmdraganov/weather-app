@@ -1,8 +1,8 @@
-import type { Coordinates } from '../../modules/location/models/coordinates.model';
+import type { Coordinates } from '../../location/models/coordinates.model';
 
 type ApiType = 'current' | 'forecast' | 'search' | 'astronomy';
 
-export const buildApiUrl = (
+export const buildWeatherApiUrl = (
   type: ApiType,
   query: string | Coordinates,
   language: string
@@ -10,6 +10,11 @@ export const buildApiUrl = (
   if (typeof query === 'object') {
     query = `${query.latitude}, ${query.longitude}`;
   }
+  const params = new URLSearchParams({
+    q: query,
+    days: '7',
+    lang: language,
+  });
   const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
-  return `${baseUrl}/weather/${type}?q=${query}&days=7&lang=${language}`;
+  return `${baseUrl}/weather/${type}?${params.toString()}`;
 };
