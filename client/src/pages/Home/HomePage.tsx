@@ -1,24 +1,35 @@
 import AstroForecast from '../../modules/weather/widgets/AstroForecast/AstroForecast';
-import DayForecast from '../../modules/weather/widgets/DayForecast/DayForecast';
 import ForecastMetrics from '../../modules/weather/widgets/ForecastMetrics/ForecastMetrics';
 import Header from '../../modules/weather/widgets/WeatherHeader/Header';
 import styles from './HomePage.module.scss';
+import { useWeather } from '../../modules/weather/hooks/useWeather';
+import ForecastChart from '../../modules/weather/widgets/ForecastChart/ForecastChart';
+import Spinner from '../../shared/ui/Spinner/Spinner';
 
 const HomePage = () => {
-  return (
-    <div className={styles.page}>
-      <Header />
-      <main className={styles.main}>
-        <div className={styles.container}>
-          <div className={styles.verticalFlexContainer}>
-            <DayForecast />
-            <AstroForecast />
+  const { data, error, isLoading } = useWeather();
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+  if (data)
+    return (
+      <div className={styles.page}>
+        <Header currentWeather={data.current} />
+        <main className={styles.main}>
+          <div className={styles.container}>
+            <div className={styles.verticalFlexContainer}>
+              <ForecastChart dailyWeather={data.daily} />
+              <AstroForecast astroData={data.daily[0].astro} />
+            </div>
+            <ForecastMetrics />
           </div>
-          <ForecastMetrics />
-        </div>
-      </main>
-    </div>
-  );
+        </main>
+      </div>
+    );
 };
 
 export default HomePage;

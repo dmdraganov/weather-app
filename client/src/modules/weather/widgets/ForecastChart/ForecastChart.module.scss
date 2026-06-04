@@ -1,0 +1,37 @@
+@use '/src/app/styles/variables' as *;
+
+.container {
+  flex: 1 1 200px;
+  padding-bottom: 0;
+  flex-direction: column;
+  align-items: normal;
+  position: relative;
+
+  @media (max-width: $breakpoint-mobile) {
+    order: 0;
+  }
+}
+
+.chartContainer {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+  height: calc(100% - 45px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 50px;
+  touch-action: none;
+  user-select: none;
+
+  .chart {
+    flex-shrink: 0;
+    position: relative;
+    height: 50%;
+
+    .canvas {
+      height: 100%;
+    }
+  }
+}

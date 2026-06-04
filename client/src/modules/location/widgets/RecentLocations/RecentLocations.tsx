@@ -8,7 +8,8 @@ import { useTranslation } from 'react-i18next';
 import { IconName } from '../../../../shared/ui/Icon/icon-map';
 
 const RecentLocations = () => {
-  const { recentLocations, favoriteLocations, toggleFavorite } = useLocationStore();
+  const { recentLocations, favoriteLocations, toggleFavorite } =
+    useLocationStore();
   const [, setCurrentLocation] = useCurrentLocation();
   const { t } = useTranslation('location');
 
@@ -18,12 +19,12 @@ const RecentLocations = () => {
         <SectionHeading name={IconName.Clock} text={t('recent_locations')} />
         <ul className={styles.list}>
           {recentLocations.map((location) => (
-            <LocationItem 
-              key={location.id} 
+            <LocationItem
+              key={location.id}
               name={location.name}
               description={location.description}
               isFavorite={favoriteLocations.some((f) => f.id === location.id)}
-              onSetCurrentLocation={() => setCurrentLocation(location)}
+              onSelect={() => setCurrentLocation(location)}
               onToggleFavorite={() => toggleFavorite(location)}
             />
           ))}

@@ -1,6 +1,6 @@
 export interface LocationSuggestion {
   id: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   tags: string[];
 }

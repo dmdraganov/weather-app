@@ -1,6 +1,6 @@
 import { useLanguage } from '../../../localization/hooks/useLanguage';
 import { formatKmPerHour } from '../../../../shared/utils/units-formatter';
-import styles from './HourlyChart.module.scss';
+import styles from './ChartPoint.module.scss';
 import type { ChartPointData } from '../../models/hourly-chart';
 import Icon from '../../../../shared/ui/Icon/Icon';
 

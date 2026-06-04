@@ -5,7 +5,7 @@ export const mapSuggestion = (dto: SuggestionDto): LocationSuggestion => {
   return {
     id: dto.uri,
     title: dto.title.text,
-    subtitle: dto.subtitle.text,
+    subtitle: dto.subtitle?.text,
     tags: dto.tags,
   };
 };

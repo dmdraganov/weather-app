@@ -1,11 +1,5 @@
-import {
-  useCallback,
-  useContext,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
-import { WeatherContext } from '../contexts/WeatherContext';
+import type { HourlyWeather } from './../models/forecast';
+import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 
 import { useChartData } from './useChartData';
 import {
@@ -14,9 +8,7 @@ import {
   type ChartPointData,
 } from '../models/hourly-chart';
 
-export const useChartCanvas = () => {
-  const weatherData = useContext(WeatherContext);
-
+export const useChartCanvas = (hourlyWeather: HourlyWeather[]) => {
   const toChartData = useChartData();
 
   const [chartData, setChartData] = useState<ChartPointData[] | null>(null);
@@ -75,19 +67,17 @@ export const useChartCanvas = () => {
   }, [dpr]);
 
   useLayoutEffect(() => {
-    if (!canvasRef.current || !containerHeight || !weatherData) return;
+    if (!canvasRef.current || !containerHeight) return;
     const height = containerHeight;
     const canvas = canvasRef.current;
     canvas.width = CANVAS_WIDTH * dpr;
     canvas.height = height * dpr;
 
-    const data = toChartData(
-      [...weatherData.daily[0].hourly, ...weatherData.daily[1].hourly],
-      height
-    );
+    const data = toChartData(hourlyWeather, height);
+
     setChartData(data);
     drawChart(data, height);
-  }, [dpr, containerHeight, weatherData, toChartData, drawChart]);
+  }, [dpr, containerHeight, hourlyWeather, toChartData, drawChart]);
 
   return { canvasRef, chartRef, chartData };
 };

@@ -13,7 +13,12 @@ export class WeatherController {
       const days = req.query.days as string | undefined;
       const lang = req.query.lang as string | undefined;
 
-      const data = await this.weatherService.getWeatherData(type, q, days, lang);
+      const data = await this.weatherService.getWeatherData(
+        type,
+        q,
+        days,
+        lang
+      );
 
       res.json(data);
     } catch (error: unknown) {

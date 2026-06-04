@@ -15,13 +15,9 @@ import type {
 import styles from './WorldMap.module.scss';
 import { useCurrentLocation } from '../../hooks/useCurrentLocation';
 import { useReverseGeocodeLocation } from '../../hooks/useReverseGeocodeLocation';
-import { useTranslation } from 'react-i18next';
-import { useLocationStore } from '../../models/store';
 import { useEffect, useMemo, useCallback } from 'react';
 import { useLanguage } from '../../../localization/hooks/useLanguage';
 import { mapLanguageToLocale } from '../../../localization/utils/language.mapper';
-
-const API_KEY = import.meta.env.VITE_YANDEX_API_KEY;
 
 const DEFAULT_CENTER: LngLat = [40.52, 34.34];
 const DEFAULT_LOCATION: YMapLocationRequest = {
@@ -69,7 +65,10 @@ const WorldMap = () => {
   );
 
   return (
-    <YMapComponentsProvider apiKey={API_KEY} lang={locale}>
+    <YMapComponentsProvider
+      apiKey={import.meta.env.VITE_YANDEX_API_KEY}
+      lang={locale}
+    >
       <YMap location={location} className={styles.map}>
         <YMapDefaultSchemeLayer />
         <YMapDefaultFeaturesLayer />

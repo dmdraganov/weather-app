@@ -7,7 +7,7 @@ import { mapSuggestion } from './suggestion.mapper';
 export const suggestLocations = async (
   query: string,
   language: Language
-): Promise<LocationSuggestion[]> => {
+): Promise<LocationSuggestion[] | null> => {
   const baseUrl = 'https://suggest-maps.yandex.ru/v1/suggest?';
   const params = new URLSearchParams({
     apikey: import.meta.env.VITE_GEOSUGGEST_API_KEY,
@@ -16,10 +16,11 @@ export const suggestLocations = async (
     types: 'locality',
     highlight: '0',
     attrs: 'uri',
+    results: '5',
   });
   const url = baseUrl + params.toString();
   const data = await request(url);
-
-  const validated = SuggestLocationsSchema.parse(data);
+  const validated = await SuggestLocationsSchema.parse(data);
+  if (!validated) return null;
   return validated.map(mapSuggestion);
 };

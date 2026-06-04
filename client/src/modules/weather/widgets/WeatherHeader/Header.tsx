@@ -1,16 +1,19 @@
 import styles from './Header.module.scss';
 import { formatDate } from '../../../../shared/utils/date-formatter';
-import { WeatherContext } from '../../contexts/WeatherContext';
-import { useContext, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import LocationButton from '../../../location/ui/LocationButton/LocationButton';
 import { useLanguage } from '../../../localization/hooks/useLanguage';
 import Icon from '../../../../shared/ui/Icon/Icon';
 import LocationSearch from '../../../location/widgets/LocationSearch/LocationSearch';
+import type { CurrentWeather } from '../../models';
 
-const Header = () => {
+interface HeaderProps {
+  currentWeather: CurrentWeather;
+}
+
+const Header = ({ currentWeather }: HeaderProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [language] = useLanguage();
-  const weatherData = useContext(WeatherContext);
 
   const currentDate = new Date();
   const { weekday, day, month, year } = useMemo(
@@ -25,9 +28,6 @@ const Header = () => {
     [language, currentDate.getDate()]
   );
 
-  if (!weatherData) return null;
-
-  const currentWeather = weatherData.current;
   const { condition, temperature } = currentWeather;
 
   return (

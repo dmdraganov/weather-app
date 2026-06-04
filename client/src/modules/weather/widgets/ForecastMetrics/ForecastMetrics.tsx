@@ -22,7 +22,11 @@ const ForecastMetrics = () => {
   const daily = weatherData.daily;
   const dayForecast = daily[selectedDay];
 
-  const conditionsList: { name: IconName; title: string; value: string | number }[] = [
+  const conditionsList: {
+    name: IconName;
+    title: string;
+    value: string | number;
+  }[] = [
     {
       name: IconName.Thermometer,
       title: t('temp'),

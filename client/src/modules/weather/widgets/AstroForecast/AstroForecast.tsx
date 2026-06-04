@@ -1,22 +1,25 @@
 import styles from './AstroForecast.module.scss';
 import SectionHeading from '../../../../shared/ui/SectionHeading/SectionHeading';
-import { useContext } from 'react';
-import { WeatherContext } from '../../contexts/WeatherContext';
 import ListItem from '../../../../shared/ui/ListItem/ListItem';
 import { useTranslation } from 'react-i18next';
 
 import { IconName } from '../../../../shared/ui/Icon/icon-map';
+import type { AstroData } from '../../models';
 
-const AstroForecast = () => {
-  const weatherData = useContext(WeatherContext);
+interface AstroForecastProps {
+  astroData: AstroData;
+}
+
+const AstroForecast = ({ astroData }: AstroForecastProps) => {
   const { t } = useTranslation('weather');
 
-  if (!weatherData) return null;
+  const { sunrise, sunset, moonPhase, moonIllumination } = astroData;
 
-  const { sunrise, sunset, moonPhase, moonIllumination } =
-    weatherData.daily[0].astro;
-
-  const conditionsList: { name: IconName; title: string; value: string | number }[] = [
+  const conditionsList: {
+    name: IconName;
+    title: string;
+    value: string | number;
+  }[] = [
     {
       name: IconName.Sunny,
       title: t('sunrise'),

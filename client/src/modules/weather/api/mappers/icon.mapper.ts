@@ -4,7 +4,10 @@ const rainThunderCodes = [1273, 1276];
 const snowThunderNightCodes = [1279, 1282];
 const thunderNightCodes = [1087];
 
-export const mapCodeToIcon = (code: number, isDay: boolean = true): IconName => {
+export const mapCodeToIcon = (
+  code: number,
+  isDay: boolean = true
+): IconName => {
   if (code === 1000) {
     return isDay ? IconName.Sunny : IconName.Clear;
   } else if (code === 1003 || code === 1006) {

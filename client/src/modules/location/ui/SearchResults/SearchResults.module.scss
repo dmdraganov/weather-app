@@ -1,0 +1,18 @@
+@use '/src/app/styles/variables' as *;
+
+.listContainer {
+  padding: 0 35px;
+  border-radius: 0 0 40px 40px;
+  overflow: hidden;
+  z-index: 1;
+  background-color: $color-grey;
+  transition: max-height 0.15s ease-in-out;
+
+  .list {
+    padding-bottom: 20px;
+    margin-top: 62px;
+    display: flex;
+    flex-direction: column;
+    row-gap: $gap-md;
+  }
+}

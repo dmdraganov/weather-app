@@ -18,12 +18,12 @@ const FavoriteLocations = () => {
         <SectionHeading name={IconName.Heart} text={t('favorite_locations')} />
         <ul className={styles.list}>
           {favoriteLocations.map((location) => (
-            <LocationItem 
-              key={location.id} 
+            <LocationItem
+              key={location.id}
               name={location.name}
               description={location.description}
               isFavorite={favoriteLocations.some((f) => f.id === location.id)}
-              onSetCurrentLocation={() => setCurrentLocation(location)}
+              onSelect={() => setCurrentLocation(location)}
               onToggleFavorite={() => toggleFavorite(location)}
             />
           ))}
