@@ -12,31 +12,30 @@ interface AstroForecastProps {
 
 const AstroForecast = ({ astroData }: AstroForecastProps) => {
   const { t } = useTranslation('weather');
-
   const { sunrise, sunset, moonPhase, moonIllumination } = astroData;
 
   const conditionsList: {
-    name: IconName;
+    iconName: IconName;
     title: string;
     value: string | number;
   }[] = [
     {
-      name: IconName.Sunny,
+      iconName: IconName.Sunny,
       title: t('sunrise'),
       value: sunrise,
     },
     {
-      name: IconName.Wind,
+      iconName: IconName.Wind,
       title: t('sunset'),
       value: sunset,
     },
     {
-      name: IconName.Clear,
+      iconName: IconName.Clear,
       title: t('moon_phase'),
       value: moonPhase,
     },
     {
-      name: IconName.Blob,
+      iconName: IconName.Blob,
       title: t('moon_illumination'),
       value: moonIllumination + '%',
     },
@@ -44,7 +43,7 @@ const AstroForecast = ({ astroData }: AstroForecastProps) => {
 
   return (
     <section className={`${styles.container} division`}>
-      <SectionHeading name={IconName.Clear} text={t('astro_forecast')} />
+      <SectionHeading iconName={IconName.Clear} text={t('astro_forecast')} />
       <ul className={styles.list}>
         {conditionsList.map((element) => (
           <ListItem key={element.title} {...element} isVertical={true} />

@@ -1,5 +1,5 @@
 import { useLanguage } from '../../../localization/hooks/useLanguage';
-import { formatKmPerHour } from '../../../../shared/utils/units-formatter';
+import { formatKmPerHour } from '../../../../shared/utils/format-units';
 import styles from './ChartPoint.module.scss';
 import type { ChartPointData } from '../../models/hourly-chart';
 import Icon from '../../../../shared/ui/Icon/Icon';

@@ -1,58 +1,36 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import styles from './ForecastMetrics.module.scss';
-import { WeatherContext } from '../../contexts/WeatherContext';
 import Slider from '../../../../shared/ui/Slider/Slider';
 import ListItem from '../../../../shared/ui/ListItem/ListItem';
-import { formatDate } from '../../../../shared/utils/date-formatter';
+import { formatDate } from '../../../../shared/utils/format-date';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '../../../localization/hooks/useLanguage';
-import { formatKmPerHour } from '../../../../shared/utils/units-formatter';
 import Icon from '../../../../shared/ui/Icon/Icon';
+import type { DailyWeather } from '../../models';
+import { mapForecastMetrics } from './ForecastMetrics.data';
 
-import { IconName } from '../../../../shared/ui/Icon/icon-map';
+interface ForecastMetricsProps {
+  dailyWeatherList: DailyWeather[];
+}
 
-const ForecastMetrics = () => {
+const ForecastMetrics = ({ dailyWeatherList }: ForecastMetricsProps) => {
   const [selectedDay, setSelectedDay] = useState<number>(0);
-  const weatherData = useContext(WeatherContext);
   const [language] = useLanguage();
-  const { t } = useTranslation('weather');
+  const { t } = useTranslation(['weather', 'shared']);
 
-  if (!weatherData) return null;
+  if (dailyWeatherList.length === 0) {
+    return (
+      <section className={`${styles.container} division`}>
+        <h2 className={styles.heading}>{t('air_conditions')}</h2>
+        <p className={styles.noData}>{t('no_data', { ns: 'shared' })}</p>
+      </section>
+    );
+  }
 
-  const daily = weatherData.daily;
-  const dayForecast = daily[selectedDay];
-
-  const conditionsList: {
-    name: IconName;
-    title: string;
-    value: string | number;
-  }[] = [
-    {
-      name: IconName.Thermometer,
-      title: t('temp'),
-      value: `${dayForecast.temperature.min.celsius}° / ${dayForecast.temperature.max.celsius}°`,
-    },
-    {
-      name: IconName.Wind,
-      title: t('wind'),
-      value: formatKmPerHour(dayForecast.wind.speedKph, language),
-    },
-    {
-      name: IconName.Blob,
-      title: t('chance_of_rain'),
-      value: dayForecast.precipitation.rainChance + '%',
-    },
-    {
-      name: IconName.Blob,
-      title: t('avg_humidity'),
-      value: dayForecast.avgHumidity + '%',
-    },
-    {
-      name: IconName.Sunny,
-      title: t('uv_index'),
-      value: dayForecast.uvIndex,
-    },
-  ];
+  const metricsList = mapForecastMetrics(
+    dailyWeatherList[selectedDay],
+    language
+  );
 
   return (
     <section className={`${styles.container} division`}>
@@ -60,9 +38,9 @@ const ForecastMetrics = () => {
         selectedSlide={selectedDay}
         setSelectedSlide={setSelectedDay}
         visibleSlides={3}
-        slidesAmount={daily.length}
+        slidesAmount={dailyWeatherList.length}
       >
-        {daily.map((day, i) => (
+        {dailyWeatherList.map((day, i) => (
           <div
             key={i}
             className={`${styles.slide} ${
@@ -81,8 +59,13 @@ const ForecastMetrics = () => {
       </Slider>
       <h2 className={styles.heading}>{t('air_conditions')}</h2>
       <ul className={styles.conditionsList}>
-        {conditionsList.map(({ name, title, value }) => (
-          <ListItem key={title} name={name} title={title} value={value} />
+        {metricsList.map(({ iconName, titleKey, value }) => (
+          <ListItem
+            key={titleKey}
+            iconName={iconName}
+            title={t(titleKey)}
+            value={value}
+          />
         ))}
       </ul>
     </section>

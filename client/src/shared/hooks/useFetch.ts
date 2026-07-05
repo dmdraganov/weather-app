@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { request } from '../api/request';
+import { request } from '../lib/request';
 
 export const useFetch = <T>(url: string, options?: RequestInit) => {
   const [data, _setData] = useState<T | null>(null);

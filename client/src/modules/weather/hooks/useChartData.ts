@@ -7,7 +7,7 @@ import {
   POINTS_DISTANCE,
   type ChartPointData,
 } from '../models/hourly-chart';
-import { formatHourTime } from '../../../shared/utils/time-formatter';
+import { formatHourTime } from '../../../shared/utils/format-time';
 import { useLanguage } from '../../localization/hooks/useLanguage';
 
 export const useChartData = () => {

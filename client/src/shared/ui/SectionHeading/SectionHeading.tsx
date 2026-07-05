@@ -4,14 +4,14 @@ import Icon from '../Icon/Icon';
 import type { IconName } from '../Icon/Icon';
 
 interface IProps {
-  name: IconName;
+  iconName: IconName;
   text: string;
 }
 
-const SectionHeading = ({ name, text }: IProps) => {
+const SectionHeading = ({ iconName, text }: IProps) => {
   return (
     <h2 className={styles.sectionHeading}>
-      <Icon name={name} className={styles.icon} />
+      <Icon name={iconName} className={styles.icon} />
       {text}
     </h2>
   );

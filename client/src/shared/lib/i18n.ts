@@ -44,7 +44,6 @@ const initI18n = async () => {
       fallbackLng: 'ru',
       ns: ['shared', 'location', 'weather', 'settings'],
       defaultNS: 'shared',
-      debug: true,
       interpolation: {
         escapeValue: false,
       },

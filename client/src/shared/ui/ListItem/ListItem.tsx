@@ -4,21 +4,21 @@ import Icon from '../Icon/Icon';
 import type { IconName } from '../Icon/Icon';
 
 interface ListItemProps {
-  name: IconName;
+  iconName: IconName;
   title: string;
   value: string | number;
   isVertical?: boolean;
 }
 
 const ListItem = ({
-  name,
+  iconName,
   title,
   value,
   isVertical = false,
 }: ListItemProps) => {
   return (
     <li className={styles.item + ' ' + (isVertical && styles.itemVertical)}>
-      <Icon name={name} className={styles.icon} />
+      <Icon name={iconName} className={styles.icon} />
       <div className={styles.text + ' ' + (isVertical && styles.textVertical)}>
         <h3 className={styles.itemTitle}>{title}</h3>
         <span>{value}</span>

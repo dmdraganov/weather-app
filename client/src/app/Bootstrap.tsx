@@ -1,9 +1,8 @@
-import { RouterProvider } from 'react-router-dom';
-import { router } from './router/router';
 import { useCurrentLocationInit } from '../modules/location/hooks/useCurrentLocationInit';
+import type { PropsWithChildren } from 'react';
 
-export const Bootstrap = () => {
+export const Bootstrap = ({ children }: PropsWithChildren) => {
   useCurrentLocationInit();
 
-  return <RouterProvider router={router} />;
+  return <>{children}</>;
 };

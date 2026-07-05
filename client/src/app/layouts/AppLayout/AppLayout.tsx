@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import NavMenu from './NavMenu/NavMenu';
+import NavMenu from '../../widgets/NavMenu/NavMenu';
 import styles from './AppLayout.module.scss';
 
 export const AppLayout = () => {

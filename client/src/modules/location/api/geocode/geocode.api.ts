@@ -1,4 +1,4 @@
-import { request } from '../../../../shared/api/request';
+import { request } from '../../../../shared/lib/request';
 import type { Location } from '../../models/location.model';
 import { GeocodeLocationSchema } from './geocode-location.dto';
 import { mapLocation } from './location.mapper';

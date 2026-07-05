@@ -22,10 +22,10 @@ const HomePage = () => {
         <main className={styles.main}>
           <div className={styles.container}>
             <div className={styles.verticalFlexContainer}>
-              <ForecastChart dailyWeather={data.daily} />
+              <ForecastChart dailyWeatherList={data.daily} />
               <AstroForecast astroData={data.daily[0].astro} />
             </div>
-            <ForecastMetrics />
+            <ForecastMetrics dailyWeatherList={data.daily} />
           </div>
         </main>
       </div>

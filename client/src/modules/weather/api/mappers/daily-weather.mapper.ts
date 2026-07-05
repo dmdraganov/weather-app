@@ -1,4 +1,4 @@
-import { formatTo24Hour } from '../../../../shared/utils/time-formatter';
+import { formatTo24Hour } from '../../../../shared/utils/format-time';
 import type { DailyWeather } from '../../models';
 import type { DailyForecastDto } from '../dtos/forecast.dto';
 import { mapHourlyWeather } from './hourly-weather.mapper';

@@ -3,5 +3,6 @@
   "go_back": "Go back",
   "weather": "Weather",
   "cities": "Cities",
-  "now": "Now"
+  "now": "Now",
+  "no_data": "No data"
 }

@@ -11,18 +11,18 @@ import { IconName } from '../../../../shared/ui/Icon/icon-map';
 import type { DailyWeather } from '../../models';
 
 interface ForecastChartProps {
-  dailyWeather: DailyWeather[];
+  dailyWeatherList: DailyWeather[];
 }
 
-const ForecastChart = ({ dailyWeather }: ForecastChartProps) => {
+const ForecastChart = ({ dailyWeatherList }: ForecastChartProps) => {
   const { t } = useTranslation('weather');
   const containerRef = useRef<HTMLDivElement>(null);
   const twentyFourHours = useMemo(() => {
-    return dailyWeather
+    return dailyWeatherList
       .slice(0, 2)
       .map((d) => d.hourly)
       .flat();
-  }, [dailyWeather]);
+  }, [dailyWeatherList]);
 
   const { canvasRef, chartRef, chartData } = useChartCanvas(twentyFourHours);
   const { isDragging, handlers } = useDrag({
@@ -33,7 +33,7 @@ const ForecastChart = ({ dailyWeather }: ForecastChartProps) => {
 
   return (
     <section className={styles.container + ' division'}>
-      <SectionHeading name={IconName.Clock} text={t('day_forecast')} />
+      <SectionHeading iconName={IconName.Clock} text={t('day_forecast')} />
       <div
         className={styles.chartContainer}
         ref={containerRef}

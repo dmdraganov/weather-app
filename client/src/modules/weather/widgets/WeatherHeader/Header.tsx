@@ -1,11 +1,12 @@
 import styles from './Header.module.scss';
-import { formatDate } from '../../../../shared/utils/date-formatter';
-import { useMemo, useState } from 'react';
+import { formatDate } from '../../../../shared/utils/format-date';
+import { useMemo, useRef, useState } from 'react';
 import LocationButton from '../../../location/ui/LocationButton/LocationButton';
 import { useLanguage } from '../../../localization/hooks/useLanguage';
 import Icon from '../../../../shared/ui/Icon/Icon';
 import LocationSearch from '../../../location/widgets/LocationSearch/LocationSearch';
 import type { CurrentWeather } from '../../models';
+import { Modal } from '../../../../shared/ui/Modal/Modal';
 
 interface HeaderProps {
   currentWeather: CurrentWeather;
@@ -13,9 +14,9 @@ interface HeaderProps {
 
 const Header = ({ currentWeather }: HeaderProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { current: currentDate } = useRef(new Date());
   const [language] = useLanguage();
 
-  const currentDate = new Date();
   const { weekday, day, month, year } = useMemo(
     () =>
       formatDate(currentDate, {
@@ -25,7 +26,7 @@ const Header = ({ currentWeather }: HeaderProps) => {
         year: 'numeric',
         locale: language,
       }),
-    [language, currentDate.getDate()]
+    [language, currentDate]
   );
 
   const { condition, temperature } = currentWeather;
@@ -53,9 +54,9 @@ const Header = ({ currentWeather }: HeaderProps) => {
         <Icon name={condition.icon} className={styles.weatherIcon} />
       </div>
       {isSearchOpen && (
-        <div className={styles.searchContainer}>
+        <Modal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)}>
           <LocationSearch />
-        </div>
+        </Modal>
       )}
     </header>
   );

@@ -1,4 +1,4 @@
-import { request } from '../../../../shared/api/request';
+import { request } from '../../../../shared/lib/request';
 import type { Language } from '../../../localization/localization.model';
 import type { LocationSuggestion } from '../../models/location-suggestion.model';
 import { SuggestLocationsSchema } from './suggestion.dto';
