@@ -5,13 +5,14 @@ import { useTranslation } from 'react-i18next';
 
 import { IconName } from '../../../../shared/ui/Icon/icon-map';
 import type { AstroData } from '../../models';
+import { I18N_NAMESPACES } from '../../../../shared/config/i18n';
 
 interface AstroForecastProps {
   astroData: AstroData;
 }
 
 const AstroForecast = ({ astroData }: AstroForecastProps) => {
-  const { t } = useTranslation('weather');
+  const { t } = useTranslation(I18N_NAMESPACES.weather);
   const { sunrise, sunset, moonPhase, moonIllumination } = astroData;
 
   const conditionsList: {

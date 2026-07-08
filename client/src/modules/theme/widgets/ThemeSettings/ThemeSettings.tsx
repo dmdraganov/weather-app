@@ -1,12 +1,13 @@
 import RadioInput from '../../../../shared/ui/RadioInput/RadioInput';
-import type { Theme } from '../../theme.model';
-import { useTheme } from '../../hooks/useTheme';
+import type { Theme } from '../../model/entities/theme';
+import { useTheme } from '../../model/context/useTheme';
 import styles from './ThemeSettings.module.scss';
 import { useTranslation } from 'react-i18next';
+import { I18N_NAMESPACES } from '../../../../shared/config/i18n';
 
 export const ThemeSettings = () => {
   const [theme, setTheme] = useTheme();
-  const { t } = useTranslation('settings');
+  const { t } = useTranslation(I18N_NAMESPACES.theme);
 
   return (
     <fieldset className={styles.section}>

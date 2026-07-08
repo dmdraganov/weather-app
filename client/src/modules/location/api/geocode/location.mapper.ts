@@ -1,4 +1,4 @@
-import type { Location } from '../../models/location.model';
+import type { Location } from '../../model/entities/location';
 import type { LocationDto } from './geocode-location.dto';
 
 export const mapLocation = (dto: LocationDto): Location => {

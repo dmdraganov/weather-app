@@ -1,7 +1,7 @@
-import type { Coordinates } from '../../location/models/coordinates.model';
+import type { Coordinates } from '../../location/model/entities/coordinates';
 import type { WeatherData } from '../models';
 import { request } from '../../../shared/lib/request';
-import { buildWeatherApiUrl } from '../utils/weather-api.builder';
+import { buildWeatherApiUrl } from './utils/build-url';
 import { WeatherResponseSchema } from './dtos/weather-response.dto';
 import { mapWeatherResponse } from './mappers/weather.mapper';
 import type { Language } from '../../localization/localization.model';

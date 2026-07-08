@@ -8,6 +8,7 @@ import { useLanguage } from '../../../localization/hooks/useLanguage';
 import Icon from '../../../../shared/ui/Icon/Icon';
 import type { DailyWeather } from '../../models';
 import { mapForecastMetrics } from './ForecastMetrics.data';
+import { I18N_NAMESPACES } from '../../../../shared/config/i18n';
 
 interface ForecastMetricsProps {
   dailyWeatherList: DailyWeather[];
@@ -16,13 +17,18 @@ interface ForecastMetricsProps {
 const ForecastMetrics = ({ dailyWeatherList }: ForecastMetricsProps) => {
   const [selectedDay, setSelectedDay] = useState<number>(0);
   const [language] = useLanguage();
-  const { t } = useTranslation(['weather', 'shared']);
+  const { t } = useTranslation([
+    I18N_NAMESPACES.weather,
+    I18N_NAMESPACES.shared,
+  ]);
 
   if (dailyWeatherList.length === 0) {
     return (
       <section className={`${styles.container} division`}>
         <h2 className={styles.heading}>{t('air_conditions')}</h2>
-        <p className={styles.noData}>{t('no_data', { ns: 'shared' })}</p>
+        <p className={styles.noData}>
+          {t('no_data', { ns: I18N_NAMESPACES.shared })}
+        </p>
       </section>
     );
   }

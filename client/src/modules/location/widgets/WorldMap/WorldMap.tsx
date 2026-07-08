@@ -13,11 +13,12 @@ import type {
   LngLat,
 } from '@yandex/ymaps3-types';
 import styles from './WorldMap.module.scss';
-import { useCurrentLocation } from '../../hooks/useCurrentLocation';
-import { useReverseGeocodeLocation } from '../../hooks/useReverseGeocodeLocation';
+import { useCurrentLocation } from '../../model/store/useCurrentLocation';
+import { useReverseGeocodeLocation } from '../../api/geocode/hooks/useReverseGeocodeLocation';
 import { useEffect, useMemo, useCallback } from 'react';
 import { useLanguage } from '../../../localization/hooks/useLanguage';
 import { mapLanguageToLocale } from '../../../localization/utils/language.mapper';
+import { getEnv } from '../../../../shared/config/get-env';
 
 const DEFAULT_CENTER: LngLat = [40.52, 34.34];
 const DEFAULT_LOCATION: YMapLocationRequest = {
@@ -31,8 +32,6 @@ const WorldMap = () => {
   const { setCoordinates, data } = useReverseGeocodeLocation();
   const [language] = useLanguage();
   const locale = useMemo(() => mapLanguageToLocale(language), [language]);
-
-  console.log('locale', locale);
 
   useEffect(() => {
     if (data) {
@@ -65,10 +64,7 @@ const WorldMap = () => {
   );
 
   return (
-    <YMapComponentsProvider
-      apiKey={import.meta.env.VITE_YANDEX_API_KEY}
-      lang={locale}
-    >
+    <YMapComponentsProvider apiKey={getEnv('VITE_MAPS_API_KEY')} lang={locale}>
       <YMap location={location} className={styles.map}>
         <YMapDefaultSchemeLayer />
         <YMapDefaultFeaturesLayer />

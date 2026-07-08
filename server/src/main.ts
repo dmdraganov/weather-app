@@ -18,7 +18,7 @@ const weatherService = new WeatherService(apiKey);
 const weatherController = new WeatherController(weatherService);
 const weatherRouter = new WeatherRouter(weatherController);
 
-app.use('/weather', weatherRouter.router);
+app.use('/api/weather', weatherRouter.router);
 
 app.listen(process.env.PORT || '3000', () => {
   console.log(`Server is running on port ${process.env.PORT || '3000'}`);

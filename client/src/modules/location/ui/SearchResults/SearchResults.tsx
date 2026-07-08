@@ -1,13 +1,14 @@
 import styles from './SearchResults.module.scss';
 import LocationItem from '../LocationItem/LocationItem';
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { LocationSuggestion } from '../../models/location-suggestion.model';
-import { useLocationStore } from '../../models/store';
-import { useCurrentLocation } from '../../hooks/useCurrentLocation';
-import { useGeocodeLocation } from '../../hooks/useGeocodeLocation';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import type { LocationSuggestion } from '../../model/entities/location-suggestion';
+import { useLocationStore } from '../../model/store/store';
+import { useGeocodeLocation } from '../../api/geocode/hooks/useGeocodeLocation';
+import type { Location } from '../../model/entities/location';
 
 interface SearchResultsProps {
   results: LocationSuggestion[];
+  setCurrentLocation: (location: Location) => void;
   isHidden: boolean;
   maxLength?: number;
 }
@@ -16,8 +17,8 @@ const SearchResults = ({
   results,
   isHidden,
   maxLength = 5,
+  setCurrentLocation,
 }: SearchResultsProps) => {
-  const [, setCurrentLocation] = useCurrentLocation();
   const { setLocationId, data } = useGeocodeLocation();
   const { favoriteLocations, toggleFavorite } = useLocationStore();
   const slicedSuggestion = useMemo(
@@ -35,15 +36,17 @@ const SearchResults = ({
 
   const handleSelect = (id: string) => {
     setLocationId(id);
-    if (!data) return;
-    setCurrentLocation(data);
   };
 
   const handleAddFavorite = (id: string) => {
     setLocationId(id);
-    if (!data) return;
-    toggleFavorite(data);
   };
+
+  useEffect(() => {
+    if (!data) return;
+    setCurrentLocation(data);
+    toggleFavorite(data);
+  }, [data, setCurrentLocation, toggleFavorite]);
 
   return (
     <div

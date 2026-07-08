@@ -1,5 +1,5 @@
 export const request = async (
-  url: string,
+  url: string | URL,
   options?: RequestInit
 ): Promise<unknown> => {
   const response = await fetch(url, {

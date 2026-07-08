@@ -2,7 +2,7 @@ import AstroForecast from '../../modules/weather/widgets/AstroForecast/AstroFore
 import ForecastMetrics from '../../modules/weather/widgets/ForecastMetrics/ForecastMetrics';
 import Header from '../../modules/weather/widgets/WeatherHeader/Header';
 import styles from './HomePage.module.scss';
-import { useWeather } from '../../modules/weather/hooks/useWeather';
+import { useWeather } from '../../modules/weather/api/useWeather';
 import ForecastChart from '../../modules/weather/widgets/ForecastChart/ForecastChart';
 import Spinner from '../../shared/ui/Spinner/Spinner';
 

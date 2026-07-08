@@ -2,9 +2,10 @@ import { ThemeSettings } from '../../modules/theme/widgets/ThemeSettings/ThemeSe
 import { LanguageSettings } from '../../modules/localization/widgets/LanguageSettings/LanguageSettings';
 import styles from './SettingsPage.module.scss';
 import { useTranslation } from 'react-i18next';
+import { I18N_NAMESPACES } from '../../shared/config/i18n';
 
 const SettingsPage = () => {
-  const { t } = useTranslation('shared');
+  const { t } = useTranslation(I18N_NAMESPACES.shared);
 
   return (
     <div className={styles.page}>

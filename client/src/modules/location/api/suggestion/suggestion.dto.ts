@@ -19,11 +19,9 @@ const SuggestionSchema = z.object({
   uri: z.string(),
 });
 
-export const SuggestLocationsSchema = z
-  .object({
-    results: z.array(SuggestionSchema).optional(),
-  })
-  .transform((data) => data.results);
+export const SuggestLocationsSchema = z.object({
+  results: z.array(SuggestionSchema).default([]),
+});
 
 export type SuggestionDto = z.infer<typeof SuggestionSchema>;
 

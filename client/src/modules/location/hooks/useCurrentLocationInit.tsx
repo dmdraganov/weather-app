@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
-import { useCurrentLocation } from './useCurrentLocation';
-import { useGeolocation } from './useGeolocation';
-import { useReverseGeocodeLocation } from './useReverseGeocodeLocation';
+import { useCurrentLocation } from '../model/store/useCurrentLocation';
+import { useGeolocation } from '../api/geolocation/useGeolocation';
+import { useReverseGeocodeLocation } from '../api/geocode/hooks/useReverseGeocodeLocation';
 
 export const useCurrentLocationInit = (): void => {
   const [currentLocation, setCurrentLocation] = useCurrentLocation();
-  const { data: geoCoordinates } = useGeolocation();
+  const { geolocationPos } = useGeolocation();
   const { setCoordinates, data: geolocationData } = useReverseGeocodeLocation();
 
   useEffect(() => {
-    if (geoCoordinates && !currentLocation) setCoordinates(geoCoordinates);
-  }, [geoCoordinates, currentLocation, setCoordinates]);
+    if (geolocationPos && !currentLocation) setCoordinates(geolocationPos);
+  }, [geolocationPos, currentLocation, setCoordinates]);
 
   useEffect(() => {
     if (geolocationData && !currentLocation) {

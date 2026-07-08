@@ -1,6 +1,7 @@
 import styles from './SearchInput.module.scss';
 import { useTranslation } from 'react-i18next';
 import type { KeyboardEvent } from 'react';
+import { I18N_NAMESPACES } from '../../../../shared/config/i18n';
 
 interface SearchInputProps {
   query: string;
@@ -15,7 +16,7 @@ const SearchInput = ({
   onEscape,
   onFocus,
 }: SearchInputProps) => {
-  const { t } = useTranslation('location');
+  const { t } = useTranslation(I18N_NAMESPACES.location);
 
   return (
     <input

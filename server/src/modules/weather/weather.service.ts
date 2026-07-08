@@ -9,7 +9,7 @@ export class WeatherApiError extends Error {
 }
 
 export class WeatherService {
-  private readonly baseUrl = 'http://api.weatherapi.com/v1';
+  private readonly API_URL = 'http://api.weatherapi.com/v1';
 
   constructor(private readonly apiKey: string) {
     if (!this.apiKey) {
@@ -23,7 +23,7 @@ export class WeatherService {
     days?: string,
     lang?: string
   ): Promise<unknown> {
-    const url = new URL(`${this.baseUrl}/${type}.json`);
+    const url = new URL(`${this.API_URL}/${type}.json`);
     url.searchParams.append('key', this.apiKey);
     if (q) url.searchParams.append('q', q);
     if (days) url.searchParams.append('days', days);

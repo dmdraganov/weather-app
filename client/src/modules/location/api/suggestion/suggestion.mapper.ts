@@ -1,4 +1,4 @@
-import type { LocationSuggestion } from '../../models/location-suggestion.model';
+import type { LocationSuggestion } from '../../model/entities/location-suggestion';
 import type { SuggestionDto } from './suggestion.dto';
 
 export const mapSuggestion = (dto: SuggestionDto): LocationSuggestion => {

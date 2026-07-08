@@ -1,7 +1,7 @@
 import styles from './LocationButton.module.scss';
 import LocationIcon from '../../../../shared/assets/icons/ui/location.svg?react';
 import ArrowIcon from '../../../../shared/assets/icons/ui/arrow.svg?react';
-import { useLocationStore } from '../../models/store';
+import { useLocationStore } from '../../model/store/store';
 
 type Props = {
   onClick: () => void;
