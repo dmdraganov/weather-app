@@ -16,6 +16,7 @@ export const LanguageSettings = () => {
       <div className={styles.radioGroup}>
         {LANGUAGE_SETTINGS.map(({ value, labelKey }) => (
           <RadioInput<Language>
+            key={labelKey}
             className={styles.radioItem}
             name='lang'
             value={value}

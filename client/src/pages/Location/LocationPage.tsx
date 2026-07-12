@@ -7,21 +7,19 @@ import LocationSearch from '../../modules/location/widgets/LocationSearch/Locati
 
 const LocationPage = () => {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <div className={styles.mainContainer}>
-          <div className={styles.sectionsContainer}>
-            <LocationSearch />
-            <CurrentLocation />
-            <FavoriteLocations />
-            <RecentLocations />
-          </div>
-          <div className={styles.mapContainer}>
-            <WorldMap />
-          </div>
+    <main className={styles.main}>
+      <div className={styles.mainContainer}>
+        <div className={styles.sectionsContainer}>
+          <LocationSearch />
+          <CurrentLocation />
+          <FavoriteLocations />
+          <RecentLocations />
         </div>
-      </main>
-    </div>
+        <div className={styles.mapContainer}>
+          <WorldMap />
+        </div>
+      </div>
+    </main>
   );
 };
 

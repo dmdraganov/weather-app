@@ -7,7 +7,7 @@ import {
   YMapListener,
 } from 'ymap3-components';
 import type {
-  YMapLocationRequest,
+  YMapTheme,
   DomEvent,
   DomEventHandlerObject,
   LngLat,
@@ -19,41 +19,38 @@ import { useEffect, useMemo, useCallback } from 'react';
 import { useLanguage } from '../../../localization/hooks/useLanguage';
 import { mapLanguageToLocale } from '../../../localization/utils/language.mapper';
 import { getEnv } from '../../../../shared/config/get-env';
+import type { Coordinates } from '../../model/entities/coordinates';
+import type { YMapLocation } from '@yandex/ymaps3-types/imperative/YMap';
+import { useTheme } from '../../../../modules/theme/model/context/useTheme';
 
 const DEFAULT_CENTER: LngLat = [40.52, 34.34];
-const DEFAULT_LOCATION: YMapLocationRequest = {
-  center: DEFAULT_CENTER,
-  zoom: 2,
-};
 const ZOOM = 10;
+
+const mapToLngLatArray = (coordinates: Coordinates): LngLat => {
+  return [coordinates.longitude, coordinates.latitude];
+};
 
 const WorldMap = () => {
   const [currentLocation, setCurrentLocation] = useCurrentLocation();
   const { setCoordinates, data } = useReverseGeocodeLocation();
+  const { resolvedTheme } = useTheme();
   const [language] = useLanguage();
-  const locale = useMemo(() => mapLanguageToLocale(language), [language]);
+  const locale = mapLanguageToLocale(language);
 
   useEffect(() => {
-    if (data) {
-      setCurrentLocation(data);
-    }
+    if (!data) return;
+    setCurrentLocation(data);
   }, [data, currentLocation, setCurrentLocation]);
 
-  const center = useMemo<LngLat>(() => {
-    if (!currentLocation) return DEFAULT_CENTER;
-    return [
-      currentLocation.coordinates.longitude,
-      currentLocation.coordinates.latitude,
-    ];
-  }, [currentLocation]);
-
-  const location = useMemo<YMapLocationRequest>(
-    () => ({
+  const yMapLocation = useMemo<YMapLocation>(() => {
+    const center = currentLocation
+      ? mapToLngLatArray(currentLocation.coordinates)
+      : DEFAULT_CENTER;
+    return {
       center,
       zoom: ZOOM,
-    }),
-    [center]
-  );
+    };
+  }, [currentLocation]);
 
   const handleClick = useCallback(
     (_object: DomEventHandlerObject, e: DomEvent) => {
@@ -65,11 +62,15 @@ const WorldMap = () => {
 
   return (
     <YMapComponentsProvider apiKey={getEnv('VITE_MAPS_API_KEY')} lang={locale}>
-      <YMap location={location} className={styles.map}>
+      <YMap
+        location={yMapLocation}
+        theme={resolvedTheme as YMapTheme}
+        className={styles.map}
+      >
         <YMapDefaultSchemeLayer />
         <YMapDefaultFeaturesLayer />
         <YMapListener layer='any' onClick={handleClick} />
-        <YMapDefaultMarker coordinates={center} />
+        <YMapDefaultMarker coordinates={yMapLocation.center} />
       </YMap>
     </YMapComponentsProvider>
   );

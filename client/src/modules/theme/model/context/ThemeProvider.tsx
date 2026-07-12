@@ -8,14 +8,14 @@ const ThemeProvider = ({ children }: PropsWithChildren) => {
   const [theme, setTheme] = useLocalStorage<Theme>('theme', 'system');
   const systemTheme = useSystemTheme();
 
-  const appliedTheme = theme === 'system' ? systemTheme : theme;
+  const resolvedTheme = theme === 'system' ? systemTheme : theme;
 
   useEffect(() => {
-    document.documentElement.dataset.theme = appliedTheme;
-  }, [appliedTheme]);
+    document.documentElement.dataset.theme = resolvedTheme;
+  }, [resolvedTheme]);
 
   return (
-    <ThemeContext.Provider value={[theme, setTheme]}>
+    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

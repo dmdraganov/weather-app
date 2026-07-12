@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { IconName } from '../../../../shared/ui/Icon/icon-map';
 import type { AstroData } from '../../models';
 import { I18N_NAMESPACES } from '../../../../shared/config/i18n';
+import { mapAstroForecast } from './AstroForecast.data';
 
 interface AstroForecastProps {
   astroData: AstroData;
@@ -13,41 +14,19 @@ interface AstroForecastProps {
 
 const AstroForecast = ({ astroData }: AstroForecastProps) => {
   const { t } = useTranslation(I18N_NAMESPACES.weather);
-  const { sunrise, sunset, moonPhase, moonIllumination } = astroData;
-
-  const conditionsList: {
-    iconName: IconName;
-    title: string;
-    value: string | number;
-  }[] = [
-    {
-      iconName: IconName.Sunny,
-      title: t('sunrise'),
-      value: sunrise,
-    },
-    {
-      iconName: IconName.Wind,
-      title: t('sunset'),
-      value: sunset,
-    },
-    {
-      iconName: IconName.Clear,
-      title: t('moon_phase'),
-      value: moonPhase,
-    },
-    {
-      iconName: IconName.Blob,
-      title: t('moon_illumination'),
-      value: moonIllumination + '%',
-    },
-  ];
 
   return (
     <section className={`${styles.container} division`}>
       <SectionHeading iconName={IconName.Clear} text={t('astro_forecast')} />
       <ul className={styles.list}>
-        {conditionsList.map((element) => (
-          <ListItem key={element.title} {...element} isVertical={true} />
+        {mapAstroForecast(astroData).map((item) => (
+          <ListItem
+            key={item.titleKey}
+            title={t(item.titleKey)}
+            iconName={item.iconName}
+            value={item.value}
+            isVertical={true}
+          />
         ))}
       </ul>
     </section>

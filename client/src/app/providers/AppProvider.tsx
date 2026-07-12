@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import ThemeProvider from '../../modules/theme/model/context/ThemeProvider';
-import { QueryProvider } from './QueryProvider';
+import { QueryProvider } from './query-client/QueryProvider';
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
   return (

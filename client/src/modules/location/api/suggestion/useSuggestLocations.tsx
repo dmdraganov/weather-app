@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { suggestLocations } from './suggestion.api';
 import { useLanguage } from '../../../localization/hooks/useLanguage';
@@ -13,7 +13,8 @@ export const useSuggestLocations = () => {
     queryKey: ['locations-search', debouncedQuery, language],
     queryFn: () => suggestLocations(debouncedQuery, language),
     enabled: debouncedQuery.length > 0,
-    placeholderData: (previousData) => previousData,
+    placeholderData: keepPreviousData,
+    staleTime: 24 * 60 * 60 * 1000,
   });
 
   return { query, setQuery, ...queryResult };

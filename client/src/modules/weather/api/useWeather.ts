@@ -11,5 +11,6 @@ export const useWeather = () => {
     queryKey: ['weather', currentLocation?.id, language],
     queryFn: () => getWeather(currentLocation!.name, language),
     enabled: !!currentLocation,
+    staleTime: 5 * 60 * 1000,
   });
 };

@@ -1,5 +1,4 @@
-import { API_URLS } from '../../../../shared/config/api';
-import { getEnv } from '../../../../shared/config/get-env';
+import { API_CONFIG } from '../../../../shared/config/api';
 import { buildUrl } from '../../../../shared/lib/build-url';
 import { request } from '../../../../shared/lib/request';
 import type { Language } from '../../../localization/localization.model';
@@ -11,8 +10,8 @@ export const suggestLocations = async (
   query: string,
   language: Language
 ): Promise<LocationSuggestion[]> => {
-  const apiUrl = buildUrl(API_URLS.geosuggest, {
-    apikey: getEnv('VITE_GEOSUGGEST_API_KEY'),
+  const apiUrl = buildUrl(API_CONFIG.geosuggest.url, {
+    apikey: API_CONFIG.geosuggest.key,
     text: query,
     lang: language,
     types: 'locality',

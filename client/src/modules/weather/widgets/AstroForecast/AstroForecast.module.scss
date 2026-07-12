@@ -4,13 +4,13 @@
   display: flex;
   flex-direction: column;
   height: fit-content;
+  gap: $gap-sm;
 
   @media (max-width: $breakpoint-mobile) {
     order: 2;
   }
 
   .list {
-    margin-top: 10px;
     flex: 1;
     display: flex;
     justify-content: space-around;

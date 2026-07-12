@@ -4,37 +4,32 @@ import { GeocodeLocationSchema } from './geocode-location.dto';
 import { mapLocation } from './location.mapper';
 import type { Language } from '../../../localization/localization.model';
 import type { Coordinates } from '../../model/entities/coordinates';
-import { API_URLS } from '../../../../shared/config/api';
-import { getEnv } from '../../../../shared/config/get-env';
+import { API_CONFIG } from '../../../../shared/config/api';
 import { buildUrl } from '../../../../shared/lib/build-url';
 
-type GeocodeLocationOptions = {
+export type GeocodeBy = 'id' | 'address' | 'coordinates';
+
+export interface GeocodeLocationOptions {
+  geocode: string;
+  geocodeBy: GeocodeBy;
   language: Language;
-} & (
-  | { geocode: string; locationId?: never }
-  | { geocode?: never; locationId: string }
-);
+}
 
 export const geocodeLocation = async ({
   geocode,
-  locationId,
+  geocodeBy,
   language,
 }: GeocodeLocationOptions): Promise<Location> => {
-  const apiUrl = buildUrl(API_URLS.geocode, {
-    apikey: getEnv('VITE_YANDEX_API_KEY'),
+  const apiUrl = buildUrl(API_CONFIG.geocode.url, {
+    apikey: API_CONFIG.geocode.key,
     lang: language,
     format: 'json',
-    results: '1',
+    results: 1,
     kind: 'locality',
   });
 
-  if (locationId) {
-    apiUrl.searchParams.set('locationId', locationId);
-  } else if (geocode) {
-    apiUrl.searchParams.set('geocode', geocode);
-  } else {
-    throw new Error('Either geocode or locationId must be provided.');
-  }
+  apiUrl.searchParams.set(geocodeBy === 'id' ? 'uri' : 'geocode', geocode);
+
   const data = await request(apiUrl);
   const validated = GeocodeLocationSchema.parse(data);
   return mapLocation(validated);
@@ -47,5 +42,6 @@ export const reverseGeocodeLocation = async (
   return geocodeLocation({
     geocode: `${coordinates.longitude}, ${coordinates.latitude}`,
     language,
+    geocodeBy: 'coordinates',
   });
 };

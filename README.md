@@ -4,34 +4,34 @@ This is a modern weather application built with a React frontend and a Node.js (
 
 ## Features
 
--   **Current & Forecast Weather:** View real-time weather conditions and a 7-day forecast for any location.
--   **Location Search:** Search for cities and locations worldwide.
--   **Geolocation:** Automatically detect and show weather for your current location.
--   **Theme Switching:** Toggle between light and dark modes.
--   **Localization:** Supports multiple languages (English and Russian).
--   **Favorite & Recent Locations:** Quickly access your saved and recently viewed locations.
+- **Current & Forecast Weather:** View real-time weather conditions and a 7-day forecast for any location.
+- **Location Search:** Search for cities and locations worldwide.
+- **Geolocation:** Automatically detect and show weather for your current location.
+- **Theme Switching:** Toggle between light and dark modes.
+- **Localization:** Supports multiple languages (English and Russian).
+- **Favorite & Recent Locations:** Quickly access your saved and recently viewed locations.
 
 ## Tech Stack
 
 ### Frontend
 
--   **Framework:** [React](https://react.dev/)
--   **Language:** [TypeScript](https://www.typescriptlang.org/)
--   **Build Tool:** [Vite](https://vitejs.dev/)
--   **Styling:** [Sass (SCSS Modules)](https://sass-lang.com/)
--   **Routing:** [React Router](https://reactrouter.com/)
--   **State Management:**
-    -   **Server State/Caching:** [TanStack Query](https://tanstack.com/query/latest)
-    -   **Client State:** [Zustand](https://github.com/pmndrs/zustand)
--   **Internationalization:** [i18next](https://www.i18next.com/)
--   **Code Quality:** [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
+- **Framework:** [React](https://react.dev/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Styling:** [Sass (SCSS Modules)](https://sass-lang.com/)
+- **Routing:** [React Router](https://reactrouter.com/)
+- **State Management:**
+  - **Server State/Caching:** [TanStack Query](https://tanstack.com/query/latest)
+  - **Client State:** [Zustand](https://github.com/pmndrs/zustand)
+- **Internationalization:** [i18next](https://www.i18next.com/)
+- **Code Quality:** [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
 
 ### Backend
 
--   **Framework:** [Express.js](https://expressjs.com/)
--   **Language:** [TypeScript](https://www.typescriptlang.org/)
--   **Runtime:** [Node.js](https://nodejs.org/)
--   **Development:** [tsx](https://github.com/esbuild-kit/tsx) for live-reloading
+- **Framework:** [Express.js](https://expressjs.com/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Runtime:** [Node.js](https://nodejs.org/)
+- **Development:** [tsx](https://github.com/esbuild-kit/tsx) for live-reloading
 
 ## Architecture
 
@@ -47,9 +47,9 @@ The application consists of a `client` (React SPA) and a `server` (Express API).
 
 ### Prerequisites
 
--   [Node.js](https://nodejs.org/) (LTS version recommended)
--   [npm](https://www.npmjs.com/) (comes with Node.js)
--   A **WeatherAPI** key from [weatherapi.com](https://www.weatherapi.com/)
+- [Node.js](https://nodejs.org/) (LTS version recommended)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+- A **WeatherAPI** key from [weatherapi.com](https://www.weatherapi.com/)
 
 ### Setup
 
@@ -65,7 +65,7 @@ cd server
 cp .env.example .env
 ```
 
-Now, open the newly created `server/.env` file and add your API key:
+Now, open the newly created `server/.env` file and add your API key from [WeatherAPI](https://www.weatherapi.com/):
 
 ```
 WEATHER_API_KEY=your_weather_api_key_here
@@ -87,6 +87,7 @@ cp .env.example .env
 ```
 
 Open `client/.env` and modify the URL:
+
 ```
 VITE_API_URL=http://your-server-address/api
 ```
@@ -95,17 +96,18 @@ VITE_API_URL=http://your-server-address/api
 
 You need to install dependencies for both the client and the server.
 
--   **Install Server Dependencies:**
-    ```bash
-    cd server
-    npm install
-    ```
+- **Install Server Dependencies:**
 
--   **Install Client Dependencies:**
-    ```bash
-    cd client
-    npm install
-    ```
+  ```bash
+  cd server
+  npm install
+  ```
+
+- **Install Client Dependencies:**
+  ```bash
+  cd client
+  npm install
+  ```
 
 ### Running the Application
 
@@ -113,9 +115,11 @@ You must start both the backend and frontend servers.
 
 1.  **Start the Backend Server:**
     In the `server/` directory, run:
+
     ```bash
     npm run dev
     ```
+
     The server will start on the port defined in your `.env` file (e.g., `3001`).
 
 2.  **Start the Frontend Client:**
@@ -129,15 +133,16 @@ You must start both the backend and frontend servers.
 
 ### Client (`client/`)
 
--   `npm run dev`: Starts the Vite development server.
--   `npm run build`: Builds the application for production.
--   `npm run preview`: Serves the production build locally.
--   `npm run lint`: Lints the codebase using ESLint.
--   `npm run format`: Formats code with Prettier.
+- `npm run dev`: Starts the Vite development server.
+- `npm run build`: Builds the application for production.
+- `npm run preview`: Serves the production build locally.
+- `npm run lint`: Lints the codebase using ESLint.
+- `npm run format`: Formats code with Prettier.
+- `npm run typecheck`: Verifies type correctness.
 
 ### Server (`server/`)
 
--   `npm run dev`: Starts the Express server with live-reloading.
--   `npm run build`: Compiles the TypeScript code to JavaScript.
--   `npm run lint`: Lints the codebase using ESLint.
-   `npm run format`: Formats code with Prettier.
+- `npm run dev`: Starts the Express server with live-reloading.
+- `npm run build`: Compiles the TypeScript code to JavaScript.
+- `npm run lint`: Lints the codebase using ESLint.
+  `npm run format`: Formats code with Prettier.

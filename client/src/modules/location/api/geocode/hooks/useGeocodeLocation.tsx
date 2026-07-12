@@ -1,47 +1,36 @@
 import { useQuery } from '@tanstack/react-query';
-import { geocodeLocation } from '../geocode.api';
+import { geocodeLocation, type GeocodeBy } from '../geocode.api';
 import { useState } from 'react';
 import { useLanguage } from '../../../../localization/hooks/useLanguage';
 
-interface GeocodeSource {
-  type: 'address' | 'locationId';
-  value: string;
-}
-
-export const useGeocodeLocation = (initialAddress?: string) => {
-  const [source, setSource] = useState<GeocodeSource | null>(
-    initialAddress ? { type: 'address', value: initialAddress } : null
-  );
+const useGeocodeLocation = (geocodeBy: GeocodeBy, geocode: string) => {
   const [language] = useLanguage();
 
-  const setAddress = (address: string) => {
-    setSource({ type: 'address', value: address });
-  };
-
-  const setLocationId = (locationId: string) => {
-    setSource({ type: 'locationId', value: locationId });
-  };
-
-  const queryResult = useQuery({
-    queryKey: ['geocode-location', source, language],
-    queryFn: () => {
-      if (!source) {
-        throw new Error('Query source is not set');
-      }
-      if (source.type === 'locationId') {
-        return geocodeLocation({ locationId: source.value, language });
-      }
-      return geocodeLocation({ geocode: source.value, language });
-    },
-    enabled: !!source && source.value.length > 0,
+  return useQuery({
+    queryKey: ['geocode-location', geocode, language],
+    queryFn: () => geocodeLocation({ geocode, geocodeBy, language }),
+    staleTime: Infinity,
+    enabled: geocode.length > 0,
   });
+};
 
-  const displayValue =
-    source?.type === 'address' ? source.value : (queryResult.data?.name ?? '');
+export const useGeocodeLocationByAddress = (initialAddress?: string) => {
+  const [address, setAddress] = useState<string>(initialAddress ?? '');
+  const queryResult = useGeocodeLocation('address', address);
 
   return {
-    displayValue,
+    address,
     setAddress,
+    ...queryResult,
+  };
+};
+
+export const useGeocodeLocationById = (initialLocationId?: string) => {
+  const [locationId, setLocationId] = useState<string>(initialLocationId ?? '');
+  const queryResult = useGeocodeLocation('id', locationId);
+
+  return {
+    locationId,
     setLocationId,
     ...queryResult,
   };

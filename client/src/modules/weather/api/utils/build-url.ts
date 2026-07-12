@@ -1,4 +1,4 @@
-import { API_URLS } from '../../../../shared/config/api';
+import { API_CONFIG } from '../../../../shared/config/api';
 import { buildUrl } from '../../../../shared/lib/build-url';
 import type { Coordinates } from '../../../location/model/entities/coordinates';
 
@@ -17,5 +17,5 @@ export const buildWeatherApiUrl = (
     days: '7',
     lang: language,
   };
-  return buildUrl(`${API_URLS.weather}/weather/${type}`, searchParams);
+  return buildUrl(`${API_CONFIG.weather.url}/weather/${type}`, searchParams);
 };
