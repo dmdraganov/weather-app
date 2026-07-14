@@ -5,5 +5,6 @@ export const useCurrentLocation = () => {
   const setCurrentLocation = useLocationStore(
     (state) => state.setCurrentLocation
   );
+
   return [currentLocation, setCurrentLocation] as const;
 };

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/main",
     "build": "tsc",
+    "test": "node --import tsx --test test/*.test.ts",
     "lint": "eslint .",
     "format": "prettier . --write",
     "check-format": "prettier . --check"

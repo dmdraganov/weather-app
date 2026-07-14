@@ -1,4 +1,4 @@
-import type { Language } from '../localization.model';
+import type { Language } from './language';
 
 const localeMap: Record<Language, string> = {
   en: 'en_US',

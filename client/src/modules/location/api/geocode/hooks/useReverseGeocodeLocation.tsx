@@ -1,18 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
-import type { Coordinates } from '../../../model/entities/coordinates';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import type { Coordinates } from '../../../../../shared/model/coordinates';
 import { reverseGeocodeLocation } from '../geocode.api';
-import { useState } from 'react';
-import { useLanguage } from '../../../../localization/hooks/useLanguage';
+import { useLanguage } from '../../../../../shared/i18n/useLanguage';
 
-export const useReverseGeocodeLocation = (
-  initialCoordinates?: Coordinates | null
-) => {
-  const [coordinates, setCoordinates] = useState<Coordinates | null>(
-    initialCoordinates ?? null
-  );
+export const useReverseGeocodeLocation = (coordinates: Coordinates | null) => {
   const [language] = useLanguage();
 
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: [
       'location-by-coordinates',
       coordinates?.latitude,
@@ -25,5 +19,14 @@ export const useReverseGeocodeLocation = (
     },
     enabled: coordinates !== null,
   });
-  return { coordinates, setCoordinates, ...queryResult };
+};
+
+export const useReverseGeocodeLocationMutation = () => {
+  const [language] = useLanguage();
+
+  return useMutation({
+    mutationKey: ['reverse-geocode-location', language],
+    mutationFn: (coordinates: Coordinates) =>
+      reverseGeocodeLocation(coordinates, language),
+  });
 };

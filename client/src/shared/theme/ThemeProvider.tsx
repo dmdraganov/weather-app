@@ -1,13 +1,12 @@
 import { useEffect, type PropsWithChildren } from 'react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import ThemeContext from './ThemeContext';
-import { useLocalStorage } from '../../../../shared/hooks/useLocalStorage';
-import type { Theme } from '../entities/theme';
-import { useSystemTheme } from '../../hooks/useSystemTheme';
+import type { Theme } from './theme';
+import { useSystemTheme } from './useSystemTheme';
 
 const ThemeProvider = ({ children }: PropsWithChildren) => {
   const [theme, setTheme] = useLocalStorage<Theme>('theme', 'system');
   const systemTheme = useSystemTheme();
-
   const resolvedTheme = theme === 'system' ? systemTheme : theme;
 
   useEffect(() => {

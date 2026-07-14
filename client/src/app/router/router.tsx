@@ -31,6 +31,10 @@ const routes: RouteObject[] = [
       { path: ROUTES.settings, element: <SettingsPage /> },
     ],
   },
+  {
+    path: '*',
+    element: <div>404</div>,
+  },
 ];
 
 export const router = createBrowserRouter(routes);

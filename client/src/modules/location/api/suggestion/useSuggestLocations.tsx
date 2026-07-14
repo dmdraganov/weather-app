@@ -1,7 +1,7 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { suggestLocations } from './suggestion.api';
-import { useLanguage } from '../../../localization/hooks/useLanguage';
+import { useLanguage } from '../../../../shared/i18n/useLanguage';
 import { useDebounce } from '../../../../shared/hooks/useDebounce';
 
 export const useSuggestLocations = () => {

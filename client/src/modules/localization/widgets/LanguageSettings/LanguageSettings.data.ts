@@ -1,4 +1,4 @@
-import type { Language } from '../../localization.model';
+import type { Language } from '../../../../shared/i18n/language';
 
 interface LanguageSetting {
   value: Language;

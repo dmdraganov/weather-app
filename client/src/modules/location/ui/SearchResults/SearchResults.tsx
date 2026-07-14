@@ -1,23 +1,14 @@
 import styles from './SearchResults.module.scss';
 import LocationItem from '../LocationItem/LocationItem';
-import {
-  memo,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { memo, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { LocationSuggestion } from '../../model/entities/location-suggestion';
 import { useLocationStore } from '../../model/store/store';
 import type { Location } from '../../model/entities/location';
 import { useGeocodeLocationById } from '../../api/geocode/hooks/useGeocodeLocation';
 
-type ActionType = 'select' | 'toggleFavorite';
-
 interface SearchResultsProps {
   results: LocationSuggestion[];
-  setCurrentLocation: (location: Location) => void;
+  changeCurrentLocation: (location: Location) => void;
   isHidden: boolean;
   maxLength?: number;
 }
@@ -27,11 +18,13 @@ const SearchResults = memo(
     results,
     isHidden,
     maxLength = 5,
-    setCurrentLocation,
+    changeCurrentLocation,
   }: SearchResultsProps) => {
-    const { setLocationId, data } = useGeocodeLocationById();
-    const [action, setAction] = useState<ActionType | null>(null);
-    const { favoriteLocations, toggleFavorite } = useLocationStore();
+    const { mutate: geocodeLocationById } = useGeocodeLocationById();
+    const favoriteLocations = useLocationStore(
+      (state) => state.favoriteLocations
+    );
+    const toggleFavorite = useLocationStore((state) => state.toggleFavorite);
     const [height, setHeight] = useState(0);
     const resultsContainerRef = useRef<HTMLDivElement>(null);
 
@@ -47,27 +40,12 @@ const SearchResults = memo(
     }, [results, resultsContainerRef, isHidden]);
 
     const handleSelect = (id: string) => {
-      setLocationId(id);
-      setAction('select');
+      geocodeLocationById(id, { onSuccess: changeCurrentLocation });
     };
 
     const handleToggleFavorite = (id: string) => {
-      setLocationId(id);
-      setAction('toggleFavorite');
+      geocodeLocationById(id, { onSuccess: toggleFavorite });
     };
-
-    useEffect(() => {
-      if (!data) return;
-
-      switch (action) {
-        case 'select':
-          setCurrentLocation(data);
-          break;
-        case 'toggleFavorite':
-          toggleFavorite(data);
-          break;
-      }
-    }, [data, action, setCurrentLocation, toggleFavorite]);
 
     return (
       <div

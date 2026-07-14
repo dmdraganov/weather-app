@@ -1,19 +1,16 @@
 import styles from './Header.module.scss';
 import { formatDate } from '../../../../shared/utils/format-date';
-import { useMemo, useRef, useState } from 'react';
-import LocationButton from '../../../location/ui/LocationButton/LocationButton';
-import { useLanguage } from '../../../localization/hooks/useLanguage';
+import { useMemo, useRef, type ReactNode } from 'react';
+import { useLanguage } from '../../../../shared/i18n/useLanguage';
 import Icon from '../../../../shared/ui/Icon/Icon';
-import LocationSearch from '../../../location/widgets/LocationSearch/LocationSearch';
 import type { CurrentWeather } from '../../models';
-import { Modal } from '../../../../shared/ui/Modal/Modal';
 
 interface HeaderProps {
   currentWeather: CurrentWeather;
+  locationControl: ReactNode;
 }
 
-const Header = ({ currentWeather }: HeaderProps) => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+const Header = ({ currentWeather, locationControl }: HeaderProps) => {
   const { current: currentDate } = useRef(new Date());
   const [language] = useLanguage();
 
@@ -35,12 +32,7 @@ const Header = ({ currentWeather }: HeaderProps) => {
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.info}>
-          <div className={styles.locationButton}>
-            <LocationButton
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              arrowDirection='forward'
-            />
-          </div>
+          <div className={styles.locationButton}>{locationControl}</div>
           <span className={styles.weatherCondition}>{condition.text}</span>
           <div className={styles.flexContainer}>
             <span className={styles.weatherTemp}>
@@ -53,11 +45,6 @@ const Header = ({ currentWeather }: HeaderProps) => {
         </div>
         <Icon name={condition.icon} className={styles.weatherIcon} />
       </div>
-      {isSearchOpen && (
-        <Modal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)}>
-          <LocationSearch />
-        </Modal>
-      )}
     </header>
   );
 };

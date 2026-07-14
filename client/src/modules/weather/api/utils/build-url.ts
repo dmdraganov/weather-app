@@ -1,8 +1,8 @@
 import { API_CONFIG } from '../../../../shared/config/api';
 import { buildUrl } from '../../../../shared/lib/build-url';
-import type { Coordinates } from '../../../location/model/entities/coordinates';
+import type { Coordinates } from '../../../../shared/model/coordinates';
 
-type ApiType = 'current' | 'forecast' | 'search' | 'astronomy';
+type ApiType = 'current' | 'forecast';
 
 export const buildWeatherApiUrl = (
   type: ApiType,
@@ -12,10 +12,11 @@ export const buildWeatherApiUrl = (
   if (typeof query === 'object') {
     query = `${query.latitude}, ${query.longitude}`;
   }
-  const searchParams = {
+  const searchParams: Record<string, string> = {
     q: query,
-    days: '7',
     lang: language,
   };
+  if (type === 'forecast') searchParams.days = '7';
+
   return buildUrl(`${API_CONFIG.weather.url}/weather/${type}`, searchParams);
 };

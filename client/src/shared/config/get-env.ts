@@ -1,4 +1,6 @@
-export function getEnv(key: keyof ImportMetaEnv): string {
+type EnvKey = Extract<keyof ImportMetaEnv, `VITE_${string}`>;
+
+export function getEnv(key: EnvKey): string {
   const value = import.meta.env[key];
 
   if (!value) {

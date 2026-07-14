@@ -8,9 +8,9 @@
   align-items: center;
   background: none;
   overflow: visible;
-  color: var(--foreground-color);
+  color: var(--color-text-primary);
 
   &::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--color-backdrop);
   }
 }

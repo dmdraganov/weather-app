@@ -4,8 +4,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: $gap-lg;
-  @media (max-width: $breakpoint-tablet) {
+  gap: $space-lg;
+  @media (max-width: $breakpoint-md) {
     height: auto;
   }
 }
@@ -15,9 +15,9 @@
 
   .container {
     display: flex;
-    gap: $gap-lg;
+    gap: $space-lg;
     height: 100%;
-    @media (max-width: $breakpoint-mobile) {
+    @media (max-width: $breakpoint-sm) {
       flex-direction: column;
     }
   }
@@ -26,14 +26,14 @@
     flex: 2.5;
     display: flex;
     flex-direction: column;
-    row-gap: $gap-lg;
+    row-gap: $space-lg;
 
     & * {
       min-height: 0;
       min-width: 0;
     }
 
-    @media (max-width: $breakpoint-mobile) {
+    @media (max-width: $breakpoint-sm) {
       flex: none;
       display: contents;
     }

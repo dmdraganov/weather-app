@@ -1,5 +1,5 @@
 import styles from './LinkButton.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, type To } from 'react-router-dom';
 import Icon from '../Icon/Icon';
 
 import type { IconName } from '../Icon/Icon';
@@ -7,7 +7,7 @@ import type { IconName } from '../Icon/Icon';
 interface IProps {
   name: IconName;
   text: string;
-  to: string;
+  to: To;
 }
 
 const LinkButton = ({ name, text, to }: IProps) => {

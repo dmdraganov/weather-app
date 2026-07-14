@@ -1,4 +1,4 @@
-import type { Language } from '../../modules/localization/localization.model';
+import type { Language } from '../i18n/language';
 
 export const formatTo24Hour = (time: string) => {
   const [timePart, period] = time.split(' ');

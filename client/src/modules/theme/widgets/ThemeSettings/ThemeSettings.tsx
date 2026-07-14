@@ -1,6 +1,6 @@
 import RadioInput from '../../../../shared/ui/RadioInput/RadioInput';
-import { THEMES, type Theme } from '../../model/entities/theme';
-import { useTheme } from '../../model/context/useTheme';
+import { THEMES, type Theme } from '../../../../shared/theme/theme';
+import { useTheme } from '../../../../shared/theme/useTheme';
 import styles from './ThemeSettings.module.scss';
 import { useTranslation } from 'react-i18next';
 import { I18N_NAMESPACES } from '../../../../shared/config/i18n';
@@ -15,6 +15,7 @@ export const ThemeSettings = () => {
       <div className={styles.radioGroup}>
         {THEMES.map((themeItem) => (
           <RadioInput<Theme>
+            key={themeItem}
             className={styles.radioItem}
             name='theme'
             value={themeItem}

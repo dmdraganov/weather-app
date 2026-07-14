@@ -1,6 +1,6 @@
 import { IconName } from '../../../../shared/ui/Icon/icon-map';
 import { formatKmPerHour } from '../../../../shared/utils/format-units';
-import type { Language } from '../../../localization/localization.model';
+import type { Language } from '../../../../shared/i18n/language';
 import type { DailyWeather } from '../../models';
 
 interface ForecastMetricItem {

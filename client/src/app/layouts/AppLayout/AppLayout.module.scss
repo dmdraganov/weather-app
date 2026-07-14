@@ -3,8 +3,8 @@
 .layout {
   display: flex;
   flex-direction: row;
-  gap: $gap-lg;
-  padding: $gap-md 0;
+  gap: $space-lg;
+  padding: $space-md 0;
   min-height: 100vh;
 }
 

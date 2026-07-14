@@ -1,8 +1,8 @@
 import RadioInput from '../../../../shared/ui/RadioInput/RadioInput';
 import styles from './LanguageSettings.module.scss';
-import type { Language } from '../../localization.model';
+import type { Language } from '../../../../shared/i18n/language';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../hooks/useLanguage';
+import { useLanguage } from '../../../../shared/i18n/useLanguage';
 import { LANGUAGE_SETTINGS } from './LanguageSettings.data';
 import { I18N_NAMESPACES } from '../../../../shared/config/i18n';
 

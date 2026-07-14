@@ -1,4 +1,4 @@
-import type { Language } from '../../modules/localization/localization.model';
+import type { Language } from '../i18n/language';
 
 const formatUnit = (value: number, unit: string, locale: Language): string => {
   return new Intl.NumberFormat(locale, { style: 'unit', unit }).format(value);

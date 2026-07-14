@@ -6,7 +6,7 @@ import {
   type ChartPointData,
 } from './ForecastChart.model';
 import { formatHourTime } from '../../../../shared/utils/format-time';
-import type { Language } from '../../../localization/localization.model';
+import type { Language } from '../../../../shared/i18n/language';
 import type { TFunction } from 'i18next';
 
 export const calculateChartData = (

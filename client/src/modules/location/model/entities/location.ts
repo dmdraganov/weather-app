@@ -1,4 +1,4 @@
-import type { Coordinates } from './coordinates';
+import type { Coordinates } from '../../../../shared/model/coordinates';
 
 export interface Location {
   id: string;

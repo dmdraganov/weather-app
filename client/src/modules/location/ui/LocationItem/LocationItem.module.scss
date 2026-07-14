@@ -35,12 +35,13 @@
 .favoriteIcon {
   width: 25px;
   height: 25px;
-  color: rgba(255, 255, 255, 0);
-  stroke: $color-white;
+  color: transparent;
+  stroke: var(--color-text-primary);
   stroke-width: 2px;
 
   &:hover {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--color-accent);
+    stroke: var(--color-accent);
     cursor: pointer;
   }
 }

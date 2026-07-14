@@ -2,8 +2,8 @@ import { request } from '../../../../shared/lib/request';
 import type { Location } from '../../model/entities/location';
 import { GeocodeLocationSchema } from './geocode-location.dto';
 import { mapLocation } from './location.mapper';
-import type { Language } from '../../../localization/localization.model';
-import type { Coordinates } from '../../model/entities/coordinates';
+import type { Language } from '../../../../shared/i18n/language';
+import type { Coordinates } from '../../../../shared/model/coordinates';
 import { API_CONFIG } from '../../../../shared/config/api';
 import { buildUrl } from '../../../../shared/lib/build-url';
 

@@ -1,17 +1,20 @@
 import SectionHeading from '../../../../shared/ui/SectionHeading/SectionHeading';
 import LocationItem from '../../ui/LocationItem/LocationItem';
 import { useLocationStore } from '../../model/store/store';
-import { useCurrentLocation } from '../../model/store/useCurrentLocation';
 import styles from './RecentLocations.module.scss';
 import { useTranslation } from 'react-i18next';
 
 import { IconName } from '../../../../shared/ui/Icon/icon-map';
 import { I18N_NAMESPACES } from '../../../../shared/config/i18n';
+import { useChangeCurrentLocation } from '../../hooks/useChangeLocation';
 
 const RecentLocations = () => {
-  const { recentLocations, favoriteLocations, toggleFavorite } =
-    useLocationStore();
-  const [, setCurrentLocation] = useCurrentLocation();
+  const recentLocations = useLocationStore((state) => state.recentLocations);
+  const favoriteLocations = useLocationStore(
+    (state) => state.favoriteLocations
+  );
+  const toggleFavorite = useLocationStore((state) => state.toggleFavorite);
+  const changeCurrentLocation = useChangeCurrentLocation();
   const { t } = useTranslation(I18N_NAMESPACES.location);
 
   return (
@@ -28,7 +31,7 @@ const RecentLocations = () => {
               name={location.name}
               description={location.description}
               isFavorite={favoriteLocations.some((f) => f.id === location.id)}
-              onSelect={() => setCurrentLocation(location)}
+              onSelect={() => changeCurrentLocation(location)}
               onToggleFavorite={() => toggleFavorite(location)}
             />
           ))}

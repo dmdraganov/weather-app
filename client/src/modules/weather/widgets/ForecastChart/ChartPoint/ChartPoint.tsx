@@ -1,4 +1,4 @@
-import { useLanguage } from '../../../../localization/hooks/useLanguage';
+import { useLanguage } from '../../../../../shared/i18n/useLanguage';
 import { formatKmPerHour } from '../../../../../shared/utils/format-units';
 import styles from './ChartPoint.module.scss';
 import type { ChartPointData } from '../ForecastChart.model';

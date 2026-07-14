@@ -1,7 +1,7 @@
 import { API_CONFIG } from '../../../../shared/config/api';
 import { buildUrl } from '../../../../shared/lib/build-url';
 import { request } from '../../../../shared/lib/request';
-import type { Language } from '../../../localization/localization.model';
+import type { Language } from '../../../../shared/i18n/language';
 import type { LocationSuggestion } from '../../model/entities/location-suggestion';
 import { SuggestLocationsSchema } from './suggestion.dto';
 import { mapSuggestion } from './suggestion.mapper';

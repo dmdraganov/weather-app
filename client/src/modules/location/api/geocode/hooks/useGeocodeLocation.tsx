@@ -1,7 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { geocodeLocation, type GeocodeBy } from '../geocode.api';
 import { useState } from 'react';
-import { useLanguage } from '../../../../localization/hooks/useLanguage';
+import { useLanguage } from '../../../../../shared/i18n/useLanguage';
 
 const useGeocodeLocation = (geocodeBy: GeocodeBy, geocode: string) => {
   const [language] = useLanguage();
@@ -25,13 +25,16 @@ export const useGeocodeLocationByAddress = (initialAddress?: string) => {
   };
 };
 
-export const useGeocodeLocationById = (initialLocationId?: string) => {
-  const [locationId, setLocationId] = useState<string>(initialLocationId ?? '');
-  const queryResult = useGeocodeLocation('id', locationId);
+export const useGeocodeLocationById = () => {
+  const [language] = useLanguage();
 
-  return {
-    locationId,
-    setLocationId,
-    ...queryResult,
-  };
+  return useMutation({
+    mutationKey: ['geocode-location-by-id', language],
+    mutationFn: (locationId: string) =>
+      geocodeLocation({
+        geocode: locationId,
+        geocodeBy: 'id',
+        language,
+      }),
+  });
 };

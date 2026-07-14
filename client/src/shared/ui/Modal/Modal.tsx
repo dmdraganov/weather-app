@@ -19,7 +19,7 @@ export const Modal = ({
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
-    dialog.closedBy = 'any';
+    Object.assign(dialog, { closedBy: 'any' });
   }, []);
 
   useEffect(() => {

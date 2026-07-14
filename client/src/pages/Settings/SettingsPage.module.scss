@@ -3,34 +3,34 @@
 .header {
   display: flex;
   align-items: center;
-  gap: $gap-md;
-  margin-bottom: $gap-lg;
+  gap: $space-md;
+  margin-bottom: $space-lg;
 
-  @media (max-width: $breakpoint-mobile) {
-    padding: 0 10px;
+  @media (max-width: $breakpoint-sm) {
+    padding: 0 $space-2xs;
   }
 }
 .title {
-  font-size: $font-lg;
+  font-size: $font-size-lg;
   font-weight: bold;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: $gap-lg;
+  gap: $space-lg;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .saveButton {
-  margin-top: $gap-md;
-  padding: 15px 30px;
-  background-color: var(--accent-color);
-  color: $color-dark-grey;
+  margin-top: $space-md;
+  padding: $space-sm 30px;
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
   border: none;
-  border-radius: 10px;
-  font-size: $font-lg;
+  border-radius: $radius-sm;
+  font-size: $font-size-lg;
   font-weight: bold;
   cursor: pointer;
   transition:
@@ -38,7 +38,7 @@
     opacity 0.2s;
 
   &:hover {
-    opacity: 0.9;
+    background-color: var(--color-accent-hover);
     transform: translateY(-2px);
   }
 

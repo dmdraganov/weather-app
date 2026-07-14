@@ -4,7 +4,7 @@ import Slider from '../../../../shared/ui/Slider/Slider';
 import ListItem from '../../../../shared/ui/ListItem/ListItem';
 import { formatDate } from '../../../../shared/utils/format-date';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../../localization/hooks/useLanguage';
+import { useLanguage } from '../../../../shared/i18n/useLanguage';
 import Icon from '../../../../shared/ui/Icon/Icon';
 import type { DailyWeather } from '../../models';
 import { mapForecastMetrics } from './ForecastMetrics.data';

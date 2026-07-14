@@ -3,7 +3,7 @@
 .header {
   height: 300px;
 
-  @media (max-width: $breakpoint-mobile) {
+  @media (max-width: $breakpoint-sm) {
     height: 450px;
   }
 
@@ -13,7 +13,7 @@
     padding: 0 35px;
     height: 100%;
 
-    @media (max-width: $breakpoint-mobile) {
+    @media (max-width: $breakpoint-sm) {
       padding: 0 10px;
       display: flex;
       flex-direction: column;
@@ -25,15 +25,15 @@
   .info {
     display: flex;
     flex-direction: column;
-    gap: $gap-sm;
+    gap: $space-xs;
     justify-content: space-between;
 
-    @media (max-width: $breakpoint-mobile) {
+    @media (max-width: $breakpoint-sm) {
       display: contents;
     }
 
     .locationButton {
-      @media (max-width: $breakpoint-mobile) {
+      @media (max-width: $breakpoint-sm) {
         order: -3;
         align-self: flex-start;
         margin-bottom: 110px;
@@ -43,16 +43,16 @@
     .weatherCondition {
       display: flex;
       align-items: center;
-      font-size: $font-xlg;
-      @media (max-width: $breakpoint-mobile) {
+      font-size: $font-size-xl;
+      @media (max-width: $breakpoint-sm) {
         order: -2;
-        font-size: $font-lg;
+        font-size: $font-size-lg;
       }
     }
 
     .flexContainer {
       .weatherTemp {
-        font-size: $font-max;
+        font-size: $font-size-2xl;
         display: block;
       }
     }
@@ -61,7 +61,7 @@
 
 .weatherIcon {
   flex: 1;
-  @media (max-width: $breakpoint-mobile) {
+  @media (max-width: $breakpoint-sm) {
     order: -1;
     flex: 1;
   }

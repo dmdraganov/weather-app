@@ -7,7 +7,7 @@
   align-items: normal;
   position: relative;
 
-  @media (max-width: $breakpoint-mobile) {
+  @media (max-width: $breakpoint-sm) {
     order: 0;
   }
 }

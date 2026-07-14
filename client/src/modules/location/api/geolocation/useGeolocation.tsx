@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { Coordinates } from '../../model/entities/coordinates';
+import type { Coordinates } from '../../../../shared/model/coordinates';
 import { requestGeolocation } from './geolocation.api';
 
 export const useGeolocation = () => {

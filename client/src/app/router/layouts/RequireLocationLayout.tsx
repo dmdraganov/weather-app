@@ -1,14 +1,16 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useCurrentLocation } from '../../../modules/location/model/store/useCurrentLocation';
-import { useGeolocation } from '../../../modules/location/api/geolocation/useGeolocation';
 import { ROUTES } from '../../../shared/config/routes';
+import { useSearchParamsLocation } from '../../../modules/location/hooks/useSearchParamsLocation';
+import Spinner from '../../../shared/ui/Spinner/Spinner';
 
 export const RequireLocationLayout = () => {
-  const [currentLocation] = useCurrentLocation();
-  const { geolocationPos, isLoading } = useGeolocation();
+  const { status, isLoading, error } = useSearchParamsLocation();
 
-  if (!currentLocation && !geolocationPos && !isLoading) {
+  if (status !== 'valid') {
     return <Navigate to={ROUTES.location} replace />;
   }
+  if (error) return <div>{error.message}</div>;
+  if (isLoading) return <Spinner />;
+
   return <Outlet />;
 };

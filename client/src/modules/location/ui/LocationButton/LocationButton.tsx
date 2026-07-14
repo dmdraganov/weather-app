@@ -9,7 +9,7 @@ type Props = {
 };
 
 const LocationButton = ({ onClick, arrowDirection }: Props) => {
-  const { currentLocation } = useLocationStore();
+  const currentLocation = useLocationStore((state) => state.currentLocation);
 
   const isBack = arrowDirection === 'back';
   return (

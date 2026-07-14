@@ -1,4 +1,4 @@
-import type { Coordinates } from '../../model/entities/coordinates';
+import type { Coordinates } from '../../../../shared/model/coordinates';
 
 export const requestGeolocation = (): Promise<Coordinates> => {
   return new Promise((resolve, reject) => {

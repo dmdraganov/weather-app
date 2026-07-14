@@ -10,7 +10,7 @@ import { CANVAS_WIDTH } from './ForecastChart.model';
 import { IconName } from '../../../../shared/ui/Icon/icon-map';
 import type { DailyWeather } from '../../models';
 import { calculateChartData } from './ForecastChart.data';
-import { useLanguage } from '../../../localization/hooks/useLanguage';
+import { useLanguage } from '../../../../shared/i18n/useLanguage';
 import { useChartHeight } from './useChartHeight';
 import { I18N_NAMESPACES } from '../../../../shared/config/i18n';
 

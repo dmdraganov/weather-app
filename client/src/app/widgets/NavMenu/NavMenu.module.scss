@@ -6,15 +6,15 @@
   align-items: center;
   justify-content: center;
   position: sticky;
-  top: $gap-md;
+  top: $space-md;
 
-  row-gap: $gap-md;
+  row-gap: $space-md;
   min-width: 100px;
   height: fit-content;
-  padding-left: $gap-sm;
-  padding-right: $gap-sm;
+  padding-left: $space-xs;
+  padding-right: $space-xs;
 
-  @media (max-width: $breakpoint-mobile) {
+  @media (max-width: $breakpoint-sm) {
     display: none;
   }
 }

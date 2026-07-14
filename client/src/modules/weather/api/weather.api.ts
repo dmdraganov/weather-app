@@ -1,10 +1,10 @@
-import type { Coordinates } from '../../location/model/entities/coordinates';
+import type { Coordinates } from '../../../shared/model/coordinates';
 import type { WeatherData } from '../models';
 import { request } from '../../../shared/lib/request';
 import { buildWeatherApiUrl } from './utils/build-url';
 import { WeatherResponseSchema } from './dtos/weather-response.dto';
 import { mapWeatherResponse } from './mappers/weather.mapper';
-import type { Language } from '../../localization/localization.model';
+import type { Language } from '../../../shared/i18n/language';
 
 export const getWeather = async (
   location: string | Coordinates,

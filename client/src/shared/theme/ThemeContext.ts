@@ -1,9 +1,9 @@
 import { createContext, type Dispatch, type SetStateAction } from 'react';
-import type { Theme } from '../entities/theme';
+import type { ResolvedTheme, Theme } from './theme';
 
 interface ThemeContextValue {
   theme: Theme;
-  resolvedTheme: Omit<Theme, 'system'>;
+  resolvedTheme: ResolvedTheme;
   setTheme: Dispatch<SetStateAction<Theme>>;
 }
 

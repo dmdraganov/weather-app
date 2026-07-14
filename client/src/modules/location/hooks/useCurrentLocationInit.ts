@@ -6,11 +6,8 @@ import { useReverseGeocodeLocation } from '../api/geocode/hooks/useReverseGeocod
 export const useCurrentLocationInit = (): void => {
   const [currentLocation, setCurrentLocation] = useCurrentLocation();
   const { geolocationPos } = useGeolocation();
-  const { setCoordinates, data: geolocationData } = useReverseGeocodeLocation();
-
-  useEffect(() => {
-    if (geolocationPos && !currentLocation) setCoordinates(geolocationPos);
-  }, [geolocationPos, currentLocation, setCoordinates]);
+  const coordinates = currentLocation ? null : geolocationPos;
+  const { data: geolocationData } = useReverseGeocodeLocation(coordinates);
 
   useEffect(() => {
     if (geolocationData && !currentLocation) {

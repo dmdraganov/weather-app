@@ -3,11 +3,15 @@ import styles from './LocationSearch.module.scss';
 import { useSuggestLocations } from '../../api/suggestion/useSuggestLocations';
 import SearchResults from '../../ui/SearchResults/SearchResults';
 import SearchInput from '../../ui/SearchInput/SearchInput';
-import { useLocationStore } from '../../model/store/store';
+import { useChangeCurrentLocation } from '../../hooks/useChangeLocation';
 
-const LocationSearch = () => {
+interface LocationSearchProps {
+  syncUrl?: boolean;
+}
+
+const LocationSearch = ({ syncUrl = false }: LocationSearchProps) => {
   const { query, setQuery, data, error } = useSuggestLocations();
-  const { setCurrentLocation } = useLocationStore();
+  const changeCurrentLocation = useChangeCurrentLocation({ syncUrl });
   const [isHidden, setIsHidden] = useState<boolean>(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +50,7 @@ const LocationSearch = () => {
         <div className={styles.searchResults}>
           <SearchResults
             results={data}
-            setCurrentLocation={setCurrentLocation}
+            changeCurrentLocation={changeCurrentLocation}
             isHidden={isHidden || !query || data.length === 0}
           />
         </div>
