@@ -8,6 +8,7 @@ interface SearchInputProps {
   setQuery: (query: string) => void;
   onEscape: (e: KeyboardEvent) => void;
   onFocus: () => void;
+  autoFocus?: boolean;
 }
 
 const SearchInput = ({
@@ -15,6 +16,7 @@ const SearchInput = ({
   setQuery,
   onEscape,
   onFocus,
+  autoFocus = false,
 }: SearchInputProps) => {
   const { t } = useTranslation(I18N_NAMESPACES.location);
 
@@ -27,6 +29,7 @@ const SearchInput = ({
       onChange={(e) => setQuery(e.target.value)}
       onKeyDown={onEscape}
       onFocus={onFocus}
+      autoFocus={autoFocus}
     />
   );
 };

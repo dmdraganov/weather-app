@@ -11,7 +11,7 @@ interface IProps {
 const SectionHeading = ({ iconName, text }: IProps) => {
   return (
     <h2 className={styles.sectionHeading}>
-      <Icon name={iconName} className={styles.icon} />
+      <Icon name={iconName} tone='ui' className={styles.icon} />
       {text}
     </h2>
   );

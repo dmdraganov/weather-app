@@ -6,6 +6,7 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   className?: string;
+  position?: 'center' | 'top';
 }
 
 export const Modal = ({
@@ -13,6 +14,7 @@ export const Modal = ({
   children,
   onClose,
   className,
+  position = 'center',
 }: PropsWithChildren<ModalProps>) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -30,7 +32,7 @@ export const Modal = ({
 
   return createPortal(
     <dialog
-      className={`${styles.modal} ${className || ''}`}
+      className={`${styles.modal} ${position === 'top' ? styles.top : ''} ${className || ''}`}
       ref={dialogRef}
       onClose={onClose}
       onCancel={onClose}

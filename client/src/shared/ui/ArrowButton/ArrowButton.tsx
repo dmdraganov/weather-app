@@ -4,14 +4,25 @@ import ArrowIcon from '../../assets/icons/ui/arrow.svg?react';
 interface IProps {
   route?: 'left' | 'right';
   onClick?: () => void;
+  disabled?: boolean;
+  ariaLabel?: string;
+  className?: string;
 }
 
-const ArrowButton = ({ route = 'right', onClick }: IProps) => {
+const ArrowButton = ({
+  route = 'right',
+  onClick,
+  disabled = false,
+  ariaLabel,
+  className = '',
+}: IProps) => {
   return (
     <button
-      aria-label={route === 'right' ? 'next' : 'prev'}
-      className={styles.button}
+      aria-label={ariaLabel ?? (route === 'right' ? 'next' : 'prev')}
+      className={`${styles.button} ${className}`}
+      disabled={disabled}
       onClick={onClick}
+      type='button'
     >
       <ArrowIcon
         className={`${route !== 'right' ? styles.invert : ''} ${styles.icon}`}

@@ -1,4 +1,4 @@
-@use '/src/app/styles/variables' as *;
+@use '@/shared/styles/variables' as *;
 
 .navMenu {
   display: flex;
@@ -7,14 +7,30 @@
   justify-content: center;
   position: sticky;
   top: $space-md;
+  flex-shrink: 0;
 
   row-gap: $space-md;
-  min-width: 100px;
+
   height: fit-content;
   padding-left: $space-xs;
   padding-right: $space-xs;
 
-  @media (max-width: $breakpoint-sm) {
-    display: none;
+  @media (max-width: $breakpoint-md) {
+    position: fixed;
+    z-index: 10;
+    top: auto;
+    right: $space-2xs;
+    bottom: max($space-2xs, env(safe-area-inset-bottom));
+    left: $space-2xs;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: $space-2xs;
+    padding: $space-2xs;
+    border-radius: $radius-md;
+    box-shadow: 0 8px 24px rgb(15 23 42 / 16%);
+
+    a {
+      flex: 1;
+    }
   }
 }

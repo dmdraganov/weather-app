@@ -18,7 +18,7 @@ const ListItem = ({
 }: ListItemProps) => {
   return (
     <li className={styles.item + ' ' + (isVertical && styles.itemVertical)}>
-      <Icon name={iconName} className={styles.icon} />
+      <Icon name={iconName} tone='ui' className={styles.icon} />
       <div className={styles.text + ' ' + (isVertical && styles.textVertical)}>
         <h3 className={styles.itemTitle}>{title}</h3>
         <span>{value}</span>

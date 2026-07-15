@@ -7,9 +7,15 @@ import { useChangeCurrentLocation } from '../../hooks/useChangeLocation';
 
 interface LocationSearchProps {
   syncUrl?: boolean;
+  autoFocus?: boolean;
+  variant?: 'popover' | 'inline';
 }
 
-const LocationSearch = ({ syncUrl = false }: LocationSearchProps) => {
+const LocationSearch = ({
+  syncUrl = false,
+  autoFocus = false,
+  variant = 'popover',
+}: LocationSearchProps) => {
   const { query, setQuery, data, error } = useSuggestLocations();
   const changeCurrentLocation = useChangeCurrentLocation({ syncUrl });
   const [isHidden, setIsHidden] = useState<boolean>(true);
@@ -35,13 +41,19 @@ const LocationSearch = ({ syncUrl = false }: LocationSearchProps) => {
   };
 
   return (
-    <section className={styles.searchContainer} ref={containerRef}>
-      <div className={'division ' + styles.inputContainer}>
+    <section
+      className={`${styles.searchContainer} ${variant === 'inline' ? styles.inline : ''}`}
+      ref={containerRef}
+    >
+      <div
+        className={`${styles.inputContainer} ${variant === 'popover' ? 'division' : ''}`}
+      >
         <SearchInput
           query={query}
           setQuery={setQuery}
           onEscape={handleEscape}
           onFocus={() => setIsHidden(false)}
+          autoFocus={autoFocus}
         />
         {error && <p>{error.message}</p>}
       </div>
@@ -52,6 +64,7 @@ const LocationSearch = ({ syncUrl = false }: LocationSearchProps) => {
             results={data}
             changeCurrentLocation={changeCurrentLocation}
             isHidden={isHidden || !query || data.length === 0}
+            variant={variant}
           />
         </div>
       )}

@@ -1,4 +1,4 @@
-@use '/src/app/styles/variables' as *;
+@use '@/shared/styles/variables' as *;
 
 .button {
   position: relative;
@@ -10,6 +10,7 @@
   .arrowIcon {
     width: 20px;
     height: 20px;
+    color: var(--color-icon-ui);
   }
 
   .backArrowIcon {
@@ -26,6 +27,7 @@
   .locationIcon {
     width: 30px;
     height: 30px;
+    color: var(--color-icon-ui);
   }
 
   &:hover {

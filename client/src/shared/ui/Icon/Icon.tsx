@@ -1,14 +1,15 @@
 import type { SVGProps } from 'react';
 import styles from './Icon.module.scss';
-import { iconMap, type IconName } from './icon-map';
+import { iconMap, iconToneMap, type IconName, type IconTone } from './icon-map';
 
-export type { IconName };
+export type { IconName, IconTone };
 
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'name'> {
   name: IconName;
+  tone?: IconTone;
 }
 
-const Icon = ({ name, className, ...props }: IconProps) => {
+const Icon = ({ name, tone = iconToneMap[name], className, ...props }: IconProps) => {
   const IconComponent = iconMap[name];
 
   if (!IconComponent) {
@@ -18,7 +19,11 @@ const Icon = ({ name, className, ...props }: IconProps) => {
   }
 
   return (
-    <IconComponent className={`${styles.icon} ${className || ''}`} {...props} />
+    <IconComponent
+      className={`${styles.icon} ${className || ''}`}
+      data-tone={tone}
+      {...props}
+    />
   );
 };
 

@@ -10,9 +10,12 @@ import LocationSearch from '../../modules/location/widgets/LocationSearch/Locati
 import { Modal } from '../../shared/ui/Modal/Modal';
 import { useState } from 'react';
 import { useLocationStore } from '../../modules/location/model/store/store';
+import { useTranslation } from 'react-i18next';
+import { I18N_NAMESPACES } from '../../shared/config/i18n';
 
 const HomePage = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { t } = useTranslation(I18N_NAMESPACES.location);
   const currentLocation = useLocationStore((state) => state.currentLocation);
   const { data, error, isLoading } = useWeather(
     currentLocation?.coordinates ?? null
@@ -37,8 +40,29 @@ const HomePage = () => {
           }
         />
         {isSearchOpen && (
-          <Modal isOpen onClose={() => setIsSearchOpen(false)}>
-            <LocationSearch syncUrl />
+          <Modal
+            isOpen
+            onClose={() => setIsSearchOpen(false)}
+            position='top'
+            className={`division ${styles.locationSearchModal}`}
+          >
+            <section>
+              <div className={styles.locationSearchHeader}>
+                <div>
+                  <h2>{t('quick_location_search_title')}</h2>
+                  <p>{t('quick_location_search_description')}</p>
+                </div>
+                <button
+                  className={styles.closeSearchButton}
+                  type='button'
+                  onClick={() => setIsSearchOpen(false)}
+                  aria-label={t('close_location_search')}
+                >
+                  <span aria-hidden='true'>×</span>
+                </button>
+              </div>
+              <LocationSearch syncUrl autoFocus variant='inline' />
+            </section>
           </Modal>
         )}
         <main className={styles.main}>

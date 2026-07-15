@@ -2,4 +2,29 @@
   display: block;
   width: 100%;
   height: 100%;
+  color: var(--color-icon-ui);
+
+  &[data-tone='sun'] {
+    color: var(--color-icon-sun);
+  }
+
+  &[data-tone='rain'] {
+    color: var(--color-icon-rain);
+  }
+
+  &[data-tone='wind'] {
+    color: var(--color-icon-wind);
+  }
+
+  &[data-tone='temperature'] {
+    color: var(--color-icon-temperature);
+  }
+
+  &[data-tone='night'] {
+    color: var(--color-icon-night);
+  }
+
+  &[data-tone='storm'] {
+    color: var(--color-icon-storm);
+  }
 }

@@ -1,4 +1,4 @@
-@use '/src/app/styles/variables' as *;
+@use '@/shared/styles/variables' as *;
 
 .section {
   display: flex;
@@ -25,8 +25,32 @@
   display: flex;
   align-items: center;
   gap: $space-xs;
+  min-height: 44px;
+  padding: 0 $space-xs;
+  border-radius: $radius-sm;
   font-size: 1rem;
   cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-sunken);
+  }
+
+  &:active {
+    background-color: var(--color-border-subtle);
+  }
+
+  &:has(input:checked) {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  &:has(input:focus-visible) {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 3px;
+  }
 
   input[type='radio'] {
     appearance: none;
@@ -55,13 +79,11 @@
       transform: scale(1);
     }
 
-    &:focus-visible {
-      outline: max(2px, 0.15em) solid var(--color-focus-ring);
-      outline-offset: max(2px, 0.15em);
-    }
   }
+}
 
-  label {
-    cursor: pointer;
+@media (max-width: $breakpoint-sm) {
+  .section {
+    padding: $space-md;
   }
 }

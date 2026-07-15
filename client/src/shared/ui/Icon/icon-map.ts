@@ -45,6 +45,36 @@ export enum IconName {
   Wind = 'wind',
 }
 
+export type IconTone =
+  | 'ui'
+  | 'sun'
+  | 'rain'
+  | 'wind'
+  | 'temperature'
+  | 'night'
+  | 'storm';
+
+export const iconToneMap: Record<IconName, IconTone> = {
+  [IconName.Arrow]: 'ui',
+  [IconName.Clock]: 'ui',
+  [IconName.Explore]: 'ui',
+  [IconName.Heart]: 'ui',
+  [IconName.Location]: 'ui',
+  [IconName.Settings]: 'ui',
+  [IconName.Blob]: 'rain',
+  [IconName.Clear]: 'night',
+  [IconName.HeavyRain]: 'rain',
+  [IconName.PartlyCloudyDay]: 'sun',
+  [IconName.PartlyCloudyNight]: 'night',
+  [IconName.RainDay]: 'rain',
+  [IconName.RainThunder]: 'storm',
+  [IconName.SnowThunderNight]: 'storm',
+  [IconName.Sunny]: 'sun',
+  [IconName.Thermometer]: 'temperature',
+  [IconName.ThunderNight]: 'storm',
+  [IconName.Wind]: 'wind',
+};
+
 type IconType = FunctionComponent<SVGProps<SVGSVGElement>>;
 
 export const iconMap: Record<IconName, IconType> = {

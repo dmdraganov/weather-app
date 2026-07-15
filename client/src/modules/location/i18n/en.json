@@ -2,5 +2,12 @@
   "search_placeholder": "Search location",
   "favorite_locations": "Favorite locations",
   "recent_locations": "Recent locations",
-  "current_location": "Current location"
+  "current_location": "Current location",
+  "quick_location_search_title": "Choose a location",
+  "quick_location_search_description": "Start typing a city or place",
+  "close_location_search": "Close location search",
+  "empty_location_description": "Find a city or select a point on the map",
+  "use_current_location": "Use my location",
+  "locating_current_location": "Finding your location…",
+  "geolocation_error": "We couldn't determine your location. Search for a city or select a point on the map."
 }

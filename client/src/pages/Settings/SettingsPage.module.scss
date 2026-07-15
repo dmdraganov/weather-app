@@ -1,4 +1,4 @@
-@use '/src/app/styles/variables' as *;
+@use '@/shared/styles/variables' as *;
 
 .header {
   display: flex;
@@ -21,6 +21,12 @@
   gap: $space-lg;
   max-width: 600px;
   margin: 0 auto;
+}
+
+@media (max-width: $breakpoint-sm) {
+  .content {
+    gap: $space-md;
+  }
 }
 
 .saveButton {

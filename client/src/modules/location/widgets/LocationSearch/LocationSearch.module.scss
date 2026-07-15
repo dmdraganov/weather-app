@@ -1,4 +1,4 @@
-@use '/src/app/styles/variables' as *;
+@use '@/shared/styles/variables' as *;
 
 .searchContainer {
   position: relative;
@@ -16,5 +16,17 @@
     top: 50%;
     left: 0;
     right: 0;
+  }
+}
+
+.inline {
+  width: 100%;
+
+  .inputContainer {
+    z-index: auto;
+  }
+
+  .searchResults {
+    position: static;
   }
 }

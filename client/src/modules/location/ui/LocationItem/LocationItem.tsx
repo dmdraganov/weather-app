@@ -26,11 +26,9 @@ const LocationItem = ({
         className={styles.favoriteButton}
         onClick={onToggleFavorite}
         style={isFavorite ? { opacity: 1 } : undefined}
+        data-favorite={isFavorite || undefined}
       >
-        <HeartIcon
-          className={styles.favoriteIcon}
-          style={isFavorite ? { color: 'white' } : undefined}
-        />
+        <HeartIcon className={styles.favoriteIcon} />
       </button>
     </li>
   );

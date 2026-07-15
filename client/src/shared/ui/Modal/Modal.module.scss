@@ -3,14 +3,18 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
+  display: block;
   overflow: visible;
   color: var(--color-text-primary);
 
   &::backdrop {
     background-color: var(--color-backdrop);
   }
+}
+
+.top {
+  top: clamp(96px, 24vh, 260px);
+  transform: translateX(-50%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
 }

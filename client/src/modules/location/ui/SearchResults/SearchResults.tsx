@@ -11,6 +11,7 @@ interface SearchResultsProps {
   changeCurrentLocation: (location: Location) => void;
   isHidden: boolean;
   maxLength?: number;
+  variant?: 'popover' | 'inline';
 }
 
 const SearchResults = memo(
@@ -19,6 +20,7 @@ const SearchResults = memo(
     isHidden,
     maxLength = 5,
     changeCurrentLocation,
+    variant = 'popover',
   }: SearchResultsProps) => {
     const { mutate: geocodeLocationById } = useGeocodeLocationById();
     const favoriteLocations = useLocationStore(
@@ -49,7 +51,7 @@ const SearchResults = memo(
 
     return (
       <div
-        className={`${styles.listContainer} ${isHidden ? styles.hidden : ''}`}
+        className={`${styles.listContainer} ${styles[variant]} ${isHidden ? styles.hidden : ''}`}
         style={{ maxHeight: isHidden ? 0 : height }}
         ref={resultsContainerRef}
       >
