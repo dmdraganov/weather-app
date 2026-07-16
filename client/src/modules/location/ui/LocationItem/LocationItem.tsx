@@ -18,10 +18,10 @@ const LocationItem = ({
 }: LocationItemProps) => {
   return (
     <li className={styles.item}>
-      <div className={styles.itemText} onClick={onSelect}>
+      <button className={styles.itemText} onClick={onSelect}>
         <h3 className={styles.itemHeading}>{name}</h3>
         <span className={styles.itemAddition}>{description}</span>
-      </div>
+      </button>
       <button
         className={styles.favoriteButton}
         onClick={onToggleFavorite}

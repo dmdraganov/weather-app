@@ -58,7 +58,7 @@ const HomePage = () => {
                   onClick={() => setIsSearchOpen(false)}
                   aria-label={t('close_location_search')}
                 >
-                  <span aria-hidden='true'>×</span>
+                  ×
                 </button>
               </div>
               <LocationSearch syncUrl autoFocus variant='inline' />

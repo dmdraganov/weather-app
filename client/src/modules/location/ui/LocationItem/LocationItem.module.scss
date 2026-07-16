@@ -17,6 +17,7 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
+    align-items: start;
     gap: $space-2xs;
     &:hover {
       cursor: pointer;

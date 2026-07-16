@@ -15,7 +15,12 @@ const allowedOrigins = new Set(env.corsOrigins);
 app.use(
   cors({
     origin: (origin, callback) => {
-      callback(null, origin === undefined || allowedOrigins.has(origin));
+      callback(
+        null,
+        origin === undefined ||
+          allowedOrigins.has(origin) ||
+          allowedOrigins.has('*')
+      );
     },
   })
 );
