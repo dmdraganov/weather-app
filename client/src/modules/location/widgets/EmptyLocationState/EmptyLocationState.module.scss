@@ -1,0 +1,61 @@
+@use '@/shared/styles/variables' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-md;
+  padding: $space-lg;
+  text-align: center;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  color: var(--color-accent);
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: 700;
+}
+
+.description {
+  max-width: 360px;
+  color: var(--color-text-secondary);
+}
+
+.action {
+  min-height: 44px;
+  padding: 0 $space-md;
+  border-radius: $radius-sm;
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 600;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-accent-hover);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    cursor: progress;
+    opacity: 0.7;
+  }
+}
+
+.error {
+  color: var(--color-text-secondary);
+  font-size: $font-size-sm;
+}

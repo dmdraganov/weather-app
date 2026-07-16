@@ -1,0 +1,29 @@
+@use '@/shared/styles/variables' as *;
+
+.searchContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: $space-md;
+
+  .inputContainer {
+    position: relative;
+    z-index: 2;
+  }
+
+  .searchResults {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+  }
+}
+
+.inline {
+  width: 100%;
+
+  .searchResults {
+    position: static;
+  }
+}

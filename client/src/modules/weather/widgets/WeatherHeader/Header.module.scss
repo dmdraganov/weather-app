@@ -1,0 +1,77 @@
+@use '@/shared/styles/variables' as *;
+
+.header {
+  height: 220px;
+
+  @media (max-width: $breakpoint-sm) {
+    height: 450px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 35px;
+    height: 100%;
+
+    @media (max-width: $breakpoint-sm) {
+      padding: 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+    justify-content: space-between;
+
+    @media (max-width: $breakpoint-sm) {
+      display: contents;
+    }
+
+    .locationButton {
+      @media (max-width: $breakpoint-sm) {
+        order: -3;
+        align-self: flex-start;
+        margin-bottom: 110px;
+      }
+    }
+
+    .weatherCondition {
+      display: flex;
+      align-items: center;
+      font-size: $font-size-xl;
+      @media (max-width: $breakpoint-sm) {
+        order: -2;
+        font-size: $font-size-lg;
+      }
+    }
+
+    .flexContainer {
+      .weatherTemp {
+        font-size: $font-size-2xl;
+        display: block;
+      }
+    }
+  }
+}
+
+.weatherIcon {
+  flex: 0 0 180px;
+  height: 180px;
+  max-height: 180px;
+  max-width: 180px;
+  width: 180px;
+
+  @media (max-width: $breakpoint-sm) {
+    order: -1;
+    flex: 1;
+    height: auto;
+    max-height: none;
+    max-width: none;
+    width: auto;
+  }
+}

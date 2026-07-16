@@ -1,0 +1,16 @@
+{
+  "astro_forecast": "Астрономический прогноз",
+  "day_forecast": "Прогноз на 24 часа",
+  "previous_six_hours": "Показать предыдущие шесть часов",
+  "next_six_hours": "Показать следующие шесть часов",
+  "sunrise": "Восход",
+  "sunset": "Закат",
+  "moon_phase": "Фаза луны",
+  "moon_illumination": "Освещенность луны",
+  "air_conditions": "Состояние воздуха",
+  "chance_of_rain": "Вероятность дождя",
+  "avg_humidity": "Средняя влажность",
+  "uv_index": "УФ-индекс",
+  "temp": "Температура",
+  "wind": "Ветер"
+}

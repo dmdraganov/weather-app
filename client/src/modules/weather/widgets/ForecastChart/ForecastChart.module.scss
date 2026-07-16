@@ -1,0 +1,70 @@
+@use '@/shared/styles/variables' as *;
+
+.container {
+  flex: 1 1 200px;
+  padding-bottom: 0;
+  flex-direction: column;
+  align-items: normal;
+  position: relative;
+
+  @media (max-width: $breakpoint-md) {
+    order: 0;
+    min-height: 320px;
+  }
+}
+
+.chartContainer {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+  height: calc(100% - 45px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 50px;
+  touch-action: none;
+  user-select: none;
+
+  .chart {
+    flex-shrink: 0;
+    position: relative;
+    height: 50%;
+    will-change: transform;
+
+    .canvas {
+      height: 100%;
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  position: absolute;
+  top: 55%;
+  left: $space-md;
+  right: $space-md;
+  transform: translateY(-50%);
+
+  .control {
+    align-items: center;
+    background-color: var(--color-surface-raised);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 50%;
+    display: flex;
+    height: 36px;
+    justify-content: center;
+    pointer-events: auto;
+    width: 36px;
+  }
+
+  .nextControl {
+    margin-left: auto;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    display: none;
+  }
+}

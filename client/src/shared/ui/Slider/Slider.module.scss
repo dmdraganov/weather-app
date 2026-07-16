@@ -1,0 +1,29 @@
+.slider {
+  overflow: hidden;
+  height: 60px;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+
+  .slides {
+    height: 100%;
+    display: flex;
+  }
+
+  .prevButton,
+  .nextButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .prevButton {
+    left: 0;
+  }
+
+  .nextButton {
+    right: 0;
+  }
+}

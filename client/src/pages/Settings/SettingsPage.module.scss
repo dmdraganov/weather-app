@@ -1,0 +1,54 @@
+@use '@/shared/styles/variables' as *;
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 0 $space-2xs;
+  }
+}
+.title {
+  font-size: $font-size-lg;
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: $breakpoint-sm) {
+  .content {
+    gap: $space-md;
+  }
+}
+
+.saveButton {
+  margin-top: $space-md;
+  padding: $space-sm 30px;
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  border: none;
+  border-radius: $radius-sm;
+  font-size: $font-size-lg;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+
+  &:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}

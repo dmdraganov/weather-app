@@ -1,0 +1,10 @@
+@use '@/shared/styles/reset';
+@use '@/shared/styles/fonts';
+@use '@/shared/styles/theme';
+@use '@/shared/styles/layout';
+
+body {
+  background-color: var(--color-surface-canvas);
+  color: var(--color-text-primary);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}

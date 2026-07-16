@@ -1,0 +1,13 @@
+{
+  "search_placeholder": "Поиск локации",
+  "favorite_locations": "Избранные локации",
+  "recent_locations": "Недавние локации",
+  "current_location": "Текущая локация",
+  "quick_location_search_title": "Выберите локацию",
+  "quick_location_search_description": "Начните вводить город или место",
+  "close_location_search": "Закрыть поиск локации",
+  "empty_location_description": "Найдите город или выберите точку на карте",
+  "use_current_location": "Определить моё местоположение",
+  "locating_current_location": "Определяем местоположение…",
+  "geolocation_error": "Не удалось определить местоположение. Найдите город или выберите точку на карте."
+}

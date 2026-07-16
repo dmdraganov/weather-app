@@ -1,0 +1,36 @@
+@use '@/shared/styles/variables' as *;
+
+.button {
+  position: relative;
+  font-size: $font-size-lg;
+  display: flex;
+  gap: 5px;
+  align-items: end;
+
+  .arrowIcon {
+    width: 20px;
+    height: 20px;
+    color: var(--color-icon-ui);
+  }
+
+  .backArrowIcon {
+    position: absolute;
+    left: -20px;
+    bottom: 3px;
+    rotate: 180deg;
+  }
+
+  .forwardArrowIcon {
+    margin-bottom: 3px;
+  }
+
+  .locationIcon {
+    width: 30px;
+    height: 30px;
+    color: var(--color-icon-ui);
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

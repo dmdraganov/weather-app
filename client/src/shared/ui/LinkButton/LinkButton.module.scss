@@ -1,0 +1,61 @@
+@use '@/shared/styles/variables' as *;
+
+.linkButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2xs;
+  min-width: 44px;
+  width: 100%;
+  min-height: 44px;
+  padding: $space-2xs;
+  border-radius: $radius-sm;
+  text-align: center;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-sunken);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 3px;
+  }
+
+  &.active {
+    background-color: var(--color-surface-sunken);
+    color: var(--color-accent);
+  }
+}
+
+.icon {
+  flex: 0 0 32px;
+  max-width: 50px;
+  max-height: 32px;
+
+  .active & {
+    color: var(--color-accent);
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .linkButton {
+    gap: 4px;
+    min-width: 0;
+    padding: $space-2xs 4px;
+    font-size: $font-size-sm;
+  }
+
+  .icon {
+    flex-basis: 24px;
+    max-height: 24px;
+  }
+}

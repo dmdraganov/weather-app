@@ -1,0 +1,89 @@
+@use '@/shared/styles/variables' as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  padding: $space-lg;
+  background-color: var(--color-surface-raised);
+  border-radius: $radius-lg;
+  border: 1px solid var(--color-border-subtle);
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.radioItem {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  min-height: 44px;
+  padding: 0 $space-xs;
+  border-radius: $radius-sm;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-sunken);
+  }
+
+  &:active {
+    background-color: var(--color-border-subtle);
+  }
+
+  &:has(input:checked) {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  &:has(input:focus-visible) {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 3px;
+  }
+
+  input[type='radio'] {
+    appearance: none;
+    background-color: var(--color-surface-canvas);
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+
+    &::before {
+      content: '';
+      width: 0.65em;
+      height: 0.65em;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em var(--color-accent);
+    }
+
+    &:checked::before {
+      transform: scale(1);
+    }
+
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .section {
+    padding: $space-md;
+  }
+}

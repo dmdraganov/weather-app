@@ -1,0 +1,74 @@
+@use '@/shared/styles/variables' as *;
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  padding: $space-xs $space-2xs;
+  border-radius: $radius-sm;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-sunken);
+  }
+
+  &Text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: $space-2xs;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &Heading {
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &Addition {
+    display: block;
+    overflow: hidden;
+    color: var(--color-text-secondary);
+    font-size: $font-size-sm;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .favoriteButton {
+    opacity: 0;
+    background: none;
+    border: none;
+    padding: 4px;
+
+    &:focus-visible {
+      opacity: 1;
+      outline: 2px solid var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+
+  &:hover .favoriteButton {
+    opacity: 1;
+  }
+}
+
+.favoriteIcon {
+  width: 25px;
+  height: 25px;
+  color: var(--color-icon-ui);
+
+  &:hover {
+    color: var(--color-accent);
+    cursor: pointer;
+  }
+}
+
+.favoriteButton[data-favorite='true'] .favoriteIcon {
+  color: var(--color-accent);
+}

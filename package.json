@@ -1,29 +1,16 @@
 {
   "name": "react-weather-app",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "install": "concurrently 'npm run install --prefix client' 'npm run install --prefix server'",
+    "dev": "concurrently 'npm run dev --prefix client' 'npm run dev --prefix server'",
+    "build": "concurrently 'npm run build --prefix client' 'npm run build --prefix server'",
+    "lint": "concurrently 'npm run lint --prefix client' 'npm run lint --prefix server'",
+    "format": "concurrently 'npm run format --prefix client' 'npm run format --prefix server'"
   },
-  "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
-  },
+  "homepage": "https://github.com/dmdraganov/react-weather-app#readme",
   "devDependencies": {
-    "@eslint/js": "^9.25.0",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.4.1",
-    "eslint": "^9.25.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^16.0.0",
-    "sass": "^1.89.0",
-    "typescript": "^5.8.3",
-    "vite": "^6.3.5"
+    "concurrently": "^9.2.1"
   }
 }
