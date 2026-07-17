@@ -1,8 +1,12 @@
 @use '@/shared/styles/variables' as *;
 
 .container {
-  padding: 0 35px;
+  padding: 0 $space-lg;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 0 $space-sm;
+  }
 }

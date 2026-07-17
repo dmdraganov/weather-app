@@ -6,23 +6,19 @@
   max-width: 100%;
   margin: 0 auto;
   padding: 0 $space-md;
-}
 
-.division {
-  padding: $space-md 35px;
-  background-color: var(--color-surface-raised);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: $radius-xl;
-}
-
-@media (max-width: $breakpoint-md) {
-  .container {
+  @media (max-width: $breakpoint-md) {
     padding: 0 $space-2xs;
   }
 }
 
-@media (max-width: $breakpoint-sm) {
-  .division {
+.division {
+  padding: $space-md $space-lg;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: $radius-xl;
+
+  @media (max-width: $breakpoint-sm) {
     padding: $space-sm;
     border-radius: $radius-md;
   }
