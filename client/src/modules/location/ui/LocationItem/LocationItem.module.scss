@@ -32,7 +32,7 @@
   }
 
   &Addition {
-    display: block;
+    max-width: 100%;
     overflow: hidden;
     color: var(--color-text-secondary);
     font-size: $font-size-sm;
